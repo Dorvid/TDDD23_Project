@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://images/Player_head_sheet.png" type="Texture" id=1]
 [ext_resource path="res://player.gd" type="Script" id=2]
 [ext_resource path="res://images/Player_body_sheet.png" type="Texture" id=3]
+[ext_resource path="res://shortsword.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -32,9 +33,9 @@ region = Rect2( 264, 0, 66, 66 )
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
-"loop": true,
+"loop": false,
 "name": "idle",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
@@ -55,28 +56,35 @@ region = Rect2( 66, 0, 66, 66 )
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 7 ) ],
-"loop": true,
+"loop": false,
 "name": "idle",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [ SubResource( 8 ) ],
-"loop": true,
+"loop": false,
 "name": "down",
-"speed": 5.0
+"speed": 1.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 34.2186
 height = 41.3328
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 24.7109, 48.9616 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 62.4581, 33.1806 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 54.6798, 33.2836 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 SPEED = 300
 GRAVITY = 32
 JUMPFORCE = 1024
+HAS_LONGSWORD = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -85,10 +93,34 @@ animation = "idle"
 playing = true
 
 [node name="Head" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
+scale = Vector2( -2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.5874, 10.3181 )
 shape = SubResource( 10 )
+
+[node name="Weapon" type="AnimatedSprite" parent="."]
+frames = ExtResource( 4 )
+animation = "idle"
+
+[node name="AttackCollision" type="Area2D" parent="."]
+monitorable = false
+
+[node name="side" type="CollisionShape2D" parent="AttackCollision"]
+position = Vector2( 58.416, 11.4938 )
+shape = SubResource( 11 )
+disabled = true
+
+[node name="up" type="CollisionShape2D" parent="AttackCollision"]
+position = Vector2( 27.0344, -19.4665 )
+shape = SubResource( 12 )
+disabled = true
+
+[node name="down" type="CollisionShape2D" parent="AttackCollision"]
+position = Vector2( 34.2292, 47.1085 )
+shape = SubResource( 13 )
+disabled = true
+
+[connection signal="animation_finished" from="Weapon" to="." method="_on_Weapon_animation_finished"]
