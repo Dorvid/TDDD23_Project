@@ -24,7 +24,7 @@ func _ready():
 	#set weapon to correct animation just is case
 	$Weapon.play("idle")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#Move Character left or right and change animation
 	if Input.is_action_pressed("ui_right") && (!is_on_floor() or is_attacking == false):
 		#Set Speed
@@ -35,7 +35,6 @@ func _physics_process(delta):
 		$Body.play("walk")
 		$Head.set_flip_h(false)
 		$Weapon.set_flip_h(false)
-		$Weapon.play("idle right")
 		$AttackCollision.scale = Vector2(1,1)
 	elif Input.is_action_pressed("ui_left") && (!is_on_floor() or is_attacking == false):
 		velocity.x = -SPEED
@@ -45,7 +44,6 @@ func _physics_process(delta):
 		$Body.play("walk")
 		$Head.set_flip_h(true)
 		$Weapon.set_flip_h(true)
-		$Weapon.play("idle left")
 		$AttackCollision.scale = Vector2(-1,1)
 	else: #No movement so idle
 		velocity.x = 0

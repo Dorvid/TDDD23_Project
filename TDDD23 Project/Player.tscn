@@ -80,6 +80,7 @@ extents = Vector2( 62.4581, 33.1806 )
 extents = Vector2( 54.6798, 33.2836 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 3
 script = ExtResource( 2 )
 SPEED = 300
 GRAVITY = 32
@@ -97,7 +98,7 @@ scale = Vector2( -2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( -1.5874, 10.3181 )
 shape = SubResource( 10 )
 

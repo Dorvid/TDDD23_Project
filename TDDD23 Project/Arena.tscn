@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://images/Arena (1).png" type="Texture" id=1]
+[ext_resource path="res://images/Arena.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Audio/Crowd.wav" type="AudioStream" id=3]
 [ext_resource path="res://Arena.gd" type="Script" id=4]
+[ext_resource path="res://Golden Warrior.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -39,7 +40,19 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 640, 5 )
+extents = Vector2( 835.054, 5 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 2, 360.123 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 267.113 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 134.234, 10 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 10, 108.227 )
 
 [node name="Arena" type="Node"]
 script = ExtResource( 4 )
@@ -49,24 +62,65 @@ position = Vector2( 640, 360 )
 frames = SubResource( 5 )
 animation = "idle"
 playing = true
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground_and_walls" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Ground_and_walls"]
 position = Vector2( 640, 720 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Ground"]
 shape = SubResource( 6 )
+
+[node name="Right_wall" type="StaticBody2D" parent="Ground_and_walls"]
+position = Vector2( 1280, 360 )
 __meta__ = {
 "_edit_group_": true
 }
 
+[node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Right_wall"]
+shape = SubResource( 7 )
+
+[node name="Left_wall" type="StaticBody2D" parent="Ground_and_walls"]
+position = Vector2( 0, 180 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Left_wall"]
+position = Vector2( -4.00452, 77.4207 )
+shape = SubResource( 8 )
+
+[node name="Entrance_roof" type="StaticBody2D" parent="Ground_and_walls"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Entrance_roof"]
+position = Vector2( -128.829, 513.388 )
+shape = SubResource( 9 )
+
+[node name="Entrance_wall" type="StaticBody2D" parent="Ground_and_walls"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Entrance_wall"]
+position = Vector2( -182.174, 615.259 )
+shape = SubResource( 10 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 28.7198, 646.129 )
-HAS_LONGSWORD = false
+position = Vector2( 28.0898, 646.129 )
 
 [node name="Audience_cheer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="Golden Warrior" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1215.63, 615.109 )
 
 [connection signal="finished" from="Audience_cheer" to="." method="_on_Audience_cheer_finished"]
