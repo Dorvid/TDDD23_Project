@@ -97,8 +97,8 @@ extents = Vector2( 63.4255, 10 )
 extents = Vector2( 66.3985, 10 )
 
 [node name="Golden Warrior" type="KinematicBody2D"]
-collision_layer = 5
-collision_mask = 5
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 SPEED = 100
 
@@ -111,7 +111,7 @@ position = Vector2( -4.00903, 21.3816 )
 shape = SubResource( 15 )
 
 [node name="AttackCollision" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="end" type="CollisionShape2D" parent="AttackCollision"]
@@ -125,13 +125,16 @@ shape = SubResource( 17 )
 disabled = true
 
 [node name="SwingTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.3
+one_shot = true
 
-[node name="SwingTimer2" type="Timer" parent="."]
-wait_time = 0.2
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
-[node name="SwingTimer3" type="Timer" parent="."]
-wait_time = 0.2
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="RayWall" type="RayCast2D" parent="."]
 position = Vector2( 0, 25 )
@@ -143,6 +146,12 @@ enabled = true
 cast_to = Vector2( -150, 0 )
 collision_mask = 2
 
+[node name="RayBehind" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 75, 0 )
+collision_mask = 2
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="SwingTimer" to="." method="_on_SwingTimer_timeout"]
-[connection signal="timeout" from="SwingTimer2" to="." method="_on_SwingTimer2_timeout"]
-[connection signal="timeout" from="SwingTimer3" to="." method="_on_SwingTimer3_timeout"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_AttackCooldownTimer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]

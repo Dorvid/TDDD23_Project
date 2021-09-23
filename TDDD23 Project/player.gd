@@ -26,7 +26,7 @@ func _ready():
 
 func _physics_process(_delta):
 	#Move Character left or right and change animation
-	if Input.is_action_pressed("ui_right") && (!is_on_floor() or is_attacking == false):
+	if Input.is_action_pressed("ui_right") && (!is_on_floor() || is_attacking == false):
 		#Set Speed
 		velocity.x = SPEED
 		# For logic concerning which side player is looking at in this case right
@@ -75,7 +75,7 @@ func _physics_process(_delta):
 	velocity.y = velocity.y + GRAVITY
 	
 	#Jump if on a floor
-	if Input.is_action_just_pressed("ui_jump") and is_on_floor():
+	if Input.is_action_just_pressed("ui_jump") && is_on_floor():
 		velocity.y = -JUMPFORCE
 	
 	#Detect Collision and move character, 
