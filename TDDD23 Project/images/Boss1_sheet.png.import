@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Weapon Sheet.png-75a95fd51da6f2f6d537799e932b4fd2.stex"
+path="res://.import/Boss1_sheet.png-1f414d1442da7c0ae1f994ff28720a83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Weapon Sheet.png"
-dest_files=[ "res://.import/Weapon Sheet.png-75a95fd51da6f2f6d537799e932b4fd2.stex" ]
+source_file="res://images/Boss1_sheet.png"
+dest_files=[ "res://.import/Boss1_sheet.png-1f414d1442da7c0ae1f994ff28720a83.stex" ]
 
 [params]
 

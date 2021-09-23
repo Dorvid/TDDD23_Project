@@ -80,7 +80,8 @@ extents = Vector2( 62.4581, 33.1806 )
 extents = Vector2( 54.6798, 33.2836 )
 
 [node name="Player" type="KinematicBody2D"]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 13
 script = ExtResource( 2 )
 SPEED = 300
 GRAVITY = 32
