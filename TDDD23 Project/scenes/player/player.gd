@@ -7,19 +7,18 @@ export (int) var SPEED
 export (int) var GRAVITY
 export (int) var JUMPFORCE
 export (int) var KNOCKBACK_FORCE
-export (bool)var HAS_LONGSWORD
 var is_attacking = false
 var last_direction = 0
 
 signal enemy_hit
 
 # Loads swords so they can be set in ready
-var short_frames = preload("res://shortsword.tres")
-var long_frames = preload("res://longsword.tres")
+var short_frames = preload("res://scenes/player/shortsword.tres")
+var long_frames = preload("res://scenes/player/longsword.tres")
 
 func _ready():
 	#If the player has unlocked the long sword set it and increase hitboxes
-	if HAS_LONGSWORD == false:
+	if CharacterController.has_longsword() == false:
 		$Weapon.set_sprite_frames(short_frames)
 	else:
 		$Weapon.set_sprite_frames(long_frames)
