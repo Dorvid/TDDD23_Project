@@ -1,12 +1,17 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
+var knockback_velocity = Vector2()
+var knockback = false
 export (int) var SPEED
 export (int) var GRAVITY
 export (int) var JUMPFORCE
+export (int) var KNOCKBACK_FORCE
 export (bool)var HAS_LONGSWORD
 var is_attacking = false
-var last_direction = 0 
+var last_direction = 0
+
+signal enemy_hit
 
 # Loads swords so they can be set in ready
 var short_frames = preload("res://shortsword.tres")
@@ -71,8 +76,13 @@ func _physics_process(_delta):
 	else:
 		$Head.play("idle")
 	
-	#Gravity
-	velocity.y = velocity.y + GRAVITY
+	#If downwards swing hit get a little knockback upwards
+	if knockback == true:
+		velocity.y = knockback_velocity.y * KNOCKBACK_FORCE
+		knockback = false
+	else:
+		#Gravity
+		velocity.y = velocity.y + GRAVITY
 	
 	#Jump if on a floor
 	if Input.is_action_just_pressed("ui_jump") && is_on_floor():
@@ -91,3 +101,13 @@ func _on_Weapon_animation_finished():
 	$AttackCollision/down.disabled = true
 	$AttackCollision/up.disabled = true
 	$AttackCollision/side.disabled = true
+
+
+func _on_AttackCollision_body_entered(_body):
+	emit_signal("enemy_hit")
+	#Get which way char is attacking
+	var temp = $Weapon.get_animation()
+	#Set knockback velocity to add it to char in next physics loop
+	if temp == "swing down":
+		knockback_velocity = Vector2(0,-1)
+		knockback = true

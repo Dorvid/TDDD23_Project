@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Crowd.wav-18d633abe3c081955690c10152b2eeee.sample"
+path="res://.import/Crowd.wav-f16060f42fd6b40545490249efcf93e3.sample"
 
 [deps]
 
-source_file="res://Audio/Crowd.wav"
-dest_files=[ "res://.import/Crowd.wav-18d633abe3c081955690c10152b2eeee.sample" ]
+source_file="res://audio/Crowd.wav"
+dest_files=[ "res://.import/Crowd.wav-f16060f42fd6b40545490249efcf93e3.sample" ]
 
 [params]
 

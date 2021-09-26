@@ -13,6 +13,11 @@ config_version=4
 config/name="TDDD23 Project"
 config/icon="res://images/icon.png"
 
+[autoload]
+
+CharacterController="*res://autoloaders/CharacterController.tscn"
+MusicController="*res://autoloaders/MusicController.tscn"
+
 [display]
 
 window/size/width=1280

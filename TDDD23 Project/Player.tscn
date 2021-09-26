@@ -86,7 +86,7 @@ script = ExtResource( 2 )
 SPEED = 300
 GRAVITY = 32
 JUMPFORCE = 1024
-HAS_LONGSWORD = true
+KNOCKBACK_FORCE = 512
 
 [node name="Body" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -109,6 +109,8 @@ animation = "idle"
 
 [node name="AttackCollision" type="Area2D" parent="."]
 monitorable = false
+collision_layer = 0
+collision_mask = 4
 
 [node name="side" type="CollisionShape2D" parent="AttackCollision"]
 position = Vector2( 58.416, 11.4938 )
@@ -126,3 +128,4 @@ shape = SubResource( 13 )
 disabled = true
 
 [connection signal="animation_finished" from="Weapon" to="." method="_on_Weapon_animation_finished"]
+[connection signal="body_entered" from="AttackCollision" to="." method="_on_AttackCollision_body_entered"]

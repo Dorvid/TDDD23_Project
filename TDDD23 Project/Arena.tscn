@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://images/Arena.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Audio/Crowd.wav" type="AudioStream" id=3]
 [ext_resource path="res://Arena.gd" type="Script" id=4]
-[ext_resource path="res://Golden Warrior.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Boss1.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -117,10 +116,5 @@ shape = SubResource( 10 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 28.0898, 646.129 )
 
-[node name="Audience_cheer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-
 [node name="Golden Warrior" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1215.63, 615.109 )
-
-[connection signal="finished" from="Audience_cheer" to="." method="_on_Audience_cheer_finished"]
