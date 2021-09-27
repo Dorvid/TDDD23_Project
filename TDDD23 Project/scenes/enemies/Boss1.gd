@@ -90,7 +90,7 @@ func _on_AttackCollision_body_entered(_body):
 func boss_hit(dmg):
 	current_hp -= dmg
 	if current_hp <=0:
+		$AnimatedSprite.play("idle")
 		CharacterController.emit_signal("boss_dead")
 		#Temporary idle animation, swap to dead animation later
-		$AnimatedSprite.play("idle")
 		alive = false
