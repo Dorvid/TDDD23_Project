@@ -29,8 +29,6 @@ func get_current_gold():
 func get_player_dmg():
 	return dmg
 
-func has_longsword():
-	return has_longsword
 
 func game_over():
 	pass

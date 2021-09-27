@@ -2,6 +2,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#Connects to boss_dead signal and calls _boss_dead when emitted
 	CharacterController.connect("boss_dead", self, "_boss_dead")
 	pass # Replace with function body.
 

@@ -18,7 +18,7 @@ var long_frames = preload("res://scenes/player/longsword.tres")
 
 func _ready():
 	#If the player has unlocked the long sword set it and increase hitboxes
-	if CharacterController.has_longsword() == false:
+	if CharacterController.has_longsword == false:
 		$Weapon.set_sprite_frames(short_frames)
 	else:
 		$Weapon.set_sprite_frames(long_frames)

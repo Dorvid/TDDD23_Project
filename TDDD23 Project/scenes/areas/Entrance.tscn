@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://images/Arena_entrance.png" type="Texture" id=1]
+[ext_resource path="res://images/Shopkeeper.png" type="Texture" id=2]
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/areas/Entrance.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 640, 25 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 360 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 128.011, 98.1141 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 130.249, 103.213 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 127.61, 182.369 )
+
+[node name="Entrance" type="Node"]
+script = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 640, 360 )
+
+[node name="Ground and walls" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Ground and walls"]
+position = Vector2( 640, 720 )
+
+[node name="Floor" type="CollisionShape2D" parent="Ground and walls/Ground"]
+shape = SubResource( 1 )
+
+[node name="Walls" type="StaticBody2D" parent="Ground and walls"]
+position = Vector2( 0, 360 )
+constant_linear_velocity = Vector2( 360, 0 )
+
+[node name="Wall Left" type="CollisionShape2D" parent="Ground and walls/Walls"]
+shape = SubResource( 2 )
+
+[node name="Wall Right" type="CollisionShape2D" parent="Ground and walls/Walls"]
+position = Vector2( 1280, 0 )
+shape = SubResource( 2 )
+
+[node name="Shopkeeper" type="Node2D" parent="."]
+position = Vector2( 384.45, 540.76 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Shopkeeper"]
+texture = ExtResource( 2 )
+
+[node name="Interaction" type="Area2D" parent="Shopkeeper"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shopkeeper/Interaction"]
+position = Vector2( 0, 50 )
+shape = SubResource( 3 )
+
+[node name="Bounty table" type="Area2D" parent="."]
+position = Vector2( 667.238, 586.413 )
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounty table"]
+shape = SubResource( 4 )
+
+[node name="Entrance" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
+position = Vector2( 938.617, 509.369 )
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 94.4352, 598.684 )
+
+[connection signal="body_entered" from="Entrance" to="." method="_on_Entrance_body_entered"]
+[connection signal="body_exited" from="Entrance" to="." method="_on_Entrance_body_exited"]
