@@ -10,6 +10,8 @@ var has_longsword = false
 
 signal player_dead
 signal boss_dead
+signal fight_start
+
 
 func _ready():
 	current_hp = base_hp
@@ -29,6 +31,8 @@ func get_current_gold():
 func get_player_dmg():
 	return dmg
 
+func emit_fight_start():
+	emit_signal("fight_start")
 
 func game_over():
 	pass

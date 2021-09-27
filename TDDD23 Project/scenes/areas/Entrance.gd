@@ -23,6 +23,6 @@ func _on_Entrance_body_entered(_body):
 
 func _on_Entrance_body_exited(_body):
 	ready_to_enter = false
-	effect_out.interpolate_property(label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
+	effect_out.interpolate_property(label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.2,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	effect_out.start()
 	print("No longer ready")

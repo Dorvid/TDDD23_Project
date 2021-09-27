@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/areas/Arena.gd" type="Script" id=1]
 [ext_resource path="res://images/Arena.png" type="Texture" id=2]
@@ -38,6 +38,12 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 12.4323, 89.3658 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 60.9033, 88.8693 )
+
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 835.054, 5 )
 
@@ -53,6 +59,9 @@ extents = Vector2( 134.234, 10 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 108.227 )
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 6.65126, 96.8545 )
+
 [node name="Arena" type="Node"]
 script = ExtResource( 1 )
 
@@ -64,6 +73,29 @@ playing = true
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Start_fight" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Start_collision" type="CollisionShape2D" parent="Start_fight"]
+position = Vector2( 100.589, 624.177 )
+shape = SubResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Leave_arena" type="Area2D" parent="."]
+position = Vector2( -96.7361, 619.162 )
+collision_layer = 0
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Leavebox" type="CollisionShape2D" parent="Leave_arena"]
+shape = SubResource( 12 )
+disabled = true
 
 [node name="Ground_and_walls" type="Node2D" parent="."]
 
@@ -105,18 +137,24 @@ position = Vector2( -128.829, 513.388 )
 shape = SubResource( 9 )
 
 [node name="Entrance_wall" type="StaticBody2D" parent="Ground_and_walls"]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Entrance_wall"]
 position = Vector2( -182.174, 615.259 )
 shape = SubResource( 10 )
 
+[node name="Entrance_door" type="StaticBody2D" parent="Ground_and_walls"]
+collision_mask = 0
+
+[node name="Door" type="CollisionShape2D" parent="Ground_and_walls/Entrance_door"]
+position = Vector2( 0.430252, 620.295 )
+shape = SubResource( 11 )
+disabled = true
+
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -79.7883, 635.641 )
+position = Vector2( -115.323, 626.602 )
 
 [node name="Boss1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1215.63, 615.109 )
 
+[connection signal="body_entered" from="Start_fight" to="." method="_on_Start_fight_body_entered"]
 [connection signal="enemy_hit" from="Player" to="." method="_on_Player_enemy_hit"]

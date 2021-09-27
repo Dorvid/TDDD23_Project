@@ -14,3 +14,11 @@ func _on_Player_enemy_hit():
 func _boss_dead():
 	MusicController.crowd_play()
 	$Background.play("cheering")
+	$Leave_arena/Leavebox.set_deferred('disabled', false)
+	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
+
+
+func _on_Start_fight_body_entered(body):
+	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', false)
+	$Start_fight/Start_collision.set_deferred('disabled', true)
+	CharacterController.emit_fight_start()

@@ -59,13 +59,13 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_attack") && is_attacking == false:
 		if Input.is_action_pressed("ui_down"):
 			$Weapon.play("swing down")
-			$AttackCollision/down.disabled = false
+			$AttackCollision/down.set_deferred('disabled', false)
 		elif Input.is_action_pressed("ui_up"):
 			$Weapon.play("swing up")
-			$AttackCollision/up.disabled = false
+			$AttackCollision/up.set_deferred('disabled', false)
 		else:
 			$Weapon.play("swing side")
-			$AttackCollision/side.disabled = false
+			$AttackCollision/side.set_deferred('disabled', false)
 		#So that we get our attacking animations over our other ones so far
 		is_attacking = true
 	

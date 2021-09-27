@@ -6,6 +6,7 @@ export (int) var HEALTH
 var current_hp
 var is_attacking = false
 var attack_on_cooldown = false
+var fight_started = false
 var moving_left = true
 var alive = true
 
@@ -15,11 +16,13 @@ onready var ray_behind = $RayBehind
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_hp = HEALTH
+	$AnimatedSprite.play("idle")
+	CharacterController.connect("fight_start", self, "_fight_start")
 	pass # Replace with function body.
 
 func _physics_process(_delta):
 	#Check if attacking then check raycasts
-	if alive == true:
+	if alive == true && fight_started == true:
 		if is_attacking == false:
 			if ray_char.is_colliding() && attack_on_cooldown == false:
 				$AnimatedSprite.play("attack")
@@ -94,3 +97,6 @@ func boss_hit(dmg):
 		CharacterController.emit_signal("boss_dead")
 		#Temporary idle animation, swap to dead animation later
 		alive = false
+
+func _fight_start():
+	fight_started = true
