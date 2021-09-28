@@ -16,6 +16,8 @@ onready var ray_behind = $RayBehind
 onready var effect_dmg = $Effect_dmg
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#Gravity incase player manages to move boss upwards
+	velocity.y = 32
 	current_hp = HEALTH
 	$AnimatedSprite.play("idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
