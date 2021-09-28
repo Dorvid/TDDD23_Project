@@ -13,6 +13,7 @@ var alive = true
 onready var ray_wall = $RayWall
 onready var ray_char = $RayChar
 onready var ray_behind = $RayBehind
+onready var effect_dmg = $Effect_dmg
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_hp = HEALTH
@@ -26,7 +27,7 @@ func _physics_process(_delta):
 		if is_attacking == false:
 			if ray_char.is_colliding() && attack_on_cooldown == false:
 				$AnimatedSprite.play("attack")
-				$AttackCollision/start.disabled = false
+				$AttackCollision/start.set_deferred('disabled', false)
 				$SwingTimer.start()
 				is_attacking = true
 			elif ray_wall.is_colliding():
@@ -55,26 +56,26 @@ func swap_sides():
 		moving_left = false
 		$AnimatedSprite.set_flip_h(true)
 		$AttackCollision.scale = Vector2(-1,1)
-		$RayWall.scale = Vector2(-1,1)
-		$RayChar.scale = Vector2(-1,1)
-		$RayBehind.scale = Vector2(-1,1)
+		ray_wall.scale = Vector2(-1,1)
+		ray_char.scale = Vector2(-1,1)
+		ray_behind.scale = Vector2(-1,1)
 	else:
 		moving_left = true
 		$AnimatedSprite.set_flip_h(false)
 		$AttackCollision.scale = Vector2(1,1)
-		$RayWall.scale = Vector2(1,1)
-		$RayChar.scale = Vector2(1,1)
-		$RayBehind.scale = Vector2(1,1)
+		ray_wall.scale = Vector2(1,1)
+		ray_char.scale = Vector2(1,1)
+		ray_behind.scale = Vector2(1,1)
 
 
 func _on_SwingTimer_timeout():
-	$AttackCollision/start.disabled = true
-	$AttackCollision/end.disabled = false
+	$AttackCollision/start.set_deferred('disabled', true)
+	$AttackCollision/end.set_deferred('disabled', false)
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "attack":
 		attack_on_cooldown = true
-		$AttackCollision/end.disabled = true
+		$AttackCollision/end.set_deferred('disabled', true)
 		is_attacking = false
 		$AttackCooldownTimer.start()
 		$AnimatedSprite.play("idle")
@@ -97,6 +98,8 @@ func boss_hit(dmg):
 		CharacterController.emit_signal("boss_dead")
 		#Temporary idle animation, swap to dead animation later
 		alive = false
-
+	else:
+		effect_dmg.interpolate_property($AnimatedSprite.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		effect_dmg.start()
 func _fight_start():
 	fight_started = true
