@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://images/Player_head_sheet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
 [ext_resource path="res://images/Player_body_sheet.png" type="Texture" id=3]
 [ext_resource path="res://scenes/player/shortsword.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://shaders/Flash.tres" type="Material" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -89,12 +90,14 @@ JUMPFORCE = 1024
 KNOCKBACK_FORCE = 512
 
 [node name="Body" type="AnimatedSprite" parent="."]
+material = ExtResource( 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "idle"
 playing = true
 
 [node name="Head" type="AnimatedSprite" parent="."]
+material = ExtResource( 5 )
 scale = Vector2( -2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
@@ -126,6 +129,10 @@ disabled = true
 position = Vector2( 34.2292, 47.1085 )
 shape = SubResource( 13 )
 disabled = true
+
+[node name="Effect_dmg_body" type="Tween" parent="."]
+
+[node name="Effect_dmg_head" type="Tween" parent="."]
 
 [connection signal="animation_finished" from="Weapon" to="." method="_on_Weapon_animation_finished"]
 [connection signal="body_entered" from="AttackCollision" to="." method="_on_AttackCollision_body_entered"]

@@ -1,14 +1,19 @@
 extends Node
 
 onready var leave_text = $Leave_text
+onready var game_over = $Game_over
 onready var bounce_up = $Leave_text/Bounce_up
-onready var effect_in = $Leave_text/Effect_in
+onready var effect_in = $Effect_in
+onready var effect_drop = $Game_over/Effect_drop
+
 var bounced_up = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Connects to boss_dead signal and calls _boss_dead when emitted
-	CharacterController.connect("boss_dead", self, "_boss_dead")
-	effect_in.interpolate_property(leave_text,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
+	if CharacterController.connect("boss_dead", self, "_boss_dead") != OK:
+		print("Failed to connect to boss_dead signal in arena script")
+	if CharacterController.connect("player_dead", self, "_player_dead") != OK:
+		print("Failed to connect to player_dead signal in arena script")
 
 
 
@@ -19,11 +24,18 @@ func _on_Player_enemy_hit():
 func _boss_dead():
 	MusicController.crowd_play()
 	print("Text appering")
+	effect_in.interpolate_property(leave_text,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	effect_in.start()
 	$Background.play("cheering")
 	$Leave_arena/Leavebox.set_deferred('disabled', false)
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
 
+func _player_dead():
+	
+	effect_in.interpolate_property(game_over,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
+	effect_drop.interpolate_property(game_over,'rect_position',Vector2(510,0),Vector2(510,140),2,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
+	effect_in.start()
+	effect_drop.start()
 
 func _on_Start_fight_body_entered(_body):
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', false)
@@ -33,7 +45,8 @@ func _on_Start_fight_body_entered(_body):
 
 func _on_Leave_arena_body_entered(_body):
 	MusicController.leave_arena()
-	get_tree().change_scene("res://scenes/areas/Entrance.tscn")
+	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
+		print("Failed to swap to entrance scene")
 
 
 func _on_Effect_in_tween_completed(_object, _key):

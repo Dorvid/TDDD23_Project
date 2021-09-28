@@ -9,6 +9,10 @@ export (int) var JUMPFORCE
 export (int) var KNOCKBACK_FORCE
 var is_attacking = false
 var last_direction = 0
+var alive = true
+
+onready var effect_dmg = $Effect_dmg_body
+onready var effect_dmg2 = $Effect_dmg_head
 
 signal enemy_hit
 
@@ -27,72 +31,80 @@ func _ready():
 		$AttackCollision/down.scale = Vector2(1,1.5)
 	#set weapon to correct animation just is case
 	$Weapon.play("idle")
+	if CharacterController.connect("player_dead",self,"_dead") != OK:
+		print("Failed to connect to player_dead signal in player script")
+	if CharacterController.connect("damage_taken",self,"_damage_taken") != OK:
+		print("Failed to connect to damage_taken signal in player script")
 
 func _physics_process(_delta):
 	#Move Character left or right and change animation
-	if Input.is_action_pressed("ui_right") && (!is_on_floor() || is_attacking == false):
-		#Set Speed
-		velocity.x = SPEED
-		# For logic concerning which side player is looking at in this case right
-		last_direction = 1
-		#Set and flip animations and hitboxes for weapons
-		$Body.play("walk")
-		$Head.set_flip_h(false)
-		$Weapon.set_flip_h(false)
-		$AttackCollision.scale = Vector2(1,1)
-	elif Input.is_action_pressed("ui_left") && (!is_on_floor() or is_attacking == false):
-		velocity.x = -SPEED
-		# For logic concerning which side player is looking at in this case left
-		last_direction = -1
-		#Set and flip animations and hitboxes for weapons
-		$Body.play("walk")
-		$Head.set_flip_h(true)
-		$Weapon.set_flip_h(true)
-		$AttackCollision.scale = Vector2(-1,1)
-	else: #No movement so idle
-		velocity.x = 0
-		if is_attacking == false:
-			$Body.play("idle")
-			$Weapon.play("idle")
-	
-	# Attack logic
-	if Input.is_action_just_pressed("ui_attack") && is_attacking == false:
+	if alive == true:
+		if Input.is_action_pressed("ui_right") && (!is_on_floor() || is_attacking == false):
+			#Set Speed
+			velocity.x = SPEED
+			# For logic concerning which side player is looking at in this case right
+			last_direction = 1
+			#Set and flip animations and hitboxes for weapons
+			$Body.play("walk")
+			$Head.set_flip_h(false)
+			$Weapon.set_flip_h(false)
+			$AttackCollision.scale = Vector2(1,1)
+		elif Input.is_action_pressed("ui_left") && (!is_on_floor() or is_attacking == false):
+			velocity.x = -SPEED
+			# For logic concerning which side player is looking at in this case left
+			last_direction = -1
+			#Set and flip animations and hitboxes for weapons
+			$Body.play("walk")
+			$Head.set_flip_h(true)
+			$Weapon.set_flip_h(true)
+			$AttackCollision.scale = Vector2(-1,1)
+		else: #No movement so idle
+			velocity.x = 0
+			if is_attacking == false:
+				$Body.play("idle")
+				$Weapon.play("idle")
+		
+		# Attack logic
+		if Input.is_action_just_pressed("ui_attack") && is_attacking == false:
+			if Input.is_action_pressed("ui_down"):
+				$Weapon.play("swing down")
+				$AttackCollision/down.set_deferred('disabled', false)
+			elif Input.is_action_pressed("ui_up"):
+				$Weapon.play("swing up")
+				$AttackCollision/up.set_deferred('disabled', false)
+			else:
+				$Weapon.play("swing side")
+				$AttackCollision/side.set_deferred('disabled', false)
+			#So that we get our attacking animations over our other ones so far
+			is_attacking = true
+		
+		#If player wants to attack downwards change animation to look down
 		if Input.is_action_pressed("ui_down"):
-			$Weapon.play("swing down")
-			$AttackCollision/down.set_deferred('disabled', false)
-		elif Input.is_action_pressed("ui_up"):
-			$Weapon.play("swing up")
-			$AttackCollision/up.set_deferred('disabled', false)
+			$Head.play("down")
 		else:
-			$Weapon.play("swing side")
-			$AttackCollision/side.set_deferred('disabled', false)
-		#So that we get our attacking animations over our other ones so far
-		is_attacking = true
-	
-	#If player wants to attack downwards change animation to look down
-	if Input.is_action_pressed("ui_down"):
-		$Head.play("down")
+			$Head.play("idle")
+		
+		#If downwards swing hit get a little knockback upwards
+		if knockback == true:
+			velocity.y = knockback_velocity.y * KNOCKBACK_FORCE
+			knockback = false
+		else:
+			#Gravity
+			velocity.y = velocity.y + GRAVITY
+		
+		#Jump if on a floor
+		if Input.is_action_just_pressed("ui_jump") && is_on_floor():
+			velocity.y = -JUMPFORCE
+		
+		#Detect Collision and move character, 
+		#Vector2.UP tells is_on_floor() which direction the floor is looking
+		velocity = move_and_slide(velocity,Vector2.UP)
+		
+		velocity.x = lerp(velocity.x,0,0.2)
 	else:
 		$Head.play("idle")
-	
-	#If downwards swing hit get a little knockback upwards
-	if knockback == true:
-		velocity.y = knockback_velocity.y * KNOCKBACK_FORCE
-		knockback = false
-	else:
-		#Gravity
-		velocity.y = velocity.y + GRAVITY
-	
-	#Jump if on a floor
-	if Input.is_action_just_pressed("ui_jump") && is_on_floor():
-		velocity.y = -JUMPFORCE
-	
-	#Detect Collision and move character, 
-	#Vector2.UP tells is_on_floor() which direction the floor is looking
-	velocity = move_and_slide(velocity,Vector2.UP)
-	
-	velocity.x = lerp(velocity.x,0,0.2)
-	
+		$Body.play("idle")
+
 #When animation is finished set animation to idle and disable weapon hitboxes
 func _on_Weapon_animation_finished():
 	is_attacking = false
@@ -110,3 +122,13 @@ func _on_AttackCollision_body_entered(_body):
 	if temp == "swing down":
 		knockback_velocity = Vector2(0,-1)
 		knockback = true
+
+func _dead():
+	alive = false
+
+func _damage_taken():
+	effect_dmg.interpolate_property($Body.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	effect_dmg2.interpolate_property($Head.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	effect_dmg.start()
+	effect_dmg2.start()
+	

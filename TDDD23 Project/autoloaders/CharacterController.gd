@@ -5,12 +5,14 @@ var current_hp
 var base_dmg = 3
 var dmg
 var gold = 0
-var ascension = 0
+#Ascension mechanic from Slay the Spire
+var renown = 0
 var has_longsword = false
 
 signal player_dead
 signal boss_dead
 signal fight_start
+signal damage_taken
 
 
 func _ready():
@@ -22,8 +24,10 @@ func _ready():
 func player_hit():
 	current_hp -= 1
 	print(current_hp)
-	if current_hp == 0:
-		game_over() 
+	if current_hp <= 0:
+		game_over()
+	else:
+		emit_signal("damage_taken") 
 
 func get_current_gold():
 	return gold
@@ -31,8 +35,12 @@ func get_current_gold():
 func get_player_dmg():
 	return dmg
 
+#Emit signals
+func game_over():
+	emit_signal("player_dead")
+
+func boss_dead():
+	emit_signal("boss_dead")
+
 func emit_fight_start():
 	emit_signal("fight_start")
-
-func game_over():
-	pass

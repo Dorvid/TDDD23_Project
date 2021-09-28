@@ -18,8 +18,8 @@ onready var effect_dmg = $Effect_dmg
 func _ready():
 	current_hp = HEALTH
 	$AnimatedSprite.play("idle")
-	CharacterController.connect("fight_start", self, "_fight_start")
-	pass # Replace with function body.
+	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
+		print("Failed to connect to fight_start signal in Boss1 script")
 
 func _physics_process(_delta):
 	#Check if attacking then check raycasts
@@ -95,7 +95,7 @@ func boss_hit(dmg):
 	current_hp -= dmg
 	if current_hp <=0:
 		$AnimatedSprite.play("idle")
-		CharacterController.emit_signal("boss_dead")
+		CharacterController.boss_dead()
 		#Temporary idle animation, swap to dead animation later
 		alive = false
 	else:

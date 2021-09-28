@@ -11,7 +11,8 @@ func _ready():
 func _process(_delta):
 	if ready_to_enter == true:
 		if Input.is_action_just_pressed("ui_up"):
-			get_tree().change_scene("res://scenes/areas/Arena.tscn")
+			if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
+				print("Failed to swap to arena scene")
 
 
 func _on_Entrance_body_entered(_body):
