@@ -6,6 +6,8 @@ onready var effect_out = $Entrance/Label/Effect_out
 onready var label = $Entrance/Label
 
 func _ready():
+	if CharacterController.get_returning():
+		$Player.position = $Return_pos.position
 	pass
 
 func _process(_delta):
@@ -13,6 +15,7 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_up"):
 			if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
 				print("Failed to swap to arena scene")
+			CharacterController.set_returning(true)
 
 
 func _on_Entrance_body_entered(_body):

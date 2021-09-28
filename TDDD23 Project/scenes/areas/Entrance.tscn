@@ -111,6 +111,9 @@ __meta__ = {
 
 [node name="Effect_out" type="Tween" parent="Entrance/Label"]
 
+[node name="Return_pos" type="Position2D" parent="."]
+position = Vector2( 939.146, 612.557 )
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 95.8495, 626.968 )
 

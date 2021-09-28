@@ -8,6 +8,7 @@ var gold = 0
 #Ascension mechanic from Slay the Spire
 var renown = 0
 var has_longsword = false
+var returning = false
 
 signal player_dead
 signal boss_dead
@@ -34,6 +35,12 @@ func get_current_gold():
 
 func get_player_dmg():
 	return dmg
+
+func get_returning():
+	return returning
+
+func set_returning(bool_val):
+	returning = bool_val
 
 #Emit signals
 func game_over():
