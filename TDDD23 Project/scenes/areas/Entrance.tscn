@@ -4,7 +4,7 @@
 [ext_resource path="res://images/Shopkeeper.png" type="Texture" id=2]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/areas/Entrance.gd" type="Script" id=4]
-[ext_resource path="res://font/Main_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://font/Frostbite_32.tres" type="DynamicFont" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 25 )
@@ -92,7 +92,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Entrance"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 0, 0, 0, 0 )
 margin_left = 839.156
 margin_top = 294.77
 margin_right = 1058.16
