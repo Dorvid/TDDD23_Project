@@ -9,3 +9,5 @@ script = ExtResource( 2 )
 [node name="Crowd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -25.0
+
+[connection signal="finished" from="Crowd" to="." method="_on_Crowd_finished"]
