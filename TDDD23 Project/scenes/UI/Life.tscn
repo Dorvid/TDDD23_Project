@@ -1,24 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://images/armored_heart_40x40.png" type="Texture" id=1]
 [ext_resource path="res://scenes/UI/Life.gd" type="Script" id=2]
 
-[node name="Control" type="Control"]
+[node name="Life" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.471924
-margin_right = 0.471924
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureProgress" type="TextureProgress" parent="."]
-margin_left = 16.0459
-margin_top = 4.24743
-margin_right = 56.0459
-margin_bottom = 44.2474
-texture_progress = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

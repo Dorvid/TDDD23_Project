@@ -11,7 +11,6 @@ config_version=4
 [application]
 
 config/name="TDDD23 Project"
-config/icon="res://images/icon.png"
 
 [autoload]
 
