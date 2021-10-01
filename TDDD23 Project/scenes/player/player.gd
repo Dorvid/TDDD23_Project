@@ -14,7 +14,6 @@ var alive = true
 onready var effect_dmg = $Effect_dmg_body
 onready var effect_dmg2 = $Effect_dmg_head
 
-signal enemy_hit
 
 # Loads swords so they can be set in ready
 var short_frames = preload("res://scenes/player/shortsword.tres")
@@ -112,7 +111,8 @@ func _on_Weapon_animation_finished():
 
 
 func _on_AttackCollision_body_entered(_body):
-	emit_signal("enemy_hit")
+
+	CharacterController.emit_signal("boss_hit")
 	#Get which way char is attacking
 	var temp = $Weapon.get_animation()
 	#Set knockback velocity to add it to char in next physics loop

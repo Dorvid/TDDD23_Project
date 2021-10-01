@@ -14,7 +14,8 @@ func _ready():
 		print("Failed to connect to boss_dead signal in arena script")
 	if CharacterController.connect("player_dead", self, "_player_dead") != OK:
 		print("Failed to connect to player_dead signal in arena script")
-
+	if CharacterController.connect("boss_hit",self, "_on_Player_enemy_hit") != OK:
+		print("Failed to connect to boss_hit signal in arena script")
 
 
 func _on_Player_enemy_hit():

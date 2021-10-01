@@ -14,7 +14,7 @@ signal player_dead
 signal boss_dead
 signal fight_start
 signal damage_taken
-
+signal boss_hit
 
 func _ready():
 	current_hp = base_hp
@@ -51,3 +51,9 @@ func boss_dead():
 
 func emit_fight_start():
 	emit_signal("fight_start")
+
+func damage_taken():
+	emit_signal("damage_taken")
+
+func boss_hit():
+	emit_signal("boss_hit")

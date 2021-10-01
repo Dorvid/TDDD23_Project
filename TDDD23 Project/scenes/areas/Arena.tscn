@@ -230,4 +230,3 @@ position = Vector2( 1215.63, 615.109 )
 [connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]
 [connection signal="tween_completed" from="Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
 [connection signal="tween_completed" from="Effect_in" to="." method="_on_Effect_in_tween_completed"]
-[connection signal="enemy_hit" from="Player" to="." method="_on_Player_enemy_hit"]
