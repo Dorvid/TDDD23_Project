@@ -7,6 +7,7 @@ var current_hp
 var is_attacking = false
 var attack_on_cooldown = false
 var fight_started = false
+var player_alive = true
 var moving_left = true
 var alive = true
 
@@ -22,10 +23,12 @@ func _ready():
 	$AnimatedSprite.play("idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
 		print("Failed to connect to fight_start signal in Boss1 script")
+	if CharacterController.connect("player_dead", self, "_player_dead") != OK:
+		print("Failed to connect to player_dead signal in Boss1 script")
 
 func _physics_process(_delta):
 	#Check if attacking then check raycasts
-	if alive == true && fight_started == true:
+	if alive == true && fight_started == true && player_alive == true:
 		if is_attacking == false:
 			if ray_char.is_colliding() && attack_on_cooldown == false:
 				$AnimatedSprite.play("attack")
@@ -96,12 +99,17 @@ func _on_AttackCollision_body_entered(_body):
 func boss_hit(dmg):
 	current_hp -= dmg
 	if current_hp <=0:
-		$AnimatedSprite.play("idle")
+		$AnimatedSprite.play("death")
 		CharacterController.boss_dead()
 		#Temporary idle animation, swap to dead animation later
 		alive = false
 	else:
 		effect_dmg.interpolate_property($AnimatedSprite.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		effect_dmg.start()
+
 func _fight_start():
 	fight_started = true
+	
+func _player_dead():
+	player_alive = false
+	$AnimatedSprite.play("idle")

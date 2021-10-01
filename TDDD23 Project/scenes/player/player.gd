@@ -101,9 +101,6 @@ func _physics_process(_delta):
 		velocity = move_and_slide(velocity,Vector2.UP)
 		
 		velocity.x = lerp(velocity.x,0,0.2)
-	else:
-		$Head.play("idle")
-		$Body.play("idle")
 
 #When animation is finished set animation to idle and disable weapon hitboxes
 func _on_Weapon_animation_finished():
@@ -125,6 +122,9 @@ func _on_AttackCollision_body_entered(_body):
 
 func _dead():
 	alive = false
+	$Body.play("death")
+	$Weapon.hide()
+	$Head.hide()
 
 func _damage_taken():
 	effect_dmg.interpolate_property($Body.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
