@@ -5,57 +5,57 @@
 [ext_resource path="res://shaders/Flash.tres" type="Material" id=3]
 [ext_resource path="res://images/spritesheets/Boss1_death_sheet.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 198, 0, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 396, 0, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 198, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=19]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 198, 198, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=20]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 396, 198, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=21]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 396, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=22]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=23]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 198, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=24]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 396, 198, 198 )
@@ -63,59 +63,59 @@ region = Rect2( 0, 396, 198, 198 )
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 198, 396, 198, 198 )
+region = Rect2( 198, 594, 198, 198 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 396, 396, 198, 198 )
+region = Rect2( 396, 594, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=25]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 594, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=26]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 198, 594, 198, 198 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=27]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 396, 594, 198, 198 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=28]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "idle",
 "speed": 4.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": false,
 "name": "attack",
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=18]
+[sub_resource type="CapsuleShape2D" id=29]
 radius = 31.5503
 height = 93.4897
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 63.4255, 10 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 53.3441, 10 )
 
 [node name="Boss1" type="KinematicBody2D"]
@@ -128,12 +128,12 @@ HEALTH = 45
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 3 )
-frames = SubResource( 17 )
+frames = SubResource( 28 )
 animation = "death"
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( -4.00903, 21.3816 )
-shape = SubResource( 18 )
+shape = SubResource( 29 )
 
 [node name="AttackCollision" type="Area2D" parent="."]
 collision_layer = 4
@@ -141,12 +141,12 @@ collision_mask = 2
 
 [node name="end" type="CollisionShape2D" parent="AttackCollision"]
 position = Vector2( -31.924, 34.4307 )
-shape = SubResource( 19 )
+shape = SubResource( 30 )
 disabled = true
 
 [node name="start" type="CollisionShape2D" parent="AttackCollision"]
 position = Vector2( 18.77, 34.4307 )
-shape = SubResource( 20 )
+shape = SubResource( 31 )
 disabled = true
 
 [node name="SwingTimer" type="Timer" parent="."]

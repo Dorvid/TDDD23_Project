@@ -1,18 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://images/icon/UI/label_bg.png" type="Texture" id=1]
 [ext_resource path="res://images/icon/coins/coin_05d.png" type="Texture" id=2]
 [ext_resource path="res://scenes/UI/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/UI/Gold.gd" type="Script" id=4]
 
 [node name="Gold" type="NinePatchRect"]
-margin_left = 0.148643
-margin_right = 81.1486
-margin_bottom = 41.0
+margin_right = 122.0
+margin_bottom = 58.0
 texture = ExtResource( 1 )
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,11 +36,13 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -14.5
-margin_right = 40.0
-margin_bottom = 14.5
+margin_left = 7.0
+margin_top = -24.0
+margin_right = 85.0
+margin_bottom = 25.0
 theme = ExtResource( 3 )
-text = "10"
+text = "0
+"
 align = 1
 valign = 1
 __meta__ = {

@@ -16,6 +16,7 @@ signal fight_start
 signal damage_taken
 signal boss_hit
 signal hp_increase
+signal gold_changed
 
 func _ready():
 	current_hp = base_hp
@@ -31,7 +32,7 @@ func player_hit():
 	else:
 		emit_signal("damage_taken") 
 
-func increase_total_hp(i :int):
+func increase_total_hp(i: int):
 	base_hp += i
 	emit_signal("hp_increase")
 
@@ -50,7 +51,7 @@ func get_player_dmg():
 func get_returning():
 	return returning
 
-func set_returning(bool_val):
+func set_returning(bool_val: bool):
 	returning = bool_val
 
 #Emit signals
@@ -69,3 +70,6 @@ func damage_taken():
 func boss_hit():
 	emit_signal("boss_hit")
 
+func gold_change(input: int):
+	gold += input
+	emit_signal("gold_changed")
