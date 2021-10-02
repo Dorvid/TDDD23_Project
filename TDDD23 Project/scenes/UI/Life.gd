@@ -1,17 +1,54 @@
 extends Control
 
+export (PackedScene) var Heart
+var hp
+var format_string = "Bar/@Heart@{int}"
+var parsing_str
+var resize_width
+var total_hp
+var health_width = 10
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
+onready var fade = $Fade_effect
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
-	$TextureProgress.value = 100
-	pass # Replace with function body.
+	total_hp = CharacterController.total_hp()
+	hp = CharacterController.get_current_hp()
+	if hp > 5:
+		_resize_bar()
+		health_width += 300
+	else:
+		add_heart(5)
+	if CharacterController.connect("damage_taken",self,"_damage_taken") != OK:
+		print("Could not connect to signal damage_taken in Life.gd")
+	if CharacterController.connect("hp_increase",self,"_resize_bar") != OK:
+		print("Could not connect to signal hp_increase in Life.gd")
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _damage_taken():
+	hp -= 1
+	if hp > 0:
+		parsing_str = format_string.format({"int": hp + 1})
+		fade_heart(get_node(parsing_str))
+	elif hp == 0:
+		fade_heart(get_node("Bar/Heart"))
+
+func fade_heart(heart):
+	fade.interpolate_property(heart,"modulate",Color("ffffff"),Color("212020"),0.5,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
+	fade.start()
+
+func _resize_bar():
+	var new_total_hp = CharacterController.total_hp()
+	resize_width = 310 + (new_total_hp - 5) * 60
+	$Bar.rect_size.x = resize_width
+	add_heart(new_total_hp - total_hp)
+	total_hp = new_total_hp
+
+func add_heart(i):
+	for x in i:
+		var heart = Heart.instance()
+		get_node("Bar").add_child(heart)
+		heart.rect_position.x = health_width
+		health_width += 60
+		print_tree()
