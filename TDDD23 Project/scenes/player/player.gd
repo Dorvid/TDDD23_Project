@@ -105,20 +105,29 @@ func _physics_process(_delta):
 func _on_Weapon_animation_finished():
 	is_attacking = false
 	$Weapon.play("idle")
-	$AttackCollision/down.disabled = true
-	$AttackCollision/up.disabled = true
-	$AttackCollision/side.disabled = true
+	turn_off_weap_collision($Weapon.get_animation())
 
+func turn_off_weap_collision(animation):
+	match animation:
+		"swing down":
+			$AttackCollision/down.set_deferred('disabled', true)
+		"swing up":
+			$AttackCollision/up.set_deferred('disabled', true)
+		"swing side":
+			$AttackCollision/side.set_deferred('disabled', true)
+	
 
 func _on_AttackCollision_body_entered(_body):
 
 	CharacterController.emit_signal("boss_hit")
 	#Get which way char is attacking
 	var temp = $Weapon.get_animation()
+	turn_off_weap_collision(temp)
 	#Set knockback velocity to add it to char in next physics loop
 	if temp == "swing down":
 		knockback_velocity = Vector2(0,-1)
 		knockback = true
+	
 
 func _dead():
 	alive = false

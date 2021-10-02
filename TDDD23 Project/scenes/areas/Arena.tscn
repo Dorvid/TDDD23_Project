@@ -173,12 +173,12 @@ position = Vector2( 0.430252, 620.295 )
 shape = SubResource( 13 )
 disabled = true
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -115.323, 626.602 )
-
 [node name="Boss1" parent="." instance=ExtResource( 3 )]
 material = SubResource( 15 )
 position = Vector2( 1215.63, 615.109 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -115.323, 626.602 )
 
 [node name="Leave_text" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )

@@ -29,8 +29,7 @@ func player_hit():
 	print(current_hp)
 	if current_hp <= 0:
 		game_over()
-	else:
-		emit_signal("damage_taken") 
+	emit_signal("damage_taken") 
 
 func increase_total_hp(i: int):
 	base_hp += i

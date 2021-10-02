@@ -2,7 +2,7 @@ extends Control
 
 export (PackedScene) var Heart
 var hp
-var format_string = "Bar/@Heart@{int}"
+var format_string = "Bar/Heart{int}"
 var parsing_str
 var resize_width
 var total_hp
@@ -48,7 +48,17 @@ func _resize_bar():
 func add_heart(i):
 	for x in i:
 		var heart = Heart.instance()
-		get_node("Bar").add_child(heart)
+		get_node("Bar").add_child(heart,true)
 		heart.rect_position.x = health_width
 		health_width += 60
 		print_tree()
+
+func free_bar_childs():
+	for n in $Bar.get_children():
+		$Bar.remove_child(n)
+		n.queue_free()
+
+
+func _on_Timer_timeout():
+	#CharacterController.
+	pass

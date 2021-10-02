@@ -46,6 +46,7 @@ func _on_Start_fight_body_entered(_body):
 
 func _on_Leave_arena_body_entered(_body):
 	MusicController.leave_arena()
+	$Interface/Life.free_bar_childs()
 	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
 		print("Failed to swap to entrance scene")
 

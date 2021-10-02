@@ -98,8 +98,10 @@ func _on_AttackCollision_body_entered(_body):
 
 func boss_hit(dmg):
 	current_hp -= dmg
+	print(current_hp)
 	if current_hp <=0:
 		$AnimatedSprite.play("death")
+		$hitbox.set_deferred('disabled',true)
 		CharacterController.boss_dead()
 		#Temporary idle animation, swap to dead animation later
 		alive = false
