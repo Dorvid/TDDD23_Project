@@ -14,11 +14,15 @@ onready var fade = $Fade_effect
 func _ready():
 	total_hp = CharacterController.total_hp()
 	hp = CharacterController.get_current_hp()
-	if hp > 5:
+	if total_hp > 5:
 		_resize_bar()
 		health_width += 300
 	else:
 		add_heart(5)
+	if hp < total_hp:
+		for n in range(total_hp,hp,-1):
+			parsing_str = format_string.format({"int": n})
+			get_node(parsing_str).set_modulate(Color("212020"))
 	if CharacterController.connect("damage_taken",self,"_damage_taken") != OK:
 		print("Could not connect to signal damage_taken in Life.gd")
 	if CharacterController.connect("hp_increase",self,"_resize_bar") != OK:
@@ -37,6 +41,7 @@ func _damage_taken():
 func fade_heart(heart):
 	fade.interpolate_property(heart,"modulate",Color("ffffff"),Color("212020"),0.5,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
 	fade.start()
+
 
 func _resize_bar():
 	var new_total_hp = CharacterController.total_hp()
