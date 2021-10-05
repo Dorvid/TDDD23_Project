@@ -180,7 +180,13 @@ position = Vector2( 1215.63, 615.109 )
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -115.323, 626.602 )
 
-[node name="Leave_text" type="Label" parent="."]
+[node name="Interface" parent="." instance=ExtResource( 6 )]
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Effect_in" type="Tween" parent="Labels"]
+
+[node name="Leave_text" type="Label" parent="Labels"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.15
@@ -200,13 +206,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bounce_up" type="Tween" parent="Leave_text"]
+[node name="Bounce_up" type="Tween" parent="Labels/Leave_text"]
 repeat = true
 playback/repeat = true
 
-[node name="Bounce_down" type="Tween" parent="Leave_text"]
+[node name="Bounce_down" type="Tween" parent="Labels/Leave_text"]
 
-[node name="Game_over" type="Label" parent="."]
+[node name="Game_over" type="Label" parent="Labels"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -223,13 +229,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Effect_drop" type="Tween" parent="Game_over"]
-
-[node name="Effect_in" type="Tween" parent="."]
-
-[node name="Interface" parent="." instance=ExtResource( 6 )]
+[node name="Effect_drop" type="Tween" parent="Labels/Game_over"]
 
 [connection signal="body_entered" from="Start_fight" to="." method="_on_Start_fight_body_entered"]
 [connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]
-[connection signal="tween_completed" from="Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
-[connection signal="tween_completed" from="Effect_in" to="." method="_on_Effect_in_tween_completed"]
+[connection signal="tween_completed" from="Labels/Effect_in" to="." method="_on_Effect_in_tween_completed"]
+[connection signal="tween_completed" from="Labels/Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]

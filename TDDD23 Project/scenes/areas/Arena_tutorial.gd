@@ -16,6 +16,7 @@ var faded_in_attack_text = false
 onready var leave_text = $Labels/Leave_text
 onready var bounce_up = $Labels/Leave_text/Bounce_up
 onready var effect_in = $Labels/Leave_text/Effect_in
+var faded_in_leave_text = false
 var leave_center
 var bounced_up = true
 
@@ -36,13 +37,11 @@ func _ready():
 	mod_in(effect_enter,enter_text,1)
 	leave_center = $Labels/Leave_text.get_global_position().x
 
-func _process(_delta):
-	if faded_in_attack_text == true:
-		if Input.is_action_just_pressed("ui_attack"):
-			mod_out(effect_attack,attack_text,1)
-
 func _on_Player_enemy_hit():
 	$Target_dummy.dummy_hit()
+	if faded_in_attack_text == true && faded_in_leave_text == false:
+		faded_in_leave_text = true
+		mod_out(effect_attack,attack_text,1)
 
 
 #Enter label
@@ -79,7 +78,6 @@ func _attack_fade_completed(_object, _key):
 	else:
 		mod_in(effect_in,leave_text,1)
 		$Labels/Leave_arena/Leavebox.set_deferred("disabled",false)
-		faded_in_attack_text = false
 
 
  #Leave label
