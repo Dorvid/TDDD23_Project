@@ -104,8 +104,8 @@ func _physics_process(_delta):
 #When animation is finished set animation to idle and disable weapon hitboxes
 func _on_Weapon_animation_finished():
 	is_attacking = false
-	$Weapon.play("idle")
 	turn_off_weap_collision($Weapon.get_animation())
+	$Weapon.play("idle")
 
 func turn_off_weap_collision(animation):
 	match animation:
