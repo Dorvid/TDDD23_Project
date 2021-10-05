@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/areas/Arena_tutorial.gd" type="Script" id=1]
 [ext_resource path="res://font/Frostbite_64.tres" type="DynamicFont" id=2]
@@ -41,12 +41,6 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12.4323, 89.3658 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 60.9033, 88.8693 )
-
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 835.054, 5 )
 
@@ -63,13 +57,22 @@ extents = Vector2( 134.234, 10 )
 extents = Vector2( 10, 108.227 )
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 6.65126, 96.8545 )
+extents = Vector2( 39.1988, 96.8545 )
 
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 12.4323, 89.3658 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 640, 1 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 60.9033, 88.8693 )
 
 [node name="Arena" type="Node"]
 script = ExtResource( 1 )
@@ -81,29 +84,6 @@ animation = "idle"
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="Start_fight" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="Start_collision" type="CollisionShape2D" parent="Start_fight"]
-position = Vector2( 100.589, 624.177 )
-shape = SubResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Leave_arena" type="Area2D" parent="."]
-position = Vector2( -96.7361, 619.162 )
-collision_layer = 0
-collision_mask = 2
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Leavebox" type="CollisionShape2D" parent="Leave_arena"]
-shape = SubResource( 7 )
-disabled = true
 
 [node name="Ground_and_walls" type="Node2D" parent="."]
 __meta__ = {
@@ -159,7 +139,6 @@ collision_mask = 0
 [node name="Door" type="CollisionShape2D" parent="Ground_and_walls/Entrance_door"]
 position = Vector2( 0.430252, 620.295 )
 shape = SubResource( 13 )
-disabled = true
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( -115.323, 626.602 )
@@ -168,7 +147,70 @@ position = Vector2( -115.323, 626.602 )
 material = SubResource( 14 )
 position = Vector2( 824.264, 621.368 )
 
-[node name="Leave_text" type="Label" parent="."]
+[node name="Interface" parent="." instance=ExtResource( 6 )]
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Enter_text" type="Label" parent="Labels"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -290.5
+margin_right = 290.5
+margin_bottom = 68.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Walk with A and D Keys"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade_effect" type="Tween" parent="Labels/Enter_text"]
+
+[node name="Jump_text" type="Label" parent="Labels"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -261.5
+margin_right = 261.5
+margin_bottom = 68.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "PRESS SPACE TO JUMP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade_effect" type="Tween" parent="Labels/Jump_text"]
+
+[node name="Attack_text" type="Label" parent="Labels"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -286.0
+margin_right = 286.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Attack with left click"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade_effect" type="Tween" parent="Labels/Attack_text"]
+
+[node name="Leave_text" type="Label" parent="Labels"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.15
@@ -178,6 +220,8 @@ margin_left = -357.0
 margin_top = -7.62939e-06
 margin_right = 358.0
 margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_pivot_offset = Vector2( 203, 0 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -189,57 +233,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bounce_up" type="Tween" parent="Leave_text"]
+[node name="Effect_in" type="Tween" parent="Labels/Leave_text"]
+
+[node name="Bounce_up" type="Tween" parent="Labels/Leave_text"]
 repeat = true
 playback/repeat = true
 
-[node name="Bounce_down" type="Tween" parent="Leave_text"]
+[node name="Start_fight" type="Area2D" parent="Labels"]
+collision_layer = 0
+collision_mask = 2
 
-[node name="Effect_in" type="Tween" parent="."]
-
-[node name="Interface" parent="." instance=ExtResource( 6 )]
-
-[node name="Enter_text" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.1
-anchor_right = 0.5
-anchor_bottom = 0.1
-margin_left = -20.0
-margin_right = 20.0
-grow_horizontal = 2
-custom_fonts/font = ExtResource( 2 )
-text = "Walk with A and D Keys"
-align = 1
-valign = 1
+[node name="Start_collision" type="CollisionShape2D" parent="Labels/Start_fight"]
+position = Vector2( 100.589, 624.177 )
+shape = SubResource( 6 )
+disabled = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
 
-[node name="Fade_effect" type="Tween" parent="Enter_text"]
+[node name="Jump_Box" type="Area2D" parent="Labels"]
+position = Vector2( 640, 500 )
+collision_layer = 0
+collision_mask = 2
 
-[node name="Jump_text" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.1
-anchor_right = 0.5
-anchor_bottom = 0.1
-margin_left = -69.5
-margin_right = 69.5
-margin_bottom = 14.0
-grow_horizontal = 2
-custom_fonts/font = ExtResource( 2 )
-text = "PRESS SPACE TO JUMP"
-align = 1
-valign = 1
+[node name="Jumpbox" type="CollisionShape2D" parent="Labels/Jump_Box"]
+shape = SubResource( 15 )
+disabled = true
+
+[node name="Leave_arena" type="Area2D" parent="Labels"]
+position = Vector2( -96.7361, 619.162 )
+collision_layer = 0
+collision_mask = 2
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
 
-[node name="Fade_effect" type="Tween" parent="Jump_text"]
+[node name="Leavebox" type="CollisionShape2D" parent="Labels/Leave_arena"]
+shape = SubResource( 7 )
+disabled = true
 
-[connection signal="body_entered" from="Start_fight" to="." method="_on_Start_fight_body_entered"]
-[connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]
-[connection signal="tween_completed" from="Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
-[connection signal="tween_completed" from="Effect_in" to="." method="_on_Effect_in_tween_completed"]
-[connection signal="tween_completed" from="Enter_text/Fade_effect" to="." method="_Enter_Text_faded"]
+[connection signal="tween_completed" from="Labels/Enter_text/Fade_effect" to="." method="_enter_fade_completed"]
+[connection signal="tween_completed" from="Labels/Jump_text/Fade_effect" to="." method="_jump_fade_completed"]
+[connection signal="tween_completed" from="Labels/Attack_text/Fade_effect" to="." method="_attack_fade_completed"]
+[connection signal="tween_completed" from="Labels/Leave_text/Effect_in" to="." method="_on_Effect_in_tween_completed"]
+[connection signal="tween_completed" from="Labels/Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
+[connection signal="body_entered" from="Labels/Start_fight" to="." method="_on_Start_fight_body_entered"]
+[connection signal="body_entered" from="Labels/Jump_Box" to="." method="_on_Jump_Box_body_entered"]
+[connection signal="body_entered" from="Labels/Leave_arena" to="." method="_on_Leave_arena_body_entered"]
