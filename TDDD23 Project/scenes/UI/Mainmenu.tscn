@@ -1,0 +1,139 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/UI/Mainmenu.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -256.0
+margin_right = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="Button_container"]
+margin_right = 256.0
+margin_bottom = 20.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Start"
+
+[node name="Tutorial" type="Button" parent="Button_container"]
+margin_top = 24.0
+margin_right = 256.0
+margin_bottom = 44.0
+text = "Tutorial"
+
+[node name="Options" type="Button" parent="Button_container"]
+margin_top = 48.0
+margin_right = 256.0
+margin_bottom = 68.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Options"
+
+[node name="Quit" type="Button" parent="Button_container"]
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 92.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Quit"
+
+[node name="Start_container" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -256.0
+margin_right = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="Start_container"]
+margin_right = 256.0
+margin_bottom = 20.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Start"
+
+[node name="CheckButton" type="CheckButton" parent="Start_container"]
+margin_top = 24.0
+margin_right = 256.0
+margin_bottom = 64.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Renown"
+
+[node name="Return" type="Button" parent="Start_container"]
+margin_top = 68.0
+margin_right = 256.0
+margin_bottom = 88.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Return"
+
+[node name="Options_container" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -256.0
+margin_right = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Volum_label" type="Label" parent="Options_container"]
+margin_right = 256.0
+margin_bottom = 14.0
+text = "Volume"
+
+[node name="Volume_slider" type="HSlider" parent="Options_container"]
+margin_top = 18.0
+margin_right = 256.0
+margin_bottom = 34.0
+min_value = -80.0
+max_value = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="Button" parent="Options_container"]
+margin_top = 38.0
+margin_right = 256.0
+margin_bottom = 58.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Return"
+
+[connection signal="pressed" from="Button_container/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Button_container/Tutorial" to="." method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="Button_container/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Button_container/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Start_container/Start" to="." method="_on_Startgame_pressed"]
+[connection signal="pressed" from="Start_container/Return" to="." method="_on_Return_pressed"]
+[connection signal="value_changed" from="Options_container/Volume_slider" to="." method="_on_Volume_changed"]
+[connection signal="pressed" from="Options_container/Return" to="." method="_on_Return_pressed"]
