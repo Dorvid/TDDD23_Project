@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Boss1_death_sheet.png-6c1a69a25bb6e89b51e99b72d21e05a4.stex"
+path="res://.import/_Fall.png-66184ea798b7187015766ab747d575b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/spritesheets/Boss1_death_sheet.png"
-dest_files=[ "res://.import/Boss1_death_sheet.png-6c1a69a25bb6e89b51e99b72d21e05a4.stex" ]
+source_file="res://images/spritesheets/Boss2/_Fall.png"
+dest_files=[ "res://.import/_Fall.png-66184ea798b7187015766ab747d575b2.stex" ]
 
 [params]
 

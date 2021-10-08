@@ -22,7 +22,7 @@ func _ready():
 
 #Signal functions
 func _on_Player_enemy_hit():
-	$Boss1.boss_hit(CharacterController.get_player_dmg())
+	$Boss2.boss_hit(CharacterController.get_player_dmg())
 
 
 func _boss_dead():
@@ -33,6 +33,7 @@ func _boss_dead():
 	$Background.play("cheering")
 	$Leave_arena/Leavebox.set_deferred('disabled', false)
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
+	$Boss2.set_collision_mask_bit(1,false)
 
 func _player_dead():
 	effect_in.interpolate_property(game_over,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)

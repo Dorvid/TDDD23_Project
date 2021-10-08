@@ -103,7 +103,6 @@ func boss_hit(dmg):
 		$AnimatedSprite.play("death")
 		$hitbox.set_deferred('disabled',true)
 		CharacterController.boss_dead()
-		#Temporary idle animation, swap to dead animation later
 		alive = false
 	else:
 		effect_dmg.interpolate_property($AnimatedSprite.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)

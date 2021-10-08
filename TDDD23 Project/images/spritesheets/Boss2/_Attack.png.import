@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player_head_sheet.png-e2d792dda6fe0f549c0796ad4f57ec6f.stex"
+path="res://.import/_Attack.png-d05835790af9484a9e148b336eab1ba6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/spritesheets/Player_head_sheet.png"
-dest_files=[ "res://.import/Player_head_sheet.png-e2d792dda6fe0f549c0796ad4f57ec6f.stex" ]
+source_file="res://images/spritesheets/Boss2/_Attack.png"
+dest_files=[ "res://.import/_Attack.png-d05835790af9484a9e148b336eab1ba6.stex" ]
 
 [params]
 
