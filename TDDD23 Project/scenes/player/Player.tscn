@@ -129,6 +129,7 @@ frames = SubResource( 13 )
 animation = "idle"
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1.5874, 10.3181 )
 shape = SubResource( 14 )
 
@@ -137,6 +138,7 @@ frames = ExtResource( 4 )
 animation = "idle"
 
 [node name="AttackCollision" type="Area2D" parent="."]
+visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 4

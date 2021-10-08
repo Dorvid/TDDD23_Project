@@ -9,6 +9,7 @@ var gold = 0
 var renown = 0
 var has_longsword = false
 var returning = false
+var current_boss = 0
 
 signal player_dead
 signal boss_dead
@@ -53,12 +54,15 @@ func get_returning():
 func set_returning(bool_val: bool):
 	returning = bool_val
 
+func get_current_boss():
+	return current_boss
 #Emit signals
 func game_over():
 	emit_signal("player_dead")
 
 func boss_dead():
 	emit_signal("boss_dead")
+	current_boss += 1
 
 func emit_fight_start():
 	emit_signal("fight_start")

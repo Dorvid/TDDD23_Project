@@ -8,6 +8,7 @@ onready var effect_drop = $Labels/Game_over/Effect_drop
 
 var bounced_up = true
 var text_pos
+var current_boss
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	text_pos = $Labels/Leave_text.get_global_position().x
@@ -18,11 +19,15 @@ func _ready():
 		print("Failed to connect to player_dead signal in arena script")
 	if CharacterController.connect("boss_hit",self, "_on_Player_enemy_hit") != OK:
 		print("Failed to connect to boss_hit signal in arena script")
-
+	current_boss = CharacterController.get_current_boss()
 
 #Signal functions
 func _on_Player_enemy_hit():
-	$Boss2.boss_hit(CharacterController.get_player_dmg())
+	match current_boss:
+		0:
+			$Boss1.boss_hit(CharacterController.get_player_dmg())
+		1:
+			$Boss2.boss_hit(CharacterController.get_player_dmg())
 
 
 func _boss_dead():
@@ -33,7 +38,9 @@ func _boss_dead():
 	$Background.play("cheering")
 	$Leave_arena/Leavebox.set_deferred('disabled', false)
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
-	$Boss2.set_collision_mask_bit(1,false)
+	if current_boss == 1:
+		$Boss2.set_collision_mask_bit(1,false)
+		$Boss2.set_collision_layer_bit(2,false)
 
 func _player_dead():
 	effect_in.interpolate_property(game_over,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)

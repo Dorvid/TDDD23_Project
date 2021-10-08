@@ -72,8 +72,11 @@ func _physics_process(_delta):
 		velocity.y = velocity.y + GRAVITY
 		velocity = move_and_slide(velocity,Vector2.UP)
 		velocity.x = lerp(velocity.x,0,0.2)
-		
-	
+	elif !is_on_floor() != alive:
+		#Makes sure boss dosent fall through floor when dying
+		velocity.y = velocity.y + GRAVITY
+		velocity = move_and_slide(velocity,Vector2.UP)
+		velocity.x = lerp(velocity.x,0,0.2)
 
 
 func set_other_hitbox():
@@ -115,8 +118,8 @@ func boss_hit(dmg):
 	print(current_hp)
 	if current_hp <=0:
 		$AnimatedSprite.play("Death")
-		$hitboxleft.set_deferred('disabled',true)
-		$hitboxright.set_deferred('disabled',true)
+		#$hitboxleft.set_deferred('disabled',true)
+		#$hitboxright.set_deferred('disabled',true)
 		CharacterController.boss_dead()
 		alive = false
 		$AttackCollision.queue_free()
@@ -131,8 +134,6 @@ func disable_all_hitboxes():
 	$AttackCollision/body/Cooldown.stop()
 	$Attack_cooldown.stop()
 	$Turn_cooldown.stop()
-	$hitboxleft.set_deferred('disabled', true)
-	$hitboxright.set_deferred('disabled', true)
 	$AttackCollision/area.set_deferred('disabled', true)
 	$AttackCollision/body.set_deferred('disabled', true)
 
@@ -146,6 +147,7 @@ func _on_AnimatedSprite_animation_finished():
 		$AttackCollision/area.set_deferred('disabled', true)
 		is_attacking = false
 		$Attack_cooldown.start()
+		$AnimatedSprite.play("idle")
 	elif $AnimatedSprite.animation == "Jump":
 		$AnimatedSprite.play("Fall")
 	elif $AnimatedSprite.animation == "Fall" && is_on_floor():

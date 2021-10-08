@@ -159,12 +159,12 @@ position = Vector2( 0.430252, 620.295 )
 shape = SubResource( 13 )
 disabled = true
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -115.323, 626.602 )
-
 [node name="Boss2" parent="." instance=ExtResource( 3 )]
 material = SubResource( 14 )
 position = Vector2( 1146.1, 590.513 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -115.323, 626.602 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
 
