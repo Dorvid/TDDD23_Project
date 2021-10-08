@@ -14,9 +14,16 @@ func _process(_delta):
 	if ready_to_enter == true:
 		if Input.is_action_just_pressed("ui_up"):
 			$Interface/Life.free_bar_childs()
-			if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
-				print("Failed to swap to arena scene")
 			CharacterController.set_returning(true)
+			match CharacterController.get_current_boss():
+				0:
+					if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
+						print("Failed to swap to arena scene")
+				1:
+					if get_tree().change_scene("res://scenes/areas/Arena2.tscn") != OK:
+						print("Failed to swap to arena2 scene")
+				#2: thrid boss
+					
 
 
 func _on_Entrance_body_entered(_body):

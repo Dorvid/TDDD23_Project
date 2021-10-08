@@ -147,7 +147,7 @@ func _on_AnimatedSprite_animation_finished():
 		$AttackCollision/area.set_deferred('disabled', true)
 		is_attacking = false
 		$Attack_cooldown.start()
-		$AnimatedSprite.play("idle")
+		$AnimatedSprite.play("Idle")
 	elif $AnimatedSprite.animation == "Jump":
 		$AnimatedSprite.play("Fall")
 	elif $AnimatedSprite.animation == "Fall" && is_on_floor():
