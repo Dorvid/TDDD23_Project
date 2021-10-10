@@ -56,7 +56,6 @@ func add_heart(i):
 		get_node("Bar").add_child(heart,true)
 		heart.rect_position.x = health_width
 		health_width += 60
-		print_tree()
 
 func free_bar_childs():
 	for n in $Bar.get_children():

@@ -179,6 +179,7 @@ position = Vector2( 1215.63, 615.109 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -115.323, 626.602 )
+collision_mask = 5
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
 

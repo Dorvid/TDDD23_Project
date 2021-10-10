@@ -1,5 +1,7 @@
 extends Node
 
+var Gold = load("res://scenes/items/Gold_item.tscn")
+
 onready var leave_text = $Labels/Leave_text
 onready var game_over = $Labels/Game_over
 onready var bounce_up = $Labels/Leave_text/Bounce_up
@@ -38,9 +40,19 @@ func _boss_dead():
 	$Background.play("cheering")
 	$Leave_arena/Leavebox.set_deferred('disabled', false)
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
+	drop_items()
 	if current_boss == 1:
 		$Boss2.set_collision_mask_bit(1,false)
 		$Boss2.set_collision_layer_bit(2,false)
+
+func drop_items():
+	print("Dropping items...")
+	var gold = Gold.instance()
+	add_child(gold)
+	gold.set_value(get_node("Boss" + str(current_boss +1)).get_gold_cap())
+	gold.position = get_node("Boss" + str(current_boss +1)).position
+	gold.set_linear_velocity(Vector2(10,50))
+	print("Done")
 
 func _player_dead():
 	effect_in.interpolate_property(game_over,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)

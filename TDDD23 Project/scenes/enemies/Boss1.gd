@@ -3,6 +3,7 @@ extends KinematicBody2D
 var velocity = Vector2()
 export (int) var SPEED
 export (int) var HEALTH
+export (int) var GOLD_CAP
 var current_hp
 var is_attacking = false
 var attack_on_cooldown = false
@@ -100,6 +101,7 @@ func boss_hit(dmg):
 	current_hp -= dmg
 	print(current_hp)
 	if current_hp <=0:
+		$AttackCollision.queue_free()
 		$AnimatedSprite.play("death")
 		$hitbox.set_deferred('disabled',true)
 		CharacterController.boss_dead()
@@ -114,3 +116,6 @@ func _fight_start():
 func _player_dead():
 	player_alive = false
 	$AnimatedSprite.play("idle")
+
+func get_gold_cap():
+	return GOLD_CAP

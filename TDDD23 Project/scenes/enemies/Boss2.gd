@@ -5,6 +5,7 @@ export (int) var SPEED
 export (int) var HEALTH
 export (int) var JUMPFORCE
 export (int) var GRAVITY
+export (int) var GOLD_CAP
 var current_hp
 var is_attacking = false
 var attack_on_cooldown = false
@@ -172,3 +173,6 @@ func _on_Attack_cooldown_timeout():
 func _on_Turn_cooldown_timeout():
 	turn_on_cooldown = false
 	$Attack_cooldown.start()
+
+func get_gold_cap():
+	return GOLD_CAP
