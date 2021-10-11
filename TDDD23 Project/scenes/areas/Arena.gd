@@ -35,6 +35,7 @@ func _on_Player_enemy_hit():
 
 
 func _boss_dead():
+	MusicController.fight_stop()
 	MusicController.crowd_play()
 	print("Text appering")
 	effect_in.interpolate_property(leave_text,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
@@ -70,6 +71,7 @@ func _on_Start_fight_body_entered(_body):
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', false)
 	$Start_fight/Start_collision.set_deferred('disabled', true)
 	CharacterController.emit_fight_start()
+	MusicController.fight_play()
 
 #Changes scene to entrance, lowes audience volume and removes interface childs
 func _on_Leave_arena_body_entered(_body):

@@ -21,3 +21,13 @@ func crowd_stop():
 
 func _on_Crowd_finished():
 	$Crowd.volume_db = -25
+
+func fight_play():
+	$Fight.play()
+
+func fight_stop():
+	$Fight/Tween.interpolate_property($Fight,"volume_db",-25,-80,0.5,Tween.TRANS_EXPO,Tween.EASE_OUT)
+	$Fight/Tween.start()
+
+func _on_Tween_tween_completed(_object, _key):
+	$Fight.stop()

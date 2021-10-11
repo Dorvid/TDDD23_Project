@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://audio/Crowd.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloaders/MusicController.gd" type="Script" id=2]
+[ext_resource path="res://audio/alexander-nakarada-chase.wav" type="AudioStream" id=3]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -10,4 +11,11 @@ script = ExtResource( 2 )
 stream = ExtResource( 1 )
 volume_db = -25.0
 
+[node name="Fight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -25.0
+
+[node name="Tween" type="Tween" parent="Fight"]
+
 [connection signal="finished" from="Crowd" to="." method="_on_Crowd_finished"]
+[connection signal="tween_completed" from="Fight/Tween" to="." method="_on_Tween_tween_completed"]

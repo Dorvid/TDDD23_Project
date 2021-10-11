@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/alexander-nakarada-chase.wav-9eaf1f3505965af1094027c35e69fbbf.sample"
+
+[deps]
+
+source_file="res://audio/alexander-nakarada-chase.wav"
+dest_files=[ "res://.import/alexander-nakarada-chase.wav-9eaf1f3505965af1094027c35e69fbbf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
