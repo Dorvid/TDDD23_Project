@@ -30,6 +30,8 @@ func _on_Player_enemy_hit():
 			$Boss1.boss_hit(CharacterController.get_player_dmg())
 		1:
 			$Boss2.boss_hit(CharacterController.get_player_dmg())
+		2:
+			$Boss3.boss_hit(CharacterController.get_player_dmg())
 
 
 func _boss_dead():
@@ -44,11 +46,14 @@ func _boss_dead():
 	if current_boss == 1:
 		$Boss2.set_collision_mask_bit(1,false)
 		$Boss2.set_collision_layer_bit(2,false)
+	elif current_boss == 2:
+		$Boss3.set_collision_mask_bit(1,false)
+		$Boss3.set_collision_layer_bit(2,false)
 
 func drop_items():
 	print("Dropping items...")
 	var gold = Gold.instance()
-	add_child(gold)
+	call_deferred("add_child",gold)
 	gold.set_value(get_node("Boss" + str(current_boss +1)).get_gold_cap())
 	gold.position = get_node("Boss" + str(current_boss +1)).position
 	gold.set_linear_velocity(Vector2(10,50))

@@ -22,8 +22,9 @@ func _process(_delta):
 				1:
 					if get_tree().change_scene("res://scenes/areas/Arena2.tscn") != OK:
 						print("Failed to swap to arena2 scene")
-				#2: thrid boss
-					
+				2: 
+					if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
+						print("Failed to swap to arena3 scene")
 
 
 func _on_Entrance_body_entered(_body):
