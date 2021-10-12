@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://TransitionScreen.gd" type="Script" id=1]
+
+[node name="TransitionScreen" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Effect_in" type="Tween" parent="."]
+
+[node name="Effect_out" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Effect_in" to="." method="_on_Effect_in_tween_completed"]
+[connection signal="tween_completed" from="Effect_out" to="." method="_on_Effect_out_tween_completed"]

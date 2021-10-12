@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/areas/Arena_tutorial.gd" type="Script" id=1]
 [ext_resource path="res://font/Frostbite_64.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://shaders/Flash_shader.gdshader" type="Shader" id=7]
+[ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -41,37 +42,37 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 835.054, 5 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 2, 360.123 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 10, 267.113 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 134.234, 10 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 108.227 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 39.1988, 96.8545 )
 
-[sub_resource type="ShaderMaterial" id=14]
+[sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 12.4323, 89.3658 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 640, 1 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 60.9033, 88.8693 )
 
 [node name="Arena" type="Node"]
@@ -97,7 +98,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Ground"]
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="Right_wall" type="StaticBody2D" parent="Ground_and_walls"]
 position = Vector2( 1280, 360 )
@@ -106,7 +107,7 @@ __meta__ = {
 }
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Right_wall"]
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="Left_wall" type="StaticBody2D" parent="Ground_and_walls"]
 position = Vector2( 0, 180 )
@@ -116,7 +117,7 @@ __meta__ = {
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Left_wall"]
 position = Vector2( -4.00452, 77.4207 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="Entrance_roof" type="StaticBody2D" parent="Ground_and_walls"]
 __meta__ = {
@@ -125,26 +126,26 @@ __meta__ = {
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Entrance_roof"]
 position = Vector2( -128.829, 513.388 )
-shape = SubResource( 11 )
+shape = SubResource( 9 )
 
 [node name="Entrance_wall" type="StaticBody2D" parent="Ground_and_walls"]
 
 [node name="shape" type="CollisionShape2D" parent="Ground_and_walls/Entrance_wall"]
 position = Vector2( -182.174, 615.259 )
-shape = SubResource( 12 )
+shape = SubResource( 10 )
 
 [node name="Entrance_door" type="StaticBody2D" parent="Ground_and_walls"]
 collision_mask = 0
 
 [node name="Door" type="CollisionShape2D" parent="Ground_and_walls/Entrance_door"]
 position = Vector2( 0.430252, 620.295 )
-shape = SubResource( 13 )
+shape = SubResource( 11 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( -115.323, 626.602 )
 
 [node name="Target_dummy" parent="." instance=ExtResource( 4 )]
-material = SubResource( 14 )
+material = SubResource( 12 )
 position = Vector2( 824.264, 621.368 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
@@ -245,7 +246,7 @@ collision_mask = 2
 
 [node name="Start_collision" type="CollisionShape2D" parent="Labels/Start_fight"]
 position = Vector2( 100.589, 624.177 )
-shape = SubResource( 6 )
+shape = SubResource( 13 )
 disabled = true
 __meta__ = {
 "_edit_group_": true
@@ -257,7 +258,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Jumpbox" type="CollisionShape2D" parent="Labels/Jump_Box"]
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 disabled = true
 
 [node name="Leave_arena" type="Area2D" parent="Labels"]
@@ -269,8 +270,10 @@ __meta__ = {
 }
 
 [node name="Leavebox" type="CollisionShape2D" parent="Labels/Leave_arena"]
-shape = SubResource( 7 )
+shape = SubResource( 15 )
 disabled = true
+
+[node name="TransitionScreen" parent="." instance=ExtResource( 8 )]
 
 [connection signal="tween_completed" from="Labels/Enter_text/Fade_effect" to="." method="_enter_fade_completed"]
 [connection signal="tween_completed" from="Labels/Jump_text/Fade_effect" to="." method="_jump_fade_completed"]
@@ -280,3 +283,4 @@ disabled = true
 [connection signal="body_entered" from="Labels/Start_fight" to="." method="_on_Start_fight_body_entered"]
 [connection signal="body_entered" from="Labels/Jump_Box" to="." method="_on_Jump_Box_body_entered"]
 [connection signal="body_entered" from="Labels/Leave_arena" to="." method="_on_Leave_arena_body_entered"]
+[connection signal="transition_done" from="TransitionScreen" to="." method="_on_TransitionScreen_transition_done"]

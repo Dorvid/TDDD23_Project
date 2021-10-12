@@ -83,9 +83,7 @@ func _attack_fade_completed(_object, _key):
  #Leave label
 func _on_Leave_arena_body_entered(_body):
 	MusicController.leave_arena()
-	$Interface/Life.free_bar_childs()
-	if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
-		print("Failed to swap to Mainmenu scene")
+	$TransitionScreen.fade_in()
 
 func _on_Effect_in_tween_completed(_object, _key):
 	bounce_up.interpolate_property(leave_text,'rect_position',Vector2(leave_center,108),Vector2(leave_center,100),1,Tween.TRANS_QUINT,Tween.EASE_OUT)
@@ -99,3 +97,9 @@ func _on_Bounce_up_tween_completed(_object, _key):
 		bounced_up = false
 		bounce_up.interpolate_property(leave_text,'rect_position',Vector2(leave_center,100),Vector2(leave_center,108),0.5,Tween.TRANS_QUINT,Tween.EASE_IN)
 	bounce_up.start()
+
+
+func _on_TransitionScreen_transition_done():
+	$Interface/Life.free_bar_childs()
+	if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
+		print("Failed to swap to Mainmenu scene")

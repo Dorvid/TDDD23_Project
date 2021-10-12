@@ -1,6 +1,8 @@
 extends Control
 
 var bus_index = AudioServer.get_bus_index("Master")
+var choice = false
+
 
 func _ready():
 	#Gets master audio bus value and sets slider to that value
@@ -18,8 +20,8 @@ func _on_Start_pressed():
 
 
 func _on_Tutorial_pressed():
-	if get_tree().change_scene("res://scenes/areas/Arena_tutorial.tscn") != OK:
-		print("Couldnt change scene to tutorial from mainmenu")
+	choice = false
+	$TransitionScreen.fade_in()
 
 
 func _on_Options_pressed():
@@ -34,9 +36,18 @@ func _on_Return_pressed():
 
 
 func _on_Startgame_pressed():
-	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
-		print("Couldnt start game in mainmenu")
+	choice = true
+	$TransitionScreen.fade_in()
 
 
 func _on_Volume_changed(value):
 	AudioServer.set_bus_volume_db(bus_index,value)
+
+
+func _on_TransitionScreen_transition_done():
+	if choice:
+		if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
+			print("Couldnt start game in mainmenu")
+	else:
+		if get_tree().change_scene("res://scenes/areas/Arena_tutorial.tscn") != OK:
+			print("Couldnt change scene to tutorial from mainmenu")

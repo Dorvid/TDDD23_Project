@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/areas/Arena.gd" type="Script" id=1]
 [ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://font/Frostbite_64.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/UI/Interface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -232,7 +233,10 @@ __meta__ = {
 
 [node name="Effect_drop" type="Tween" parent="Labels/Game_over"]
 
+[node name="TransitionScreen" parent="." instance=ExtResource( 7 )]
+
 [connection signal="body_entered" from="Start_fight" to="." method="_on_Start_fight_body_entered"]
 [connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]
 [connection signal="tween_completed" from="Labels/Effect_in" to="." method="_on_Effect_in_tween_completed"]
 [connection signal="tween_completed" from="Labels/Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
+[connection signal="transition_done" from="TransitionScreen" to="." method="_on_TransitionScreen_transition_done"]

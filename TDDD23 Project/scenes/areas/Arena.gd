@@ -82,10 +82,8 @@ func _on_Start_fight_body_entered(_body):
 
 #Changes scene to entrance, lowes audience volume and removes interface childs
 func _on_Leave_arena_body_entered(_body):
+	$TransitionScreen.fade_in()
 	MusicController.leave_arena()
-	$Interface/Life.free_bar_childs()
-	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
-		print("Failed to swap to entrance scene")
 
 #Tweens for text
 func _on_Effect_in_tween_completed(_object, _key):
@@ -100,3 +98,9 @@ func _on_Bounce_up_tween_completed(_object, _key):
 		bounced_up = false
 		bounce_up.interpolate_property(leave_text,'rect_position',Vector2(text_pos,100),Vector2(text_pos,108),0.5,Tween.TRANS_QUINT,Tween.EASE_IN)
 	bounce_up.start()
+
+
+func _on_TransitionScreen_transition_done():
+	$Interface/Life.free_bar_childs()
+	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
+		print("Failed to swap to entrance scene")

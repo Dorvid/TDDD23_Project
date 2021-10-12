@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/UI/Mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://font/Frostbite_64_main_menu.tres" type="DynamicFont" id=2]
 [ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=3]
 [ext_resource path="res://scenes/UI/Mainmenu_theme.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=5]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -154,6 +155,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TransitionScreen" parent="." instance=ExtResource( 5 )]
+
 [connection signal="pressed" from="Button_container/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Button_container/Tutorial" to="." method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="Button_container/Options" to="." method="_on_Options_pressed"]
@@ -162,3 +165,4 @@ __meta__ = {
 [connection signal="pressed" from="Start_container/Return" to="." method="_on_Return_pressed"]
 [connection signal="value_changed" from="Options_container/Volume_slider" to="." method="_on_Volume_changed"]
 [connection signal="pressed" from="Options_container/Return" to="." method="_on_Return_pressed"]
+[connection signal="transition_done" from="TransitionScreen" to="." method="_on_TransitionScreen_transition_done"]
