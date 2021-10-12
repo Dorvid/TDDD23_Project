@@ -71,11 +71,10 @@ func _physics_process(_delta):
 			velocity.y = velocity.y + GRAVITY
 		velocity = move_and_slide(velocity,Vector2.UP)
 		velocity.x = lerp(velocity.x,0,0.2)
-	elif !is_on_floor() != alive:
+	elif !is_on_floor():
 		#Makes sure boss dosent fall through floor when dying
 		velocity.y = velocity.y + GRAVITY
 		velocity = move_and_slide(velocity,Vector2.UP)
-		velocity.x = lerp(velocity.x,0,0.2)
 
 
 func swap_sides():
@@ -139,6 +138,9 @@ func disable_all_hitboxes():
 	$Attack_cooldown.stop()
 	$Turn_cooldown.stop()
 	$AttackCollision/area.set_deferred('disabled', true)
+	$AttackCollision/area2.set_deferred('disabled', true)
+	$AttackCollision/area3.set_deferred('disabled', true)
+	$AttackCollision/area4.set_deferred('disabled', true)
 	$AttackCollision/body.set_deferred('disabled', true)
 
 func _on_Attack_timer_timeout():
@@ -188,7 +190,6 @@ func attack_done(input_area):
 	$AnimatedSprite.play("Idle")
 	cant_turn = false
 
-
 func _on_AttackCollision_body_entered(_body):
 	CharacterController.player_hit()
 	$AttackCollision/area.set_deferred('disabled', true)
@@ -201,10 +202,8 @@ func _on_AttackCollision_body_entered(_body):
 func _on_damage_cooldown_timeout():
 	$AttackCollision/body.set_deferred('disabled', false)
 
-
 func _on_Attack_cooldown_timeout():
 	attack_on_cooldown = false
-
 
 func _on_Turn_cooldown_timeout():
 	turn_on_cooldown = false

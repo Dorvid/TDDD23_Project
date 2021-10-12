@@ -65,6 +65,7 @@ func _player_dead():
 	effect_drop.interpolate_property(game_over,'rect_position',Vector2(510,0),Vector2(510,140),2,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
 	effect_in.start()
 	effect_drop.start()
+	$Player.set_collision_mask_bit(2,false)
 
 #Starts boss fight when player has entered arena
 func _on_Start_fight_body_entered(_body):

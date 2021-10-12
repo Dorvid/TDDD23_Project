@@ -100,6 +100,10 @@ func _physics_process(_delta):
 		velocity = move_and_slide(velocity,Vector2.UP)
 		
 		velocity.x = lerp(velocity.x,0,0.2)
+	elif !is_on_floor():
+		velocity.y = velocity.y + GRAVITY
+		velocity.x = 0
+		velocity = move_and_slide(velocity)
 
 #When animation is finished set animation to idle and disable weapon hitboxes
 func _on_Weapon_animation_finished():
