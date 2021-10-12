@@ -44,13 +44,19 @@ func _boss_dead():
 	$Leave_arena/Leavebox.set_deferred('disabled', false)
 	$Ground_and_walls/Entrance_door/Door.set_deferred('disabled', true)
 	drop_items()
+	change_masks()
+
+#Turns off masks so player and/or boss falls to ground without colliding and staying in air
+func change_masks():
 	if current_boss == 1:
 		$Boss2.set_collision_mask_bit(1,false)
 		$Boss2.set_collision_layer_bit(2,false)
 	elif current_boss == 2:
 		$Boss3.set_collision_mask_bit(1,false)
 		$Boss3.set_collision_layer_bit(2,false)
+	$Player.set_collision_mask_bit(2,false)
 
+#Drops items to player when boss dies
 func drop_items():
 	print("Dropping items...")
 	var gold = Gold.instance()
@@ -65,7 +71,7 @@ func _player_dead():
 	effect_drop.interpolate_property(game_over,'rect_position',Vector2(510,0),Vector2(510,140),2,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
 	effect_in.start()
 	effect_drop.start()
-	$Player.set_collision_mask_bit(2,false)
+	change_masks()
 
 #Starts boss fight when player has entered arena
 func _on_Start_fight_body_entered(_body):
