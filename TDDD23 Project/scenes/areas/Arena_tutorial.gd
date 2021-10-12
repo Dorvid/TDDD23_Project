@@ -84,7 +84,7 @@ func _attack_fade_completed(_object, _key):
 func _on_Leave_arena_body_entered(_body):
 	MusicController.leave_arena()
 	$Interface/Life.free_bar_childs()
-	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
+	if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
 		print("Failed to swap to entrance scene")
 
 func _on_Effect_in_tween_completed(_object, _key):
