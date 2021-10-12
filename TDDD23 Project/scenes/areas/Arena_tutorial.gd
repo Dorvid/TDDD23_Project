@@ -85,7 +85,7 @@ func _on_Leave_arena_body_entered(_body):
 	MusicController.leave_arena()
 	$Interface/Life.free_bar_childs()
 	if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
-		print("Failed to swap to entrance scene")
+		print("Failed to swap to Mainmenu scene")
 
 func _on_Effect_in_tween_completed(_object, _key):
 	bounce_up.interpolate_property(leave_text,'rect_position',Vector2(leave_center,108),Vector2(leave_center,100),1,Tween.TRANS_QUINT,Tween.EASE_OUT)

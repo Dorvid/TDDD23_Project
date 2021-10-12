@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/UI/Mainmenu.gd" type="Script" id=1]
+[ext_resource path="res://font/Frostbite_64_main_menu.tres" type="DynamicFont" id=2]
+[ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=3]
+[ext_resource path="res://scenes/UI/Mainmenu_theme.tres" type="Theme" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -9,6 +12,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+texture = ExtResource( 3 )
 
 [node name="Button_container" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -20,35 +27,36 @@ margin_top = -256.0
 margin_right = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Start" type="Button" parent="Button_container"]
 margin_right = 256.0
-margin_bottom = 20.0
+margin_bottom = 34.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Start"
 
 [node name="Tutorial" type="Button" parent="Button_container"]
-margin_top = 24.0
+margin_top = 38.0
 margin_right = 256.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 text = "Tutorial"
 
 [node name="Options" type="Button" parent="Button_container"]
-margin_top = 48.0
+margin_top = 76.0
 margin_right = 256.0
-margin_bottom = 68.0
+margin_bottom = 110.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Options"
 
 [node name="Quit" type="Button" parent="Button_container"]
-margin_top = 72.0
+margin_top = 114.0
 margin_right = 256.0
-margin_bottom = 92.0
+margin_bottom = 148.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Quit"
@@ -61,6 +69,7 @@ margin_right = 768.0
 margin_bottom = 552.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,6 +108,7 @@ margin_top = -256.0
 margin_right = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,6 +135,24 @@ margin_bottom = 58.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Return"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.15
+anchor_right = 0.5
+anchor_bottom = 0.15
+margin_left = -246.0
+margin_right = 246.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Colosseum of Steel"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="Button_container/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Button_container/Tutorial" to="." method="_on_Tutorial_pressed"]
