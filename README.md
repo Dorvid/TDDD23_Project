@@ -23,6 +23,10 @@ retrieved from: https://www.fontspace.com/frostbite-boss-fight-font-f31221
 
 Sprites:
 
+
+"Pixel Heart" by Havran | https://havran.itch.io/
+retrieved from: https://havran.itch.io/pixel-heart
+
 "Kyrise's Free 16x16 RPG Icon Pack" (c) 2018 by Kyrise | https://kyrise.itch.io/
 retrieved from: https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack
 Attribution 4.0 International (CC by 4.0)
