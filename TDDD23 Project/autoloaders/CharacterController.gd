@@ -1,5 +1,9 @@
 extends Node
 
+export (Array, PackedScene) var Boss_loot
+export (Array, PackedScene) var Shop_loot
+var rng = RandomNumberGenerator.new()
+
 var base_hp = 5
 var current_hp
 var base_dmg = 3
@@ -17,7 +21,9 @@ signal fight_start
 signal damage_taken
 signal boss_hit
 signal hp_increase
+signal heal
 signal gold_changed
+signal longsword
 
 func _ready():
 	current_hp = base_hp
@@ -25,6 +31,7 @@ func _ready():
 	#TODO: Load save file
 	pass # Replace with function body.
 
+#Player hp functions
 func player_hit():
 	current_hp -= 1
 	print(current_hp)
@@ -34,6 +41,7 @@ func player_hit():
 
 func increase_total_hp(i: int):
 	base_hp += i
+	current_hp += i
 	emit_signal("hp_increase")
 
 func total_hp():
@@ -42,12 +50,28 @@ func total_hp():
 func get_current_hp():
 	return current_hp
 
+func heal_hp(i: int):
+	if current_hp != base_hp:
+		current_hp += i
+		emit_signal("heal")
+
+#Player gold functions
 func get_current_gold():
 	return gold
 
+func gold_change(input: int):
+	gold += input
+	emit_signal("gold_changed")
+
+#Player damage/weapon functions
 func get_player_dmg():
 	return dmg
 
+func received_longsword():
+	has_longsword = true
+	emit_signal("longsword")
+
+#Scene related functions
 func get_returning():
 	return returning
 
@@ -73,6 +97,9 @@ func damage_taken():
 func boss_hit():
 	emit_signal("boss_hit")
 
-func gold_change(input: int):
-	gold += input
-	emit_signal("gold_changed")
+#Loot functions
+func select_loot():
+	rng.randomize()
+	var item = Boss_loot[rng.randi_range(0,Boss_loot.size()-1)]
+	print("Item selected: " + str(item))
+	return item
