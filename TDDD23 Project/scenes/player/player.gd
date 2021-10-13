@@ -15,7 +15,7 @@ onready var effect_dmg = $Effect_dmg_body
 onready var effect_dmg2 = $Effect_dmg_head
 
 
-# Loads swords so they can be set in ready
+# Loads swords so they can be set in ready or in set_longsword()
 var short_frames = preload("res://scenes/player/shortsword.tres")
 var long_frames = preload("res://scenes/player/longsword.tres")
 
@@ -24,16 +24,16 @@ func _ready():
 	if CharacterController.has_longsword == false:
 		$Weapon.set_sprite_frames(short_frames)
 	else:
-		$Weapon.set_sprite_frames(long_frames)
-		$AttackCollision/side.scale = Vector2(1.5,1)
-		$AttackCollision/up.scale = Vector2(1,1.5)
-		$AttackCollision/down.scale = Vector2(1,1.5)
+		set_longsword()
 	#set weapon to correct animation just is case
 	$Weapon.play("idle")
+	#Connect to signals
 	if CharacterController.connect("player_dead",self,"_dead") != OK:
 		print("Failed to connect to player_dead signal in player script")
 	if CharacterController.connect("damage_taken",self,"_damage_taken") != OK:
 		print("Failed to connect to damage_taken signal in player script")
+	if CharacterController.connect("longsword",self,"set_longsword") != OK:
+		print("Failed to connect to longsword signal in player script")
 
 func _physics_process(_delta):
 	#Move Character left or right and change animation
@@ -121,8 +121,8 @@ func turn_off_weap_collision(animation):
 			$AttackCollision/side.set_deferred('disabled', true)
 	
 
+#When player attacks enemy
 func _on_AttackCollision_body_entered(_body):
-
 	CharacterController.emit_signal("boss_hit")
 	#Get which way char is attacking
 	var temp = $Weapon.get_animation()
@@ -132,16 +132,24 @@ func _on_AttackCollision_body_entered(_body):
 		knockback_velocity = Vector2(0,-1)
 		knockback = true
 	
-
+	
+#Player dies :(
 func _dead():
 	alive = false
 	$Body.play("death")
 	$Weapon.hide()
 	$Head.hide()
 
+#Flashes player when taking damage
 func _damage_taken():
 	effect_dmg.interpolate_property($Body.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	effect_dmg2.interpolate_property($Head.get_material(),'shader_param/flash_modifier',1.0,0.0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	effect_dmg.start()
 	effect_dmg2.start()
-	
+
+#Gives player longsword
+func set_longsword():
+	$Weapon.set_sprite_frames(long_frames)
+	$AttackCollision/side.scale = Vector2(1.5,1)
+	$AttackCollision/up.scale = Vector2(1,1.5)
+	$AttackCollision/down.scale = Vector2(1,1.5)

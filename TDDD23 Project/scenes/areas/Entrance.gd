@@ -8,12 +8,12 @@ onready var label = $Entrance/Label
 func _ready():
 	if CharacterController.get_returning():
 		$Player.position = $Return_pos.position
+	print_tree()
 	pass
 
 func _process(_delta):
 	if ready_to_enter == true:
 		if Input.is_action_just_pressed("ui_up"):
-			$Interface/Life.free_bar_childs()
 			CharacterController.set_returning(true)
 			$TransitionScreen.fade_in()
 
@@ -43,3 +43,4 @@ func _on_TransitionScreen_transition_done():
 		2: 
 			if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
 				print("Failed to swap to arena3 scene")
+	$Interface/Life.free_bar_childs()
