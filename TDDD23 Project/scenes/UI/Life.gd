@@ -12,8 +12,8 @@ func _ready():
 	hp = CharacterController.get_current_hp()
 	if CharacterController.connect("damage_taken",self,"_damage_taken") != OK:
 		print("Could not connect to signal damage_taken in Life.gd")
-	if CharacterController.connect("hp_increase",self,"_hp_increase") != OK:
-		print("Could not connect to signal hp_increase in Life.gd")
+	if CharacterController.connect("hp_change",self,"_hp_change") != OK:
+		print("Could not connect to signal hp_change in Life.gd")
 	if CharacterController.connect("heal",self,"_heal") != OK:
 		print("Could not connect to signal heal in Life.gd")
 	update_text(hp,total_hp)
@@ -23,11 +23,10 @@ func _damage_taken():
 	hp -= 1
 	update_text(hp,total_hp)
 
-func _hp_increase():
-	var new_total_hp = CharacterController.total_hp()
-	#Heals player for ammount received
-	hp += new_total_hp - total_hp
-	total_hp = new_total_hp
+func _hp_change():
+	total_hp = CharacterController.total_hp()
+	hp = CharacterController.get_current_hp()
+	print("Changing max value in bar")
 	$Bar/ProgressBar.set_max(total_hp)
 	update_text(hp,total_hp)
 
