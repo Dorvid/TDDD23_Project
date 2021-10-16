@@ -4,6 +4,7 @@ var velocity = Vector2()
 var knockback_velocity = Vector2()
 var knockback = false
 export (int) var SPEED
+var base_speed
 export (int) var GRAVITY
 export (int) var JUMPFORCE
 export (int) var KNOCKBACK_FORCE
@@ -20,6 +21,7 @@ var short_frames = preload("res://scenes/player/shortsword.tres")
 var long_frames = preload("res://scenes/player/longsword.tres")
 
 func _ready():
+	base_speed = SPEED
 	#If the player has unlocked the long sword set it and increase hitboxes
 	if CharacterController.has_longsword == false:
 		$Weapon.set_sprite_frames(short_frames)
@@ -34,6 +36,8 @@ func _ready():
 		print("Failed to connect to damage_taken signal in player script")
 	if CharacterController.connect("longsword",self,"set_longsword") != OK:
 		print("Failed to connect to longsword signal in player script")
+	if CharacterController.connect("speed_increase",self,"_speed_increase") != OK:
+		print("Failed to connect to speed_increase signal in player script")
 
 func _physics_process(_delta):
 	#Move Character left or right and change animation
@@ -153,3 +157,6 @@ func set_longsword():
 	$AttackCollision/side.scale = Vector2(1.5,1)
 	$AttackCollision/up.scale = Vector2(1,1.5)
 	$AttackCollision/down.scale = Vector2(1,1.5)
+
+func _speed_increase():
+	SPEED = base_speed * CharacterController.get_speed_multiplier()

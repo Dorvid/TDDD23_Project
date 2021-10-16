@@ -14,16 +14,19 @@ var renown = 0
 var has_longsword = false
 var returning = false
 var current_boss = 0
+var speed_multiplier = 1.0
 
 signal player_dead
 signal boss_dead
 signal fight_start
 signal damage_taken
 signal boss_hit
-signal hp_increase
+signal hp_change
 signal heal
 signal gold_changed
 signal longsword
+signal damage_change
+signal speed_increase
 
 func _ready():
 	current_hp = base_hp
@@ -39,10 +42,13 @@ func player_hit():
 		game_over()
 	emit_signal("damage_taken") 
 
-func increase_total_hp(i: int):
-	base_hp += i
-	current_hp += i
-	emit_signal("hp_increase")
+func change_total_hp(i: int):
+	if i < 0 && base_hp != current_hp:
+		base_hp += i
+	else:
+		base_hp += i
+		current_hp += i
+	emit_signal("hp_change")
 
 func total_hp():
 	return base_hp
@@ -71,6 +77,18 @@ func received_longsword():
 	has_longsword = true
 	emit_signal("longsword")
 
+func increase_dmg(input: int):
+	dmg += input
+	emit_signal("damage_change")
+
+#Speed related functions
+
+func increase_speed(input: float):
+	speed_multiplier *= input
+	emit_signal("speed_increase")
+
+func get_speed_multiplier():
+	return speed_multiplier
 #Scene related functions
 func get_returning():
 	return returning
