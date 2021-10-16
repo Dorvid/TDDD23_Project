@@ -7,4 +7,5 @@ func _ready():
 		print("Could not connect to signal damage_change in Dmg_box")
 	
 func update_label():
-	$NinePatchRect/Label.text = CharacterController.get_player_dmg()
+	$NinePatchRect/Label.text = str(CharacterController.get_player_dmg())
+	

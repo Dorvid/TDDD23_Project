@@ -15,6 +15,8 @@ var has_longsword = false
 var returning = false
 var current_boss = 0
 var speed_multiplier = 1.0
+var avoidance = false
+
 
 signal player_dead
 signal boss_dead
@@ -36,6 +38,11 @@ func _ready():
 
 #Player hp functions
 func player_hit():
+	#Chance to avoid taking damage if player has specific item
+	if avoidance:
+		rng.randomize()
+		if rng.randf_range(0.0,1.0) < 0.1:
+			return
 	current_hp -= 1
 	#print(current_hp)
 	if current_hp <= 0:
@@ -61,6 +68,8 @@ func heal_hp(i: int):
 		current_hp += i
 		emit_signal("heal")
 
+func set_avoidance():
+	avoidance = true
 #Player gold functions
 func get_current_gold():
 	return gold
