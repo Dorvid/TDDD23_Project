@@ -34,7 +34,7 @@ func _ready():
 #Player hp functions
 func player_hit():
 	current_hp -= 1
-	print(current_hp)
+	#print(current_hp)
 	if current_hp <= 0:
 		game_over()
 	emit_signal("damage_taken") 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://autoloaders/CharacterController.gd" type="Script" id=1]
 [ext_resource path="res://scenes/items/inherited/Leather_armor.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/items/inherited/Small_hp_pot.tscn" type="PackedScene" id=3]
 
 [node name="CharacterController" type="Node"]
 script = ExtResource( 1 )
-Boss_loot = [ ExtResource( 3 ), ExtResource( 2 ) ]
+Boss_loot = [ ExtResource( 2 ) ]

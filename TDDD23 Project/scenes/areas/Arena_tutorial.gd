@@ -100,6 +100,5 @@ func _on_Bounce_up_tween_completed(_object, _key):
 
 
 func _on_TransitionScreen_transition_done():
-	$Interface/Life.free_bar_childs()
 	if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
 		print("Failed to swap to Mainmenu scene")

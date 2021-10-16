@@ -43,4 +43,3 @@ func _on_TransitionScreen_transition_done():
 		2: 
 			if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
 				print("Failed to swap to arena3 scene")
-	$Interface/Life.free_bar_childs()
