@@ -31,3 +31,4 @@ func fight_stop():
 
 func _on_Tween_tween_completed(_object, _key):
 	$Fight.stop()
+	$Fight.set_volume_db(-25)

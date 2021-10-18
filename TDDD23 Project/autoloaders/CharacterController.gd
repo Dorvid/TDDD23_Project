@@ -5,18 +5,24 @@ export (Array, PackedScene) var Shop_loot
 var rng = RandomNumberGenerator.new()
 
 var base_hp = 5
+var max_hp
 var current_hp
 var base_dmg = 3
 var dmg
 var gold = 0
 #Ascension mechanic from Slay the Spire
 var renown = 0
+var chosen_renown = 0
+var progressing_renown = false
 var has_longsword = false
 var returning = false
 var current_boss = 0
 var speed_multiplier = 1.0
 var avoidance = false
 
+#Save data variables
+const SAVE_DIR = "user://saves"
+var filepath = SAVE_DIR + "/save.dat"
 
 signal player_dead
 signal boss_dead
@@ -31,10 +37,9 @@ signal damage_change
 signal speed_increase
 
 func _ready():
-	current_hp = base_hp
+	max_hp = base_hp
+	current_hp = max_hp
 	dmg = base_dmg
-	#TODO: Load save file
-	pass # Replace with function body.
 
 #Player hp functions
 func player_hit():
@@ -50,15 +55,15 @@ func player_hit():
 	emit_signal("damage_taken") 
 
 func change_total_hp(i: int):
-	if i < 0 && base_hp != current_hp:
-		base_hp += i
+	if i < 0 && max_hp != current_hp:
+		max_hp += i
 	else:
-		base_hp += i
+		max_hp += i
 		current_hp += i
 	emit_signal("hp_change")
 
 func total_hp():
-	return base_hp
+	return max_hp
 
 func get_current_hp():
 	return current_hp
@@ -70,6 +75,7 @@ func heal_hp(i: int):
 
 func set_avoidance():
 	avoidance = true
+
 #Player gold functions
 func get_current_gold():
 	return gold
@@ -98,6 +104,7 @@ func increase_speed(input: float):
 
 func get_speed_multiplier():
 	return speed_multiplier
+
 #Scene related functions
 func get_returning():
 	return returning
@@ -107,6 +114,7 @@ func set_returning(bool_val: bool):
 
 func get_current_boss():
 	return current_boss
+
 #Emit signals
 func game_over():
 	emit_signal("player_dead")
@@ -130,3 +138,83 @@ func select_loot():
 	var item = Boss_loot[rng.randi_range(0,Boss_loot.size()-1)]
 	print("Item selected: " + str(item))
 	return item
+
+#Renown functions
+func get_renown():
+	return renown
+
+func increase_renown():
+	if renown < 10:
+		renown += 1
+	return renown
+
+func set_chosen_renown(value: int):
+	chosen_renown = value
+
+func get_chosen_renown():
+	return chosen_renown
+
+func set_renown_progression(value: bool):
+	progressing_renown = value
+
+func get_renown_progression():
+	return progressing_renown
+#Run was won by player, resets stats and other bools
+func game_won():
+	returning = false
+	speed_multiplier = 1.0
+	avoidance = false
+	max_hp = base_hp
+	current_hp = max_hp
+	dmg = base_dmg
+	current_boss = 0
+	save_progress()
+
+#Save data functions
+func save_progress():
+	#Check if directory exists, if not create it
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
+	
+	#Open file
+	var file = File.new()
+	var error = file.open(filepath,File.WRITE)
+	if error != OK:
+		print("Failed to open save data, error code:")
+		print(error)
+	else:
+		file.store_var(fill_save_data())
+		file.close()
+
+func fill_save_data():
+	var save_data = {
+		"base_hp": base_hp,
+		"gold": gold,
+		"renown": renown,
+		"damage": base_dmg,
+		"longsword": has_longsword
+	}
+	print(save_data)
+	return save_data
+
+func load_progress():
+	var file = File.new()
+	if file.file_exists(filepath):
+		var error = file.open(filepath,File.READ)
+		if error != OK:
+			print("Couldnt open save data, error code:")
+			print(error)
+		else:
+			var save_data = file.get_var()
+			read_save_data(save_data)
+			file.close()
+
+func read_save_data(data):
+	print(data)
+	if !data.empty():
+		base_hp = data["base_hp"]
+		gold = data["gold"]
+		renown = data["renown"]
+		base_dmg = data["damage"]
+		has_longsword = data["longsword"]

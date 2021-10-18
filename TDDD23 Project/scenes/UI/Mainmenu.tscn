@@ -77,23 +77,52 @@ __meta__ = {
 
 [node name="Start" type="Button" parent="Start_container"]
 margin_right = 256.0
-margin_bottom = 20.0
+margin_bottom = 34.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Start"
 
 [node name="CheckButton" type="CheckButton" parent="Start_container"]
-margin_top = 24.0
+margin_top = 38.0
 margin_right = 256.0
-margin_bottom = 64.0
+margin_bottom = 102.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Renown"
 
-[node name="Return" type="Button" parent="Start_container"]
-margin_top = 68.0
+[node name="GridContainer" type="HSplitContainer" parent="Start_container"]
+margin_top = 106.0
 margin_right = 256.0
-margin_bottom = 88.0
+margin_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 45
+
+[node name="Label" type="Label" parent="Start_container/GridContainer"]
+margin_top = 5.0
+margin_right = 117.0
+margin_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level"
+align = 1
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Start_container/GridContainer"]
+margin_left = 129.0
+margin_right = 256.0
+margin_bottom = 44.0
+max_value = 0.0
+align = 1
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="Button" parent="Start_container"]
+margin_top = 154.0
+margin_right = 256.0
+margin_bottom = 188.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Return"
@@ -162,6 +191,8 @@ __meta__ = {
 [connection signal="pressed" from="Button_container/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Button_container/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="Start_container/Start" to="." method="_on_Startgame_pressed"]
+[connection signal="toggled" from="Start_container/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="value_changed" from="Start_container/GridContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Start_container/Return" to="." method="_on_Return_pressed"]
 [connection signal="value_changed" from="Options_container/Volume_slider" to="." method="_on_Volume_changed"]
 [connection signal="pressed" from="Options_container/Return" to="." method="_on_Return_pressed"]

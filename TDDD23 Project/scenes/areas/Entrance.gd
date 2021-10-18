@@ -43,3 +43,6 @@ func _on_TransitionScreen_transition_done():
 		2: 
 			if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
 				print("Failed to swap to arena3 scene")
+		3:
+			if get_tree().change_scene("res://scenes/areas/Win_scene.tscn") != OK:
+				print("Failed to swap to win_scene")
