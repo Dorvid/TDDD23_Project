@@ -5,7 +5,9 @@
 [ext_resource path="res://scenes/items/inherited/scripts/Small_hp_pot.gd" type="Script" id=3]
 
 [node name="Small HP pot" instance=ExtResource( 1 )]
+collision_layer = 8
 script = ExtResource( 3 )
+PRICE = 20
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -13,5 +15,3 @@ texture = ExtResource( 2 )
 [node name="Control" parent="." index="2"]
 hint_tooltip = "Small Health Potion:
 Restore 1 Health"
-
-[connection signal="body_shape_entered" from="." to="." method="_on_Small_HP_pot_body_shape_entered"]

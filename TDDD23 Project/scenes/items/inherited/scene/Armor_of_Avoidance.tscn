@@ -6,6 +6,7 @@
 
 [node name="Armor_of_Avoidance" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+PRICE = 80
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -13,5 +14,3 @@ texture = ExtResource( 2 )
 [node name="Control" parent="." index="2"]
 hint_tooltip = "Armor of Avoidance:
 Have a 10% chance to avoid damage"
-
-[connection signal="body_shape_entered" from="." to="." method="_on_Armor_of_Avoidance_body_shape_entered"]

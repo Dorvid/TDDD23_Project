@@ -6,6 +6,7 @@
 
 [node name="Longsword" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+PRICE = 250
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

@@ -6,6 +6,7 @@
 
 [node name="Cursed_Orb_of_Damage" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+PRICE = 100
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
@@ -14,5 +15,3 @@ texture = ExtResource( 1 )
 hint_tooltip = "Cursed Orb of Damage:
 Increase Damage by 2
 Decrease HP by 1"
-
-[connection signal="body_shape_entered" from="." to="." method="_on_Cursed_Orb_of_Damage_body_shape_entered"]

@@ -2,6 +2,8 @@ extends Node
 
 export (Array, PackedScene) var Boss_loot
 export (Array, PackedScene) var Shop_loot
+export (Array, PackedScene) var Upgrade_loot
+var temp_shop_loot
 var rng = RandomNumberGenerator.new()
 
 var base_hp = 5
@@ -40,6 +42,7 @@ func _ready():
 	max_hp = base_hp
 	current_hp = max_hp
 	dmg = base_dmg
+	temp_shop_loot = Shop_loot
 
 #Player hp functions
 func player_hit():
@@ -83,6 +86,13 @@ func get_current_gold():
 func gold_change(input: int):
 	gold += input
 	emit_signal("gold_changed")
+
+func can_purchase(input: int):
+	if gold < input:
+		return false
+	else:
+		gold_change(-input)
+		return true
 
 #Player damage/weapon functions
 func get_player_dmg():
@@ -139,6 +149,15 @@ func select_loot():
 	print("Item selected: " + str(item))
 	return item
 
+func select_shop_loot():
+	rng.randomize()
+	var i = rng.randi_range(0,temp_shop_loot.size()-1)
+	var item = temp_shop_loot[i]
+	temp_shop_loot.erase(i)
+	return item
+
+func add_to_shop_loot(item: PackedScene):
+	Shop_loot.push_back(item)
 #Renown functions
 func get_renown():
 	return renown
@@ -168,6 +187,7 @@ func game_won():
 	current_hp = max_hp
 	dmg = base_dmg
 	current_boss = 0
+	temp_shop_loot = Shop_loot
 	save_progress()
 
 #Save data functions
@@ -193,7 +213,8 @@ func fill_save_data():
 		"gold": gold,
 		"renown": renown,
 		"damage": base_dmg,
-		"longsword": has_longsword
+		"longsword": has_longsword,
+		"shop_loot": Shop_loot
 	}
 	print(save_data)
 	return save_data
@@ -218,3 +239,4 @@ func read_save_data(data):
 		renown = data["renown"]
 		base_dmg = data["damage"]
 		has_longsword = data["longsword"]
+		Shop_loot = data["shop_loot"]

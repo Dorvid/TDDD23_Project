@@ -1,8 +1,5 @@
-extends RigidBody2D
+extends "res://scenes/items/Base_item.gd"
 
-export (int) var PRICE
+func remove_item():
+	CharacterController.increase_speed(1.2)
 
-func _on_Orb_of_speed_body_shape_entered(body_id, _body, _body_shape, _local_shape):
-	if get_parent().get_node("Player").get_instance_id() == body_id:
-		CharacterController.increase_speed(1.1)
-		queue_free()

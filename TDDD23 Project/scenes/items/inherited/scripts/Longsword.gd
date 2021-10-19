@@ -1,7 +1,4 @@
-extends RigidBody2D
+extends "res://scenes/items/Base_item.gd"
 
-export (int) var PRICE
-
-func get_effect():
+func remove_item():
 	CharacterController.received_longsword()
-

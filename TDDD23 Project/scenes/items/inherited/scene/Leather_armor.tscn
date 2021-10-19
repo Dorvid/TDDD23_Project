@@ -5,9 +5,8 @@
 
 [node name="Leather_armor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+PRICE = 30
 
 [node name="Control" parent="." index="2"]
 hint_tooltip = "Leather armor:
 Increases HP by 1"
-
-[connection signal="body_shape_entered" from="." to="." method="_on_Leather_armor_body_shape_entered"]

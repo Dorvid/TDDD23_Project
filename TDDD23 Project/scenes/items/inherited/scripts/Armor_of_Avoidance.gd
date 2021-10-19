@@ -1,11 +1,5 @@
-extends RigidBody2D
-
-export (int) var PRICE
+extends "res://scenes/items/Base_item.gd"
 
 
-
-
-func _on_Armor_of_Avoidance_body_shape_entered(body_id, _body, _body_shape, _local_shape):
-	if get_parent().get_node("Player").get_instance_id() == body_id:
-		CharacterController.set_avoidance()
-		queue_free()
+func remove_item():
+	CharacterController.set_avoidance()
