@@ -2,8 +2,10 @@ extends Node
 
 export (Array, PackedScene) var Boss_loot
 export (Array, PackedScene) var Shop_loot
-export (Array, PackedScene) var Upgrade_loot
+export (Array, PackedScene) var Permanent_loot
 var temp_shop_loot
+var temp_boss_loot
+var temp_perma_loot
 var rng = RandomNumberGenerator.new()
 
 var base_hp = 5
@@ -42,7 +44,9 @@ func _ready():
 	max_hp = base_hp
 	current_hp = max_hp
 	dmg = base_dmg
-	temp_shop_loot = Shop_loot
+	temp_shop_loot = [] + Shop_loot
+	temp_boss_loot = [] + Boss_loot
+	temp_perma_loot = [] + Permanent_loot
 
 #Player hp functions
 func player_hit():
@@ -100,6 +104,7 @@ func get_player_dmg():
 
 func received_longsword():
 	has_longsword = true
+	
 	emit_signal("longsword")
 
 func increase_dmg(input: int):
@@ -144,18 +149,41 @@ func boss_hit():
 
 #Loot functions
 func select_loot():
-	rng.randomize()
-	var item = Boss_loot[rng.randi_range(0,Boss_loot.size()-1)]
-	print("Item selected: " + str(item))
-	return item
+	if temp_boss_loot.size() != 0:
+		rng.randomize()
+		var i = rng.randi_range(0,temp_boss_loot.size()-1)
+		var item = temp_boss_loot[i]
+		temp_boss_loot.remove(i)
+		return item
+	return null
 
 func select_shop_loot():
-	rng.randomize()
-	var i = rng.randi_range(0,temp_shop_loot.size()-1)
-	var item = temp_shop_loot[i]
-	temp_shop_loot.erase(i)
-	return item
+	if temp_shop_loot.size() != 0:
+		rng.randomize()
+		var i = rng.randi_range(0,temp_shop_loot.size()-1)
+		var item = temp_shop_loot[i]
+		temp_shop_loot.remove(i)
+		return item
+	return null
 
+func select_permanent_loot():
+	if temp_perma_loot.size() != 0:
+		rng.randomize()
+		var i = rng.randi_range(0,temp_perma_loot.size()-1)
+		var item = temp_perma_loot[i]
+		temp_perma_loot.remove(i)
+		return item
+	return null
+
+func is_boss_loot_empty():
+	return temp_boss_loot.size() == 0
+
+func is_shop_loot_empty():
+	return temp_shop_loot.size() == 0
+	
+func is_perma_loot_empty():
+	return temp_perma_loot.size() == 0
+	
 func add_to_shop_loot(item: PackedScene):
 	Shop_loot.push_back(item)
 #Renown functions
@@ -188,6 +216,8 @@ func game_won():
 	dmg = base_dmg
 	current_boss = 0
 	temp_shop_loot = Shop_loot
+	temp_boss_loot = Boss_loot
+	temp_perma_loot = Permanent_loot
 	save_progress()
 
 #Save data functions
@@ -213,8 +243,7 @@ func fill_save_data():
 		"gold": gold,
 		"renown": renown,
 		"damage": base_dmg,
-		"longsword": has_longsword,
-		"shop_loot": Shop_loot
+		"longsword": has_longsword
 	}
 	print(save_data)
 	return save_data
@@ -239,4 +268,3 @@ func read_save_data(data):
 		renown = data["renown"]
 		base_dmg = data["damage"]
 		has_longsword = data["longsword"]
-		Shop_loot = data["shop_loot"]

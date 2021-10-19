@@ -5,17 +5,28 @@ onready var effect_in = $Entrance/Label/Effect_in
 onready var effect_out = $Entrance/Label/Effect_out
 onready var label = $Entrance/Label
 
+var ready_to_shop = false
+onready var shop_in = $Shopkeeper/Shop_in
+onready var shop_out = $Shopkeeper/Shop_out
+onready var shop_label = $Shopkeeper/Label
+
 func _ready():
 	if CharacterController.get_returning():
 		$Player.position = $Return_pos.position
-	print_tree()
-	pass
 
 func _process(_delta):
-	if ready_to_enter == true:
+	if ready_to_enter:
 		if Input.is_action_just_pressed("ui_up"):
 			CharacterController.set_returning(true)
 			$TransitionScreen.fade_in()
+	if ready_to_shop:
+		if Input.is_action_just_pressed("ui_enter_shop"):
+			$Shop_Screen.set_visible(true)
+	#prevent player from moving and attacking when shop is open
+	if $Shop_Screen.is_visible() == true:
+		$Player.is_attacking = true
+	else:
+		$Player.is_attacking = false
 
 
 func _on_Entrance_body_entered(_body):
@@ -46,3 +57,18 @@ func _on_TransitionScreen_transition_done():
 		3:
 			if get_tree().change_scene("res://scenes/areas/Win_scene.tscn") != OK:
 				print("Failed to swap to win_scene")
+
+
+func _on_Interaction_body_entered(_body):
+	ready_to_shop = true
+	shop_in.interpolate_property(shop_label,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
+	shop_in.start()
+	print("Ready to shop")
+
+
+func _on_Interaction_body_exited(_body):
+	ready_to_shop = false
+	$Shop_Screen.set_visible(false)
+	shop_out.interpolate_property(shop_label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.2,Tween.TRANS_CUBIC,Tween.EASE_IN)
+	shop_out.start()
+	print("No longer ready to shop")

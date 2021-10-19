@@ -13,4 +13,4 @@
 script = ExtResource( 1 )
 Boss_loot = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 Shop_loot = [ ExtResource( 7 ) ]
-Upgrade_loot = [ ExtResource( 8 ) ]
+Permanent_loot = [ ExtResource( 8 ) ]

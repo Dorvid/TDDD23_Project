@@ -1,33 +1,41 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://images/icon/UI/label_bg.png" type="Texture" id=1]
+[ext_resource path="res://scenes/UI/Item_button_boss.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/Item_button_perma.gd" type="Script" id=2]
 [ext_resource path="res://scenes/UI/Shop.gd" type="Script" id=3]
-[ext_resource path="res://scenes/UI/Item_button.gd" type="Script" id=4]
+[ext_resource path="res://scenes/UI/Item_button_shop.gd" type="Script" id=4]
 
-[node name="Shop_Screen" type="NinePatchRect"]
+[node name="Shop_Screen" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -370.0
+margin_left = -286.5
 margin_top = -186.0
-margin_right = 370.0
+margin_right = 286.5
 margin_bottom = 186.0
-texture = ExtResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Button" type="Button" parent="."]
+margin_left = 15.4731
+margin_top = 13.5093
+margin_right = 41.4731
+margin_bottom = 37.5093
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Regular_items" type="GridContainer" parent="."]
-anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -255.556
-margin_top = -73.8079
-margin_right = -25.5559
-margin_bottom = 132.192
+margin_left = 20.0
+margin_top = -103.0
+margin_right = 230.0
+margin_bottom = 103.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 10
 columns = 3
@@ -167,7 +175,7 @@ __meta__ = {
 margin_top = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 24, 24 )
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Regular_items/Item7"]
 anchor_left = 0.5
@@ -190,7 +198,7 @@ margin_top = 40.0
 margin_right = 10.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 24, 24 )
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Regular_items/Item8"]
 anchor_left = 0.5
@@ -213,7 +221,7 @@ margin_top = 40.0
 margin_right = 20.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 24, 24 )
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Regular_items/Item9"]
 anchor_left = 0.5
@@ -231,17 +239,246 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-anchor_left = 0.8
-anchor_top = 0.2
-anchor_right = 0.8
-anchor_bottom = 0.2
-margin_left = -40.0
-margin_bottom = 14.0
+margin_left = 85.0
+margin_top = 50.0
+margin_right = 125.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 20, 7 )
 text = "Items"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Permanent_upgrades" type="GridContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -184.0
+margin_top = -98.0
+margin_right = -20.0
+margin_bottom = 98.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 10
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item1" type="TextureButton" parent="Permanent_upgrades"]
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item1"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item2" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 10.0
+margin_right = 10.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item3" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 20.0
+margin_right = 20.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item3"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item4" type="TextureButton" parent="Permanent_upgrades"]
+margin_top = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item4"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item5" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 10.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item5"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item6" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item6"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item7" type="TextureButton" parent="Permanent_upgrades"]
+margin_top = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item7"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item8" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 10.0
+margin_top = 40.0
+margin_right = 10.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item8"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item9" type="TextureButton" parent="Permanent_upgrades"]
+margin_left = 20.0
+margin_top = 40.0
+margin_right = 20.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 24, 24 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Permanent_upgrades/Item9"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "PRICE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 113.071
+margin_top = -138.853
+margin_right = 245.071
+margin_bottom = -124.853
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlockable Items"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Regular_items/Item1" to="Regular_items/Item1" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="Regular_items/Item2" to="Regular_items/Item2" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="Regular_items/Item3" to="Regular_items/Item3" method="_on_TextureButton_pressed"]
@@ -251,3 +488,12 @@ __meta__ = {
 [connection signal="pressed" from="Regular_items/Item7" to="Regular_items/Item7" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="Regular_items/Item8" to="Regular_items/Item8" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="Regular_items/Item9" to="Regular_items/Item9" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item1" to="Permanent_upgrades/Item1" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item2" to="Permanent_upgrades/Item2" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item3" to="Permanent_upgrades/Item3" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item4" to="Permanent_upgrades/Item4" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item5" to="Permanent_upgrades/Item5" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item6" to="Permanent_upgrades/Item6" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item7" to="Permanent_upgrades/Item7" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item8" to="Permanent_upgrades/Item8" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Permanent_upgrades/Item9" to="Permanent_upgrades/Item9" method="_on_TextureButton_pressed"]
