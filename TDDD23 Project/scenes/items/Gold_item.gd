@@ -7,7 +7,7 @@ func _ready():
 	rng.randomize()
 
 func set_value(gold_cap):
-	value = rng.randi_range(gold_cap-20,gold_cap)
+	value = floor(rng.randi_range(gold_cap-20,gold_cap) * CharacterController.get_gold_multiplier())
 	if value < 40:
 		$Sprite.play("1")
 	elif value < 80:

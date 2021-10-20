@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://autoloaders/CharacterController.gd" type="Script" id=1]
 [ext_resource path="res://scenes/items/inherited/scene/Cursed_Orb_of_Damage.tscn" type="PackedScene" id=2]
@@ -8,9 +8,18 @@
 [ext_resource path="res://scenes/items/inherited/scene/Armor_of_Avoidance.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/items/inherited/scene/Small_hp_pot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/items/inherited/scene/Longsword.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/items/inherited/scene/Gold_armor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/items/inherited/scene/Iron_armor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/items/inherited/scene/Flame_armor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/items/inherited/scene/Orb_of_Weakening.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/items/inherited/scene/Necklace_of_Speed.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/items/inherited/scene/Necklace_of_Strength.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/items/inherited/scene/Ring_of_Speed.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/items/inherited/scene/Orb_of_Major_Health.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/items/inherited/scene/Orb_of_Luck.tscn" type="PackedScene" id=17]
 
 [node name="CharacterController" type="Node"]
 script = ExtResource( 1 )
-Boss_loot = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
-Shop_loot = [ ExtResource( 7 ) ]
-Permanent_loot = [ ExtResource( 8 ) ]
+Boss_loot = [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 16 ) ]
+Shop_loot = [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 3 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ) ]
+Permanent_loot = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 17 ) ]

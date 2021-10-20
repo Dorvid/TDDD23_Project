@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/items/Base_item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/icon/jewelry/necklace_02b.png" type="Texture" id=2]
+[ext_resource path="res://scenes/items/inherited/scripts/Necklace_of_Strength.gd" type="Script" id=3]
+
+[node name="Necklace_of_Strength" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+PRICE = 65
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Control" parent="." index="2"]
+hint_tooltip = "Necklace of Strength:
+Increase Damage by 2"

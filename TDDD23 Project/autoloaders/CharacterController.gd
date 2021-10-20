@@ -6,7 +6,7 @@ export (Array, PackedScene) var Permanent_loot
 var temp_shop_loot
 var temp_boss_loot
 var temp_perma_loot
-var unlocked_array = [false]
+var unlocked_array = []
 var rng = RandomNumberGenerator.new()
 
 var base_hp = 5
@@ -22,8 +22,11 @@ var progressing_renown = false
 var has_longsword = false
 var returning = false
 var current_boss = 0
+var boss_hp_multiplier = 1.0
 var speed_multiplier = 1.0
+var gold_multiplier = 1.0
 var avoidance = false
+var flame_armor = false
 
 #Save data variables
 const SAVE_DIR = "user://saves"
@@ -40,14 +43,17 @@ signal gold_changed
 signal longsword
 signal damage_change
 signal speed_increase
+signal flame_armor_hit
 
 func _ready():
+	for _i in range(0,Permanent_loot.size()):
+		unlocked_array.push_back(false)
 	max_hp = base_hp
 	current_hp = max_hp
 	dmg = base_dmg
-	temp_shop_loot = [] + Shop_loot
-	temp_boss_loot = [] + Boss_loot
-	temp_perma_loot = [] + Permanent_loot
+	temp_shop_loot = Shop_loot.duplicate()
+	temp_boss_loot = Boss_loot.duplicate()
+	temp_perma_loot = Permanent_loot.duplicate()
 
 #Player hp functions
 func player_hit():
@@ -81,8 +87,18 @@ func heal_hp(i: int):
 		current_hp += i
 		emit_signal("heal")
 
+#Other item related functions
 func set_avoidance():
 	avoidance = true
+
+func set_flame_armor():
+	flame_armor = true
+
+func set_boss_hp_scale(input: float):
+	boss_hp_multiplier *= input
+
+func get_boss_hp_scale():
+	return boss_hp_multiplier
 
 #Player gold functions
 func get_current_gold():
@@ -98,6 +114,12 @@ func can_purchase(input: int):
 	else:
 		gold_change(-input)
 		return true
+
+func get_gold_multiplier():
+	return gold_multiplier
+
+func set_gold_multiplier(input: float):
+	gold_multiplier *= input
 
 #Player damage/weapon functions
 func get_player_dmg():
@@ -142,10 +164,12 @@ func boss_dead():
 func emit_fight_start():
 	emit_signal("fight_start")
 	#reset permanent loot for next round shop
-	temp_perma_loot = [] + Permanent_loot
+	temp_perma_loot = Permanent_loot.duplicate()
 
 func damage_taken():
 	emit_signal("damage_taken")
+	if flame_armor:
+		emit_signal("flame_armor_hit")
 
 func boss_hit():
 	emit_signal("boss_hit")
@@ -178,8 +202,9 @@ func select_permanent_loot():
 		return item
 	return null
 
+#Changes loot that shop can have so that each item only appears once in shop
 func change_permanent_loot():
-	var temp_unlocked_array = [] + unlocked_array
+	var temp_unlocked_array = unlocked_array.duplicate()
 	print(range(0,unlocked_array.size()))
 	for i in range(0,unlocked_array.size()):
 		if temp_unlocked_array[i]:
@@ -187,7 +212,7 @@ func change_permanent_loot():
 			Permanent_loot.remove(i)
 			temp_unlocked_array.remove(i)
 			i -= 1
-	temp_perma_loot = [] + Permanent_loot
+	temp_perma_loot = Permanent_loot.duplicate()
 
 func is_boss_loot_empty():
 	return temp_boss_loot.size() == 0
@@ -221,18 +246,21 @@ func set_renown_progression(value: bool):
 func get_renown_progression():
 	return progressing_renown
 
-#Run was won by player, resets stats and other bools
-func game_won():
+#Run is over, resets stats and other bools
+func game_done():
 	returning = false
 	speed_multiplier = 1.0
 	avoidance = false
+	flame_armor = false
+	gold_multiplier = 1.0
 	max_hp = base_hp
 	current_hp = max_hp
 	dmg = base_dmg
 	current_boss = 0
-	temp_shop_loot = [] + Shop_loot
-	temp_boss_loot = [] + Boss_loot
-	temp_perma_loot = [] + Permanent_loot
+	boss_hp_multiplier = 1.0
+	temp_shop_loot = Shop_loot.duplicate()
+	temp_boss_loot = Boss_loot.duplicate()
+	temp_perma_loot = Permanent_loot.duplicate()
 	save_progress()
 
 #Save data functions

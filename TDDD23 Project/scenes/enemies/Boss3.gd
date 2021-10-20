@@ -26,7 +26,7 @@ onready var ray_above = $RayAbove
 onready var effect_dmg = $Effect_dmg
 
 func _ready():
-	current_hp = HEALTH
+	current_hp = ceil(HEALTH * CharacterController.get_boss_hp_scale())
 	$AnimatedSprite.play("Idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
 		print("Failed to connect to fight_start signal in Boss1 script")

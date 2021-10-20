@@ -22,7 +22,7 @@ func _input(event):
 	if fade_done:
 		if event is InputEventKey:
 			if event.pressed:
-				CharacterController.game_won()
+				CharacterController.game_done()
 				if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
 					print("Couldnt change to Mainmenu scene in Win_scene")
 

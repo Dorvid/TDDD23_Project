@@ -22,6 +22,8 @@ func _ready():
 		print("Failed to connect to player_dead signal in arena script")
 	if CharacterController.connect("boss_hit",self, "_on_Player_enemy_hit") != OK:
 		print("Failed to connect to boss_hit signal in arena script")
+	if CharacterController.connect("flame_armor_hit",self,"_on_Flame_armor_hit") != OK:
+		print("Failed to connect to flame_armor_hit signal in arena script")
 	current_boss = CharacterController.get_current_boss()
 
 func _input(event):
@@ -41,6 +43,14 @@ func _on_Player_enemy_hit():
 		2:
 			$Boss3.boss_hit(CharacterController.get_player_dmg())
 
+func _on_Flame_armor_hit():
+	match current_boss:
+		0:
+			$Boss1.boss_hit(5)
+		1:
+			$Boss2.boss_hit(5)
+		2:
+			$Boss3.boss_hit(5)
 
 func _boss_dead():
 	MusicController.fight_stop()
@@ -88,7 +98,7 @@ func _player_dead():
 	effect_in.start()
 	effect_drop.start()
 	change_masks()
-	CharacterController.save_progress()
+	CharacterController.game_done()
 	MusicController.fight_stop()
 
 #Starts boss fight when player has entered arena
@@ -119,8 +129,12 @@ func _on_Bounce_up_tween_completed(_object, _key):
 
 
 func _on_TransitionScreen_transition_done():
-	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
-		print("Failed to swap to entrance scene")
+	if current_boss == 2:
+		if get_tree().change_scene("res://scenes/areas/Win_scene.tscn") != OK:
+			print("Failed to swap to win_scene")
+	else:
+		if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
+			print("Failed to swap to entrance scene")
 
 
 func _on_Effect_drop_tween_completed(_object, _key):
