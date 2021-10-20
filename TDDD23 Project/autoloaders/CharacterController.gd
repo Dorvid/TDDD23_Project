@@ -6,6 +6,7 @@ export (Array, PackedScene) var Permanent_loot
 var temp_shop_loot
 var temp_boss_loot
 var temp_perma_loot
+var unlocked_array = [false]
 var rng = RandomNumberGenerator.new()
 
 var base_hp = 5
@@ -104,7 +105,7 @@ func get_player_dmg():
 
 func received_longsword():
 	has_longsword = true
-	
+	unlocked_array[0] = true
 	emit_signal("longsword")
 
 func increase_dmg(input: int):
@@ -177,6 +178,17 @@ func select_permanent_loot():
 		return item
 	return null
 
+func change_permanent_loot():
+	var temp_unlocked_array = [] + unlocked_array
+	print(range(0,unlocked_array.size()))
+	for i in range(0,unlocked_array.size()):
+		if temp_unlocked_array[i]:
+			print("Removed index out of Permanent_loot:" + str(i))
+			Permanent_loot.remove(i)
+			temp_unlocked_array.remove(i)
+			i -= 1
+	temp_perma_loot = [] + Permanent_loot
+
 func is_boss_loot_empty():
 	return temp_boss_loot.size() == 0
 
@@ -208,6 +220,7 @@ func set_renown_progression(value: bool):
 
 func get_renown_progression():
 	return progressing_renown
+
 #Run was won by player, resets stats and other bools
 func game_won():
 	returning = false
@@ -245,7 +258,8 @@ func fill_save_data():
 		"gold": gold,
 		"renown": renown,
 		"damage": base_dmg,
-		"longsword": has_longsword
+		"longsword": has_longsword,
+		"unlocked_items": unlocked_array
 	}
 	print(save_data)
 	return save_data
@@ -270,3 +284,6 @@ func read_save_data(data):
 		renown = data["renown"]
 		base_dmg = data["damage"]
 		has_longsword = data["longsword"]
+		unlocked_array = data["unlocked_items"]
+		print(unlocked_array)
+		change_permanent_loot()

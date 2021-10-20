@@ -89,6 +89,7 @@ func _player_dead():
 	effect_drop.start()
 	change_masks()
 	CharacterController.save_progress()
+	MusicController.fight_stop()
 
 #Starts boss fight when player has entered arena
 func _on_Start_fight_body_entered(_body):
