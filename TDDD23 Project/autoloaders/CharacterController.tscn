@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://autoloaders/CharacterController.gd" type="Script" id=1]
 [ext_resource path="res://scenes/items/inherited/scene/Cursed_Orb_of_Damage.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/items/inherited/scene/Orb_of_speed.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/items/inherited/scene/Ring_of_strength.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/items/inherited/scene/Armor_of_Avoidance.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/items/inherited/scene/Small_hp_pot.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Minor_Healing.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/items/inherited/scene/Longsword.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/items/inherited/scene/Gold_armor.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/items/inherited/scene/Iron_armor.tscn" type="PackedScene" id=10]
@@ -17,9 +17,16 @@
 [ext_resource path="res://scenes/items/inherited/scene/Ring_of_Speed.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/items/inherited/scene/Orb_of_Major_Health.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/items/inherited/scene/Orb_of_Luck.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/items/inherited/scene/Necklace_of_Flame.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Minor_Speed.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/items/inherited/scene/Flame_ring.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Healing.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Major_Healing.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Major_Avoidance.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/items/inherited/scene/Potion_of_Minor_Avoidance.tscn" type="PackedScene" id=24]
 
 [node name="CharacterController" type="Node"]
 script = ExtResource( 1 )
-Boss_loot = [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 16 ) ]
-Shop_loot = [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 3 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ) ]
+Boss_loot = [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 18 ) ]
+Shop_loot = [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 3 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 23 ) ]
 Permanent_loot = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 17 ) ]

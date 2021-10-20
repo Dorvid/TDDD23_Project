@@ -13,4 +13,4 @@ texture = ExtResource( 2 )
 
 [node name="Control" parent="." index="2"]
 hint_tooltip = "Armor of Avoidance:
-Have a 10% chance to avoid damage"
+Have a 10% chance to Avoid damage (stacks with other sources of Avoidance)"

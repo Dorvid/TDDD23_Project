@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/items/inherited/scripts/Flame_ring.gd" type="Script" id=1]
+[ext_resource path="res://scenes/items/Base_item.tscn" type="PackedScene" id=2]
+[ext_resource path="res://images/icon/jewelry/ring_02e.png" type="Texture" id=3]
+
+[node name="Flame_ring" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+PRICE = 25
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="Control" parent="." index="2"]
+hint_tooltip = "Flame ring:
+Deal 1 damage to boss when hit"

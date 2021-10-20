@@ -159,4 +159,4 @@ func set_longsword():
 	$AttackCollision/down.scale = Vector2(1,1.5)
 
 func _speed_increase():
-	SPEED = base_speed * CharacterController.get_speed_multiplier()
+	SPEED = floor(base_speed * CharacterController.get_speed_multiplier())

@@ -26,6 +26,7 @@ var boss_hp_multiplier = 1.0
 var speed_multiplier = 1.0
 var gold_multiplier = 1.0
 var avoidance = false
+var avoid_chance = 0.0
 var flame_armor = false
 var flame_armor_damage = 0
 
@@ -61,7 +62,7 @@ func player_hit():
 	#Chance to avoid taking damage if player has specific item
 	if avoidance:
 		rng.randomize()
-		if rng.randf_range(0.0,1.0) < 0.1:
+		if rng.randf_range(0.0,1.0) < avoid_chance:
 			return
 	current_hp -= 1
 	#print(current_hp)
@@ -89,8 +90,9 @@ func heal_hp(i: int):
 		emit_signal("heal")
 
 #Other item related functions
-func set_avoidance():
+func set_avoidance(value: float):
 	avoidance = true
+	avoid_chance += value
 
 func set_flame_armor(value: int):
 	flame_armor = true
@@ -256,6 +258,7 @@ func game_done():
 	returning = false
 	speed_multiplier = 1.0
 	avoidance = false
+	avoid_chance = 0.0
 	flame_armor = false
 	flame_armor_damage = 0
 	gold_multiplier = 1.0

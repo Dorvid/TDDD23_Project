@@ -4,7 +4,7 @@
 [ext_resource path="res://images/icon/potions/potion_01a.png" type="Texture" id=2]
 [ext_resource path="res://scenes/items/inherited/scripts/Small_hp_pot.gd" type="Script" id=3]
 
-[node name="Small HP pot" instance=ExtResource( 1 )]
+[node name="Potion_of_Minor_Healing" instance=ExtResource( 1 )]
 collision_layer = 8
 script = ExtResource( 3 )
 PRICE = 20
@@ -13,5 +13,5 @@ PRICE = 20
 texture = ExtResource( 2 )
 
 [node name="Control" parent="." index="2"]
-hint_tooltip = "Small Health Potion:
+hint_tooltip = "Potion of Minor Healing:
 Restore 1 Health"

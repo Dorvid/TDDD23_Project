@@ -13,4 +13,4 @@ texture = ExtResource( 3 )
 
 [node name="Control" parent="." index="2"]
 hint_tooltip = "Flame Armor:
-Deal 5 Damage to Boss"
+Deal 5 Damage to Boss when hit"
