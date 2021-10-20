@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/areas/Arena.gd" type="Script" id=1]
 [ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/UI/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://shaders/Flash_shader.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://font/Frostbite_32.tres" type="DynamicFont" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -217,6 +218,19 @@ __meta__ = {
 }
 
 [node name="Effect_drop" type="Tween" parent="Labels/Game_over"]
+
+[node name="Quit_text" type="Label" parent="Labels/Game_over"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -171.5
+margin_top = 10.0
+margin_right = 171.5
+custom_fonts/font = ExtResource( 9 )
+text = "PRESS ANY BUTTON CONTINUE"
+align = 1
+valign = 1
 
 [node name="TransitionScreen" parent="." instance=ExtResource( 8 )]
 

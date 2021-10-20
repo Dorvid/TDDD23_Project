@@ -11,6 +11,7 @@ onready var effect_drop = $Labels/Game_over/Effect_drop
 var bounced_up = true
 var text_pos
 var current_boss
+var run_over = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	text_pos = $Labels/Leave_text.get_global_position().x
@@ -22,6 +23,13 @@ func _ready():
 	if CharacterController.connect("boss_hit",self, "_on_Player_enemy_hit") != OK:
 		print("Failed to connect to boss_hit signal in arena script")
 	current_boss = CharacterController.get_current_boss()
+
+func _input(event):
+	if run_over:
+		if event is InputEventKey:
+			if event.pressed:
+				if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
+					print("Could not change to Mainmenu scene in Arena.gd")
 
 #Signal functions
 func _on_Player_enemy_hit():
@@ -80,6 +88,7 @@ func _player_dead():
 	effect_in.start()
 	effect_drop.start()
 	change_masks()
+	CharacterController.save_progress()
 
 #Starts boss fight when player has entered arena
 func _on_Start_fight_body_entered(_body):
@@ -111,3 +120,7 @@ func _on_Bounce_up_tween_completed(_object, _key):
 func _on_TransitionScreen_transition_done():
 	if get_tree().change_scene("res://scenes/areas/Entrance.tscn") != OK:
 		print("Failed to swap to entrance scene")
+
+
+func _on_Effect_drop_tween_completed(_object, _key):
+	run_over = true

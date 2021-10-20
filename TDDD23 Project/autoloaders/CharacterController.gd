@@ -140,6 +140,8 @@ func boss_dead():
 
 func emit_fight_start():
 	emit_signal("fight_start")
+	#reset permanent loot for next round shop
+	temp_perma_loot = [] + Permanent_loot
 
 func damage_taken():
 	emit_signal("damage_taken")
@@ -215,9 +217,9 @@ func game_won():
 	current_hp = max_hp
 	dmg = base_dmg
 	current_boss = 0
-	temp_shop_loot = Shop_loot
-	temp_boss_loot = Boss_loot
-	temp_perma_loot = Permanent_loot
+	temp_shop_loot = [] + Shop_loot
+	temp_boss_loot = [] + Boss_loot
+	temp_perma_loot = [] + Permanent_loot
 	save_progress()
 
 #Save data functions
