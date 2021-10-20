@@ -38,14 +38,14 @@ func _on_Entrance_body_entered(_body):
 	ready_to_enter = true
 	effect_in.interpolate_property(label,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	effect_in.start()
-	print("Ready to enter")
+	#print("Ready to enter")
 
 
 func _on_Entrance_body_exited(_body):
 	ready_to_enter = false
 	effect_out.interpolate_property(label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.2,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	effect_out.start()
-	print("No longer ready")
+	#print("No longer ready")
 
 
 func _on_TransitionScreen_transition_done():
@@ -65,7 +65,7 @@ func _on_Interaction_body_entered(_body):
 	ready_to_shop = true
 	shop_in.interpolate_property(shop_label,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	shop_in.start()
-	print("Ready to shop")
+	#print("Ready to shop")
 
 
 func _on_Interaction_body_exited(_body):
@@ -73,4 +73,4 @@ func _on_Interaction_body_exited(_body):
 	$Shop_Screen.set_visible(false)
 	shop_out.interpolate_property(shop_label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.2,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	shop_out.start()
-	print("No longer ready to shop")
+	#print("No longer ready to shop")

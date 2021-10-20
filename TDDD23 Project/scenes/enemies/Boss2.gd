@@ -56,10 +56,10 @@ func _physics_process(_delta):
 				$AttackCollision/area/Attack_timer.start()
 				is_attacking = true
 				attack_on_cooldown = true
-				print("Ray_char collided with player!")
+				#print("Ray_char collided with player!")
 			elif ray_above.is_colliding():
 				going_to_jump = true
-				print("Ray_above collided with player!")
+				#print("Ray_above collided with player!")
 			elif ray_wall.is_colliding():
 				swap_sides()
 			elif ray_behind.is_colliding() && turn_on_cooldown == false:

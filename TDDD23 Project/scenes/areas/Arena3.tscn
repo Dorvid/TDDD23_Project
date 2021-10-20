@@ -238,4 +238,5 @@ valign = 1
 [connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]
 [connection signal="tween_completed" from="Labels/Effect_in" to="." method="_on_Effect_in_tween_completed"]
 [connection signal="tween_completed" from="Labels/Leave_text/Bounce_up" to="." method="_on_Bounce_up_tween_completed"]
+[connection signal="tween_completed" from="Labels/Game_over/Effect_drop" to="." method="_on_Effect_drop_tween_completed"]
 [connection signal="transition_done" from="TransitionScreen" to="." method="_on_TransitionScreen_transition_done"]

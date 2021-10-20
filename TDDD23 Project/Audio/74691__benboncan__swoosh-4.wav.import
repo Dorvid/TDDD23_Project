@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/74691__benboncan__swoosh-4.wav-01ad2a6dff892bd7ef3ac2625bfdda09.sample"
+
+[deps]
+
+source_file="res://audio/74691__benboncan__swoosh-4.wav"
+dest_files=[ "res://.import/74691__benboncan__swoosh-4.wav-01ad2a6dff892bd7ef3ac2625bfdda09.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

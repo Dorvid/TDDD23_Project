@@ -114,6 +114,8 @@ func boss_hit(dmg):
 	print(current_hp)
 	if current_hp <=0:
 		$AttackCollision.queue_free()
+		$SwingTimer.queue_free()
+		$TurnTimer.queue_free()
 		$AnimatedSprite.play("death")
 		$hitbox.set_deferred('disabled',true)
 		CharacterController.boss_dead()

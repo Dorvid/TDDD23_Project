@@ -80,6 +80,7 @@ func _physics_process(_delta):
 				$AttackCollision/side.set_deferred('disabled', false)
 			#So that we get our attacking animations over our other ones so far
 			is_attacking = true
+			MusicController.player_swing()
 		
 		#If player wants to attack downwards change animation to look down
 		if Input.is_action_pressed("ui_down"):

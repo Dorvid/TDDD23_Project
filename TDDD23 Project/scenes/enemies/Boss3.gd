@@ -55,7 +55,7 @@ func _physics_process(_delta):
 				choose_attack()
 			elif ray_above.is_colliding():
 				going_to_jump = true
-				print("Ray_above collided with player!")
+				#print("Ray_above collided with player!")
 			elif ray_wall.is_colliding():
 				swap_sides()
 		if ray_behind.is_colliding() && turn_on_cooldown == false && cant_turn == false:
@@ -158,20 +158,24 @@ func disable_all_hitboxes():
 func _on_Attack_timer_timeout():
 	$AttackCollision/area.set_deferred('disabled',false)
 	cant_turn = true
+	MusicController.boss3_fast()
 
 func _on_Attack_timer2_timeout():
 	$AttackCollision/area2.set_deferred('disabled',false)
 	cant_turn = true
+	MusicController.boss3_slow()
 
 
 func _on_Attack_timer3_timeout():
 	$AttackCollision/area3.set_deferred('disabled',false)
 	cant_turn = true
+	MusicController.boss3_fast()
 
 
 func _on_Attack_timer4_timeout():
 	$AttackCollision/area4.set_deferred('disabled',false)
 	cant_turn = true
+	MusicController.boss3_air()
 
 
 func _on_AnimatedSprite_animation_finished():

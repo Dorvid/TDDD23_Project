@@ -55,7 +55,7 @@ func _on_Flame_armor_hit():
 func _boss_dead():
 	MusicController.fight_stop()
 	MusicController.crowd_play()
-	print("Text appering")
+	#print("Text appering")
 	effect_in.interpolate_property(leave_text,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	effect_in.start()
 	$Background.play("cheering")
@@ -76,7 +76,7 @@ func change_masks():
 
 #Drops items to player when boss dies
 func drop_items():
-	print("Dropping items...")
+	#print("Dropping items...")
 	#Select item
 	if !CharacterController.is_boss_loot_empty():
 		var item = CharacterController.select_loot().instance()
@@ -85,12 +85,11 @@ func drop_items():
 		item.set_linear_velocity(Vector2(10,50))
 	#Drop gold
 	var gold = Gold.instance()
-	print(gold)
 	call_deferred("add_child",gold)
 	gold.set_value(get_node("Boss" + str(current_boss +1)).get_gold_cap())
 	gold.position = get_node("Boss" + str(current_boss +1)).position
 	gold.set_linear_velocity(Vector2(10,50))
-	print("Done")
+	#print("Done")
 
 func _player_dead():
 	effect_in.interpolate_property(game_over,'modulate',Color(1,1,1,0),Color(1,1,1,1),0.5,Tween.TRANS_CUBIC,Tween.EASE_IN)
@@ -139,3 +138,4 @@ func _on_TransitionScreen_transition_done():
 
 func _on_Effect_drop_tween_completed(_object, _key):
 	run_over = true
+	print("Ready to exit")

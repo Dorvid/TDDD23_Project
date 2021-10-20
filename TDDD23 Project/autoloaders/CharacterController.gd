@@ -68,6 +68,7 @@ func player_hit():
 	#print(current_hp)
 	if current_hp <= 0:
 		game_over()
+		MusicController.Game_over()
 	emit_signal("damage_taken") 
 
 func change_total_hp(i: int):
@@ -319,7 +320,7 @@ func read_save_data(data):
 	if !data.empty():
 		base_hp = data["base_hp"]
 		gold = data["gold"]
-		gold_multiplier = data["gold_multiplier"]
+		gold_multiplier = data["gold_scale"]
 		renown = data["renown"]
 		base_dmg = data["damage"]
 		has_longsword = data["longsword"]
