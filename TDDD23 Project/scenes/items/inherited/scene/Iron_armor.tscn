@@ -6,7 +6,7 @@
 
 [node name="Iron_armor" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-PRICE = 35
+PRICE = 50
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

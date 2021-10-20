@@ -46,11 +46,11 @@ func _on_Player_enemy_hit():
 func _on_Flame_armor_hit():
 	match current_boss:
 		0:
-			$Boss1.boss_hit(5)
+			$Boss1.boss_hit(CharacterController.get_flame_armor_damage())
 		1:
-			$Boss2.boss_hit(5)
+			$Boss2.boss_hit(CharacterController.get_flame_armor_damage())
 		2:
-			$Boss3.boss_hit(5)
+			$Boss3.boss_hit(CharacterController.get_flame_armor_damage())
 
 func _boss_dead():
 	MusicController.fight_stop()

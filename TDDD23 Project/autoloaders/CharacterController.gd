@@ -27,6 +27,7 @@ var speed_multiplier = 1.0
 var gold_multiplier = 1.0
 var avoidance = false
 var flame_armor = false
+var flame_armor_damage = 0
 
 #Save data variables
 const SAVE_DIR = "user://saves"
@@ -91,8 +92,12 @@ func heal_hp(i: int):
 func set_avoidance():
 	avoidance = true
 
-func set_flame_armor():
+func set_flame_armor(value: int):
 	flame_armor = true
+	flame_armor_damage += value
+
+func get_flame_armor_damage():
+	return flame_armor_damage
 
 func set_boss_hp_scale(input: float):
 	boss_hp_multiplier *= input
@@ -252,6 +257,7 @@ func game_done():
 	speed_multiplier = 1.0
 	avoidance = false
 	flame_armor = false
+	flame_armor_damage = 0
 	gold_multiplier = 1.0
 	max_hp = base_hp
 	current_hp = max_hp
@@ -284,6 +290,7 @@ func fill_save_data():
 	var save_data = {
 		"base_hp": base_hp,
 		"gold": gold,
+		"gold_scale": gold_multiplier,
 		"renown": renown,
 		"damage": base_dmg,
 		"longsword": has_longsword,
@@ -309,6 +316,7 @@ func read_save_data(data):
 	if !data.empty():
 		base_hp = data["base_hp"]
 		gold = data["gold"]
+		gold_multiplier = data["gold_multiplier"]
 		renown = data["renown"]
 		base_dmg = data["damage"]
 		has_longsword = data["longsword"]
