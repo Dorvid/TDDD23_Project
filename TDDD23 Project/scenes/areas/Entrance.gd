@@ -13,6 +13,11 @@ onready var shop_label = $Shopkeeper/Label
 func _ready():
 	if CharacterController.get_returning():
 		$Player.position = $Return_pos.position
+	else:
+		if CharacterController.get_chosen_renown() >= 7:
+			CharacterController.increase_dmg(-1)
+		if CharacterController.get_chosen_renown() >= 8:
+			CharacterController.damage_taken()
 
 func _process(_delta):
 	if ready_to_enter:

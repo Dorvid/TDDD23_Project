@@ -209,8 +209,7 @@ func select_permanent_loot():
 		return item
 	return null
 
-#Changes loot that shop can have so that each item only appears once in shop
-func change_permanent_loot():
+func change_permanent_loot(): #Changes loot that shop can have so that each item only appears once in shop
 	var temp_unlocked_array = unlocked_array.duplicate()
 	print(range(0,unlocked_array.size()))
 	for i in range(0,unlocked_array.size()):
@@ -226,12 +225,13 @@ func is_boss_loot_empty():
 
 func is_shop_loot_empty():
 	return temp_shop_loot.size() == 0
-	
+
 func is_perma_loot_empty():
 	return temp_perma_loot.size() == 0
-	
+
 func add_to_shop_loot(item: PackedScene):
 	Shop_loot.push_back(item)
+
 #Renown functions
 func get_renown():
 	return renown

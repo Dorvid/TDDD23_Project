@@ -3,6 +3,9 @@ extends RigidBody2D
 export (int) var PRICE
 
 func get_price():
+	#if renown 6 or higher
+	if CharacterController.get_chosen_renown() >= 6:
+		PRICE = ceil(PRICE * 1.3)
 	return PRICE
 
 func buy_item():

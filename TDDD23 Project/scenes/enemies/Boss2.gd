@@ -17,6 +17,7 @@ var alive = true
 var going_to_jump = false
 var jumping = false
 var done_with_gravity = false
+var renown_hp_scale = 1.0
 
 onready var ray_wall = $RayWall
 onready var ray_char = $RayChar
@@ -25,7 +26,18 @@ onready var ray_above = $RayAbove
 onready var effect_dmg = $Effect_dmg
 
 func _ready():
-	current_hp = ceil(HEALTH * CharacterController.get_boss_hp_scale())
+	#Increases hp depending on renown
+	if CharacterController.get_chosen_renown() == 10:
+		renown_hp_scale = 3.0
+	elif CharacterController.get_chosen_renown() >= 2:
+		renown_hp_scale = 1.5
+	current_hp = ceil(HEALTH * CharacterController.get_boss_hp_scale() * renown_hp_scale)
+	#If renown 9 or higher boss is faster
+	if CharacterController.get_chosen_renown() >= 9:
+		SPEED *= 1.5
+	#If renown 5 or higher drop less gold
+	if CharacterController.get_chosen_renown() >= 5:
+		GOLD_CAP *= 0.8
 	$AnimatedSprite.play("Idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
 		print("Failed to connect to fight_start signal in Boss1 script")
