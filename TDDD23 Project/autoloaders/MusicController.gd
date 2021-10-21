@@ -52,6 +52,17 @@ func boss_slow():
 func boss_air():
 	$boss_air.play()
 
+#Grunts
+func play_grunt1():
+	$grunt1.play()
+
+func play_grunt2():
+	$grunt2.play()
+
+func play_grunt3():
+	$grunt3.play()
+
+
 #Purchasing items
 func purchase():
 	$Purchase.play()

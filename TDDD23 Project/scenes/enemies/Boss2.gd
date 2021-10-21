@@ -59,6 +59,7 @@ func _physics_process(_delta):
 				$AttackCollision/area/Attack_timer.start()
 				is_attacking = true
 				attack_on_cooldown = true
+				MusicController.play_grunt2()
 				#print("Ray_char collided with player!")
 			elif ray_above.is_colliding():
 				going_to_jump = true

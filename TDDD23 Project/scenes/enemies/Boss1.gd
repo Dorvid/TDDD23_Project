@@ -52,10 +52,12 @@ func _physics_process(_delta):
 				$AttackCollision/start.set_deferred('disabled', false)
 				$SwingTimer.start()
 				is_attacking = true
+				MusicController.play_grunt1()
 			elif can_attack_upwards && ray_up.is_colliding():
 				$AnimatedSprite.play("upwards")
 				$UpwardTimer.start()
 				is_attacking = true
+				MusicController.play_grunt1()
 			elif ray_wall.is_colliding():
 				swap_sides()
 			elif ray_behind.is_colliding():

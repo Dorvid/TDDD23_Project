@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/420932__cigaro30__male-grunt-uh.mp3-49b0860785118242ccba483d95718d55.mp3str"
+
+[deps]
+
+source_file="res://audio/420932__cigaro30__male-grunt-uh.mp3"
+dest_files=[ "res://.import/420932__cigaro30__male-grunt-uh.mp3-49b0860785118242ccba483d95718d55.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

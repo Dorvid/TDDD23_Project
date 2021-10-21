@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://audio/Crowd.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloaders/MusicController.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://audio/74691__benboncan__swoosh-4.wav" type="AudioStream" id=8]
 [ext_resource path="res://audio/140382__dwoboyle__coins-01.wav" type="AudioStream" id=9]
 [ext_resource path="res://audio/Sand.wav" type="AudioStream" id=10]
+[ext_resource path="res://audio/420932__cigaro30__male-grunt-uh.mp3" type="AudioStream" id=11]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -49,6 +50,21 @@ bus = "SFX"
 [node name="boss_air" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -10.0
+bus = "SFX"
+
+[node name="grunt1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+pitch_scale = 0.7
+bus = "SFX"
+
+[node name="grunt2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+pitch_scale = 0.9
+bus = "SFX"
+
+[node name="grunt3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+pitch_scale = 1.1
 bus = "SFX"
 
 [node name="Purchase" type="AudioStreamPlayer" parent="."]

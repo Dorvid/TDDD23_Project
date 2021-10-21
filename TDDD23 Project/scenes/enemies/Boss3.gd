@@ -118,6 +118,7 @@ func choose_attack():
 			$AttackCollision/area3/Attack_timer3.start()
 	is_attacking = true
 	attack_on_cooldown = true
+	MusicController.play_grunt3()
 
 func _fight_start():
 	fight_started = true
