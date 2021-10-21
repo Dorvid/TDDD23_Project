@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://audio/Crowd.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloaders/MusicController.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://audio/140382__dwoboyle__coins-01.wav" type="AudioStream" id=9]
 [ext_resource path="res://audio/Sand.wav" type="AudioStream" id=10]
 [ext_resource path="res://audio/420932__cigaro30__male-grunt-uh.mp3" type="AudioStream" id=11]
+[ext_resource path="res://audio/1.MainTheme-320bit.mp3" type="AudioStream" id=12]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -19,6 +20,13 @@ script = ExtResource( 2 )
 stream = ExtResource( 1 )
 volume_db = -25.0
 bus = "Music"
+
+[node name="Main_menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "Music"
+
+[node name="Tween" type="Tween" parent="Main_menu"]
 
 [node name="Fight" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

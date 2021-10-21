@@ -22,6 +22,14 @@ func _on_Crowd_finished():
 	$Crowd.volume_db = -25
 	crowd_active = false
 
+#Main menu music
+func menu_play():
+	$Main_menu.play()
+
+func fade_menu_music():
+	$Main_menu/Tween.interpolate_property($Main_menu,"volume_db",-10,-80,1,Tween.TRANS_EXPO,Tween.EASE_IN_OUT)
+	$Main_menu/Tween.start()
+
 #Fight
 func fight_play():
 	$Fight.play()

@@ -5,6 +5,7 @@ var choice = false
 
 
 func _ready():
+	MusicController.menu_play()
 	CharacterController.load_progress()
 	#Gets master audio bus value and sets slider to that value
 	$Options_container/Volume_slider.set_value(AudioServer.get_bus_volume_db(bus_index))
@@ -45,6 +46,7 @@ func _on_Startgame_pressed():
 		CharacterController.set_renown_progression(false)
 		CharacterController.set_chosen_renown(false)
 	$TransitionScreen.fade_in()
+	MusicController.fade_menu_music()
 
 
 func _on_Volume_changed(value):
