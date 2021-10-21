@@ -18,3 +18,4 @@ func _on_TextureButton_pressed():
 	if item.buy_item():
 		self.set_disabled(true)
 		self.set_modulate(Color("3f3232"))
+		CharacterController.add_to_inventory(item)
