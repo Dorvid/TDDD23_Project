@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://audio/Crowd.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloaders/MusicController.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://audio/Sand.wav" type="AudioStream" id=10]
 [ext_resource path="res://audio/420932__cigaro30__male-grunt-uh.mp3" type="AudioStream" id=11]
 [ext_resource path="res://audio/1.MainTheme-320bit.mp3" type="AudioStream" id=12]
+[ext_resource path="res://audio/Adventure-320bit.mp3" type="AudioStream" id=13]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -27,6 +28,14 @@ volume_db = -10.0
 bus = "Music"
 
 [node name="Tween" type="Tween" parent="Main_menu"]
+
+[node name="Entrance" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Music"
+
+[node name="Tween" type="Tween" parent="Entrance"]
 
 [node name="Fight" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -89,6 +98,8 @@ wait_time = 1.5
 one_shot = true
 
 [connection signal="finished" from="Crowd" to="." method="_on_Crowd_finished"]
+[connection signal="tween_completed" from="Main_menu/Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="Entrance/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="Fight/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="finished" from="walk" to="." method="_on_walk_finished"]
 [connection signal="timeout" from="walk/Timer" to="." method="_on_Timer_timeout"]

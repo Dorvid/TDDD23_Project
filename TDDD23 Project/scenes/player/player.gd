@@ -22,7 +22,7 @@ var short_frames = preload("res://scenes/player/shortsword.tres")
 var long_frames = preload("res://scenes/player/longsword.tres")
 
 func _ready():
-	base_speed = SPEED
+	base_speed = SPEED * CharacterController.get_speed_multiplier()
 	#If the player has unlocked the long sword set it and increase hitboxes
 	if CharacterController.has_longsword == false:
 		set_shortsword()

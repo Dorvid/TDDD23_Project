@@ -22,6 +22,7 @@ func _ready():
 			CharacterController.damage_taken()
 	if CharacterController.connect("abandon_run",self,"_abandon_run") != OK:
 		print("Could not connect to abandon_run in entrance script")
+	MusicController.entrance_play()
 
 func _process(_delta):
 	if ready_to_enter:
@@ -53,6 +54,7 @@ func _on_Entrance_body_exited(_body):
 
 
 func _on_TransitionScreen_transition_done():
+	MusicController.fade_entrance()
 	if abandon_run:
 		if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
 			print("Failed to swap to main menu")

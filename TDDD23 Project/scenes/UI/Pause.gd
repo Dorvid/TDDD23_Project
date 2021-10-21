@@ -21,6 +21,8 @@ func _input(event):
 
 func _on_Button_pressed():
 	get_tree().paused = false
+	MusicController.fight_stop()
+	MusicController.crowd_stop()
 	CharacterController.abandon_run()
 
 func update_inventory():

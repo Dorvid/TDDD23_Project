@@ -1,6 +1,7 @@
 extends Node
 
 var crowd_active = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,23 +26,31 @@ func _on_Crowd_finished():
 #Main menu music
 func menu_play():
 	$Main_menu.play()
+	$Main_menu.set_volume_db(-10)
 
 func fade_menu_music():
 	$Main_menu/Tween.interpolate_property($Main_menu,"volume_db",-10,-80,1,Tween.TRANS_EXPO,Tween.EASE_IN_OUT)
 	$Main_menu/Tween.start()
 
+#Entrance
+func entrance_play():
+	$Entrance.play()
+	$Entrance.set_volume_db(-10)
+
+func fade_entrance():
+	$Entrance/Tween.interpolate_property($Entrance,"volume_db",-10,-80,1,Tween.TRANS_EXPO,Tween.EASE_IN_OUT)
+	$Entrance/Tween.start()
 #Fight
 func fight_play():
 	$Fight.play()
+	$Fight.set_volume_db(-25)
 
 func fight_stop():
 	$Fight/Tween.interpolate_property($Fight,"volume_db",-25,-80,2,Tween.TRANS_EXPO,Tween.EASE_IN_OUT)
 	$Fight/Tween.start()
 
-func _on_Tween_tween_completed(_object, _key):
-	$Fight.stop()
-	$Fight.set_volume_db(-25)
-
+func _on_Tween_tween_completed(object, _key):
+	object.stop()
 #Game_Over
 func Game_over():
 	$Game_over.play()
