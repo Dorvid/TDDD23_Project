@@ -28,4 +28,5 @@ func get_texture():
 func _on_Base_item_body_shape_entered(body_id, _body, _body_shape, _local_shape):
 	if get_parent().get_node("Player").get_instance_id() == body_id:
 		remove_item()
+		CharacterController.add_to_inventory(self)
 		queue_free()

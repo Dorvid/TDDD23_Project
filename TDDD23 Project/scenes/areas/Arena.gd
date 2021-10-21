@@ -12,6 +12,7 @@ var bounced_up = true
 var text_pos
 var current_boss
 var run_over = false
+var abandon_run = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	text_pos = $Labels/Leave_text.get_global_position().x
@@ -24,6 +25,8 @@ func _ready():
 		print("Failed to connect to boss_hit signal in arena script")
 	if CharacterController.connect("flame_armor_hit",self,"_on_Flame_armor_hit") != OK:
 		print("Failed to connect to flame_armor_hit signal in arena script")
+	if CharacterController.connect("abandon_run",self,"_abandon_run") != OK:
+		print("Failed to connect to abandon_run signal in arena script")
 	current_boss = CharacterController.get_current_boss()
 
 func _input(event):
@@ -128,7 +131,10 @@ func _on_Bounce_up_tween_completed(_object, _key):
 
 
 func _on_TransitionScreen_transition_done():
-	if current_boss == 2:
+	if abandon_run:
+		if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
+			print("Failed to swap to main menu")
+	elif current_boss == 2:
 		if get_tree().change_scene("res://scenes/areas/Win_scene.tscn") != OK:
 			print("Failed to swap to win_scene")
 	else:
@@ -139,3 +145,7 @@ func _on_TransitionScreen_transition_done():
 func _on_Effect_drop_tween_completed(_object, _key):
 	run_over = true
 	print("Ready to exit")
+
+func _abandon_run():
+	abandon_run = true
+	$TransitionScreen.fade_in()

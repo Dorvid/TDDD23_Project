@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/areas/Arena.gd" type="Script" id=1]
 [ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://shaders/Flash_shader.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=8]
 [ext_resource path="res://font/Frostbite_32.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/UI/Pause_menu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -233,6 +234,8 @@ align = 1
 valign = 1
 
 [node name="TransitionScreen" parent="." instance=ExtResource( 8 )]
+
+[node name="Pause_menu" parent="." instance=ExtResource( 10 )]
 
 [connection signal="body_entered" from="Start_fight" to="." method="_on_Start_fight_body_entered"]
 [connection signal="body_entered" from="Leave_arena" to="." method="_on_Leave_arena_body_entered"]

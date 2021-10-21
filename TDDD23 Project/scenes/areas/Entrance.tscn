@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://images/spritesheets/Arena_entrance.png" type="Texture" id=1]
 [ext_resource path="res://images/spritesheets/Shopkeeper.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/UI/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/UI/Shop.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/UI/Pause_menu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 25 )
@@ -130,6 +131,8 @@ position = Vector2( 95.8495, 626.968 )
 
 [node name="Shop_Screen" parent="." instance=ExtResource( 8 )]
 visible = false
+
+[node name="Pause_menu" parent="." instance=ExtResource( 9 )]
 
 [connection signal="body_entered" from="Shopkeeper/Interaction" to="." method="_on_Interaction_body_entered"]
 [connection signal="body_exited" from="Shopkeeper/Interaction" to="." method="_on_Interaction_body_exited"]

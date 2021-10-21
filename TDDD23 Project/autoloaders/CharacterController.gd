@@ -8,6 +8,9 @@ var temp_boss_loot
 var temp_perma_loot
 var unlocked_array = []
 var rng = RandomNumberGenerator.new()
+#Inventory for pause screen
+var inventory = []
+
 
 var base_hp = 5
 var max_hp
@@ -46,6 +49,8 @@ signal longsword
 signal damage_change
 signal speed_increase
 signal flame_armor_hit
+signal inventory_change
+signal abandon_run
 
 func _ready():
 	for _i in range(0,Permanent_loot.size()):
@@ -118,6 +123,13 @@ func increase_range(value: float):
 func get_range():
 	return range_multiplier
 
+func add_to_inventory(item):
+	inventory.push_back(item)
+	emit_signal("inventory_change")
+	pass
+
+func get_inventory():
+	return inventory.duplicate()
 #Player gold functions
 func get_current_gold():
 	return gold
@@ -279,11 +291,15 @@ func game_done():
 	current_boss = 0
 	boss_hp_multiplier = 1.0
 	range_multiplier = 1.0
+	inventory.clear()
 	temp_shop_loot = Shop_loot.duplicate()
 	temp_boss_loot = Boss_loot.duplicate()
 	temp_perma_loot = Permanent_loot.duplicate()
 	save_progress()
 
+func abandon_run():
+	game_done()
+	emit_signal("abandon_run")
 #Save data functions
 func save_progress():
 	#Check if directory exists, if not create it

@@ -10,6 +10,7 @@ onready var shop_in = $Shopkeeper/Shop_in
 onready var shop_out = $Shopkeeper/Shop_out
 onready var shop_label = $Shopkeeper/Label
 
+var abandon_run = false
 func _ready():
 	$Player.in_entrance_area()
 	if CharacterController.get_returning():
@@ -19,6 +20,8 @@ func _ready():
 			CharacterController.increase_dmg(-1)
 		if CharacterController.get_chosen_renown() >= 8:
 			CharacterController.damage_taken()
+	if CharacterController.connect("abandon_run",self,"_abandon_run") != OK:
+		print("Could not connect to abandon_run in entrance script")
 
 func _process(_delta):
 	if ready_to_enter:
@@ -50,16 +53,20 @@ func _on_Entrance_body_exited(_body):
 
 
 func _on_TransitionScreen_transition_done():
-	match CharacterController.get_current_boss():
-		0:
-			if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
-				print("Failed to swap to arena scene")
-		1:
-			if get_tree().change_scene("res://scenes/areas/Arena2.tscn") != OK:
-				print("Failed to swap to arena2 scene")
-		2: 
-			if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
-				print("Failed to swap to arena3 scene")
+	if abandon_run:
+		if get_tree().change_scene("res://scenes/UI/Mainmenu.tscn") != OK:
+			print("Failed to swap to main menu")
+	else:
+		match CharacterController.get_current_boss():
+			0:
+				if get_tree().change_scene("res://scenes/areas/Arena.tscn") != OK:
+					print("Failed to swap to arena scene")
+			1:
+				if get_tree().change_scene("res://scenes/areas/Arena2.tscn") != OK:
+					print("Failed to swap to arena2 scene")
+			2: 
+				if get_tree().change_scene("res://scenes/areas/Arena3.tscn") != OK:
+					print("Failed to swap to arena3 scene")
 
 
 func _on_Interaction_body_entered(_body):
@@ -75,3 +82,7 @@ func _on_Interaction_body_exited(_body):
 	shop_out.interpolate_property(shop_label,'modulate',Color(1,1,1,1),Color(1,1,1,0),0.2,Tween.TRANS_CUBIC,Tween.EASE_IN)
 	shop_out.start()
 	#print("No longer ready to shop")
+
+func _abandon_run():
+	abandon_run = true
+	$TransitionScreen.fade_in()

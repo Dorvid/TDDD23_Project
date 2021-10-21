@@ -195,6 +195,7 @@ __meta__ = {
 }
 
 [node name="TransitionScreen" parent="." instance=ExtResource( 5 )]
+layer = 11
 
 [connection signal="pressed" from="Button_container/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Button_container/Tutorial" to="." method="_on_Tutorial_pressed"]
