@@ -29,7 +29,7 @@ var avoidance = false
 var avoid_chance = 0.0
 var flame_armor = false
 var flame_armor_damage = 0
-
+var range_multiplier = 1.0
 #Save data variables
 const SAVE_DIR = "user://saves"
 var filepath = SAVE_DIR + "/save.dat"
@@ -107,6 +107,12 @@ func set_boss_hp_scale(input: float):
 
 func get_boss_hp_scale():
 	return boss_hp_multiplier
+
+func increase_range(value: float):
+	range_multiplier *= value
+
+func get_range():
+	return range_multiplier
 
 #Player gold functions
 func get_current_gold():
@@ -268,6 +274,7 @@ func game_done():
 	dmg = base_dmg
 	current_boss = 0
 	boss_hp_multiplier = 1.0
+	range_multiplier = 1.0
 	temp_shop_loot = Shop_loot.duplicate()
 	temp_boss_loot = Boss_loot.duplicate()
 	temp_perma_loot = Permanent_loot.duplicate()

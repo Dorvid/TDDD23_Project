@@ -24,7 +24,7 @@ func _ready():
 	base_speed = SPEED
 	#If the player has unlocked the long sword set it and increase hitboxes
 	if CharacterController.has_longsword == false:
-		$Weapon.set_sprite_frames(short_frames)
+		set_shortsword()
 	else:
 		set_longsword()
 	#set weapon to correct animation just is case
@@ -154,10 +154,18 @@ func _damage_taken():
 
 #Gives player longsword
 func set_longsword():
+	var val = CharacterController.get_range()
 	$Weapon.set_sprite_frames(long_frames)
-	$AttackCollision/side.scale = Vector2(1.5,1)
-	$AttackCollision/up.scale = Vector2(1,1.5)
-	$AttackCollision/down.scale = Vector2(1,1.5)
+	$AttackCollision/side.scale = Vector2(1.5 * val ,1)
+	$AttackCollision/up.scale = Vector2(1,1.5 * val)
+	$AttackCollision/down.scale = Vector2(1,1.5 * val)
+
+func set_shortsword():
+	var val = CharacterController.get_range()
+	$Weapon.set_sprite_frames(short_frames)
+	$AttackCollision/side.scale = Vector2(1.5 * val ,1)
+	$AttackCollision/up.scale = Vector2(1,1.5 * val)
+	$AttackCollision/down.scale = Vector2(1,1.5 * val)
 
 func _speed_increase():
 	SPEED = floor(base_speed * CharacterController.get_speed_multiplier())
