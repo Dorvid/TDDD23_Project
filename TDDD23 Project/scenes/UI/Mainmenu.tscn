@@ -37,8 +37,6 @@ __meta__ = {
 [node name="Start" type="Button" parent="Button_container"]
 margin_right = 256.0
 margin_bottom = 34.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Start"
 
 [node name="Tutorial" type="Button" parent="Button_container"]
@@ -51,16 +49,12 @@ text = "Tutorial"
 margin_top = 76.0
 margin_right = 256.0
 margin_bottom = 110.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Options"
 
 [node name="Quit" type="Button" parent="Button_container"]
 margin_top = 114.0
 margin_right = 256.0
 margin_bottom = 148.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Quit"
 
 [node name="Start_container" type="VBoxContainer" parent="."]
@@ -79,16 +73,12 @@ __meta__ = {
 [node name="Start" type="Button" parent="Start_container"]
 margin_right = 256.0
 margin_bottom = 34.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Start"
 
 [node name="CheckButton" type="CheckButton" parent="Start_container"]
 margin_top = 38.0
 margin_right = 256.0
 margin_bottom = 102.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Renown"
 
 [node name="GridContainer" type="HSplitContainer" parent="Start_container"]
@@ -133,8 +123,6 @@ max_lines_visible = 3
 margin_top = 192.0
 margin_right = 256.0
 margin_bottom = 226.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Return"
 
 [node name="Options_container" type="VBoxContainer" parent="."]
@@ -172,8 +160,6 @@ __meta__ = {
 margin_top = 38.0
 margin_right = 256.0
 margin_bottom = 58.0
-focus_mode = 0
-enabled_focus_mode = 0
 text = "Return"
 
 [node name="Label" type="Label" parent="."]
