@@ -11,6 +11,7 @@ func get_price():
 func buy_item():
 	if CharacterController.can_purchase(PRICE):
 		remove_item()
+		MusicController.purchase()
 		return true
 	return false
 

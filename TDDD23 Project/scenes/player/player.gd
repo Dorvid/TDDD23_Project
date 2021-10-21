@@ -11,6 +11,7 @@ export (int) var KNOCKBACK_FORCE
 var is_attacking = false
 var last_direction = 0
 var alive = true
+var entrance_area = false
 
 onready var effect_dmg = $Effect_dmg_body
 onready var effect_dmg2 = $Effect_dmg_head
@@ -68,19 +69,20 @@ func _physics_process(_delta):
 				$Weapon.play("idle")
 		
 		# Attack logic
-		if Input.is_action_just_pressed("ui_attack") && is_attacking == false:
-			if Input.is_action_pressed("ui_down"):
-				$Weapon.play("swing down")
-				$AttackCollision/down.set_deferred('disabled', false)
-			elif Input.is_action_pressed("ui_up"):
-				$Weapon.play("swing up")
-				$AttackCollision/up.set_deferred('disabled', false)
-			else:
-				$Weapon.play("swing side")
-				$AttackCollision/side.set_deferred('disabled', false)
-			#So that we get our attacking animations over our other ones so far
-			is_attacking = true
-			MusicController.player_swing()
+		if !entrance_area:
+			if Input.is_action_just_pressed("ui_attack") && is_attacking == false:
+				if Input.is_action_pressed("ui_down"):
+					$Weapon.play("swing down")
+					$AttackCollision/down.set_deferred('disabled', false)
+				elif Input.is_action_pressed("ui_up"):
+					$Weapon.play("swing up")
+					$AttackCollision/up.set_deferred('disabled', false)
+				else:
+					$Weapon.play("swing side")
+					$AttackCollision/side.set_deferred('disabled', false)
+				#So that we get our attacking animations over our other ones so far
+				is_attacking = true
+				MusicController.player_swing()
 		
 		#If player wants to attack downwards change animation to look down
 		if Input.is_action_pressed("ui_down"):
@@ -100,6 +102,11 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("ui_jump") && is_on_floor():
 			velocity.y = -JUMPFORCE
 		
+		#walking noise
+		if velocity.x != 0 && is_on_floor():
+			MusicController.walk_start()
+		else:
+			MusicController.walk_stop()
 		#Detect Collision and move character, 
 		#Vector2.UP tells is_on_floor() which direction the floor is looking
 		velocity = move_and_slide(velocity,Vector2.UP)
@@ -169,3 +176,7 @@ func set_shortsword():
 
 func _speed_increase():
 	SPEED = floor(base_speed * CharacterController.get_speed_multiplier())
+
+#so player cant swing in entrance area
+func in_entrance_area():
+	entrance_area = true

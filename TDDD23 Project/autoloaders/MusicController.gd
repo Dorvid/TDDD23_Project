@@ -51,3 +51,22 @@ func boss3_slow():
 
 func boss3_air():
 	$boss3_air.play()
+
+#Purchasing items
+func purchase():
+	$Purchase.play()
+
+#Walking
+func walk_start():
+	if !$walk.is_playing():
+		$walk.play()
+
+func walk_stop():
+	$walk.stop()
+	$walk/Timer.stop()
+
+func _on_walk_finished():
+	$walk/Timer.start()
+
+func _on_Timer_timeout():
+	walk_start()

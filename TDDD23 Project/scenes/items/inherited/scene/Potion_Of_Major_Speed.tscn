@@ -6,6 +6,7 @@
 
 [node name="Potion_Of_Major_Speed" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
+PRICE = 20
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

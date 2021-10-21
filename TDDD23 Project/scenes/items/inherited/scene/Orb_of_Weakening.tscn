@@ -12,5 +12,5 @@ PRICE = 50
 texture = ExtResource( 3 )
 
 [node name="Control" parent="." index="2"]
-hint_tooltip = "Item Name:
+hint_tooltip = "Orb of Weakening:
 Bosses Have 10% Less Health"

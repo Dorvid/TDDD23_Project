@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/140382__dwoboyle__coins-01.wav-6354e7ed3337596a8ce91aa2fb20d882.sample"
+
+[deps]
+
+source_file="res://audio/140382__dwoboyle__coins-01.wav"
+dest_files=[ "res://.import/140382__dwoboyle__coins-01.wav-6354e7ed3337596a8ce91aa2fb20d882.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

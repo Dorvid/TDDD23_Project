@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://audio/Crowd.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloaders/MusicController.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://audio/mixkit-fast-sword-whoosh-2792.wav" type="AudioStream" id=6]
 [ext_resource path="res://audio/mixkit-powerful-air-whooshes-3220.wav" type="AudioStream" id=7]
 [ext_resource path="res://audio/74691__benboncan__swoosh-4.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/140382__dwoboyle__coins-01.wav" type="AudioStream" id=9]
+[ext_resource path="res://audio/Sand.wav" type="AudioStream" id=10]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -31,7 +33,7 @@ bus = "Music"
 
 [node name="player_swing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -10.0
+volume_db = -15.0
 bus = "SFX"
 
 [node name="boss3_fast" type="AudioStreamPlayer" parent="."]
@@ -47,5 +49,20 @@ bus = "SFX"
 stream = ExtResource( 8 )
 bus = "SFX"
 
+[node name="Purchase" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -20.0
+bus = "SFX"
+
+[node name="Timer" type="Timer" parent="walk"]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="finished" from="Crowd" to="." method="_on_Crowd_finished"]
 [connection signal="tween_completed" from="Fight/Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="finished" from="walk" to="." method="_on_walk_finished"]
+[connection signal="timeout" from="walk/Timer" to="." method="_on_Timer_timeout"]

@@ -11,6 +11,7 @@ onready var shop_out = $Shopkeeper/Shop_out
 onready var shop_label = $Shopkeeper/Label
 
 func _ready():
+	$Player.in_entrance_area()
 	if CharacterController.get_returning():
 		$Player.position = $Return_pos.position
 	else:

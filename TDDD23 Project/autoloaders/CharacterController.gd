@@ -90,6 +90,10 @@ func heal_hp(i: int):
 		current_hp += i
 		emit_signal("heal")
 
+func increase_base_hp(i: int):
+	base_hp += i
+	change_total_hp(i)
+
 #Other item related functions
 func set_avoidance(value: float):
 	avoidance = true
@@ -217,15 +221,15 @@ func select_permanent_loot():
 	return null
 
 func change_permanent_loot(): #Changes loot that shop can have so that each item only appears once in shop
-	var temp_unlocked_array = unlocked_array.duplicate()
-	print(range(0,unlocked_array.size()))
+	var temp_arr = [] #Fills with which indexs of elements in Permanent_loot to remove
+	var temp_permanent = Permanent_loot.duplicate() #Neccessary so that this function can be used multiple times
 	for i in range(0,unlocked_array.size()):
-		if temp_unlocked_array[i]:
-			print("Removed index out of Permanent_loot:" + str(i))
-			Permanent_loot.remove(i)
-			temp_unlocked_array.remove(i)
-			i -= 1
-	temp_perma_loot = Permanent_loot.duplicate()
+		if unlocked_array[i]:
+			temp_arr += [i]
+	temp_arr.invert() #To loop from behind
+	for i in temp_arr:
+		temp_permanent.remove(i)
+	temp_perma_loot = temp_permanent.duplicate()
 
 func is_boss_loot_empty():
 	return temp_boss_loot.size() == 0
