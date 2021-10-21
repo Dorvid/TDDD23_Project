@@ -62,7 +62,32 @@ func _on_TransitionScreen_transition_done():
 
 func _on_SpinBox_value_changed(value):
 	CharacterController.set_chosen_renown(value)
+	set_renown_text(value)
 
+func set_renown_text(value: int):
+	match value:
+		0:
+			$Start_container/Renown_text.set_text("")
+		1:
+			$Start_container/Renown_text.set_text("First boss has more HP")
+		2:
+			$Start_container/Renown_text.set_text("Second boss has more HP")
+		3:
+			$Start_container/Renown_text.set_text("Third boss has more HP")
+		4:
+			$Start_container/Renown_text.set_text("First and second boss is harder")
+		5:
+			$Start_container/Renown_text.set_text("Bosses drop less gold")
+		6:
+			$Start_container/Renown_text.set_text("Shop is more expensive")
+		7:
+			$Start_container/Renown_text.set_text("Start with less damage")
+		8:
+			$Start_container/Renown_text.set_text("Start hurt")
+		9:
+			$Start_container/Renown_text.set_text("Bosses are Faster")
+		10:
+			$Start_container/Renown_text.set_text("Bosses have even more health")
 
 func _on_CheckButton_toggled(button_pressed):
 	CharacterController.set_renown_progression(button_pressed)

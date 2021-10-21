@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/UI/Mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://font/Frostbite_64_main_menu.tres" type="DynamicFont" id=2]
 [ext_resource path="res://images/spritesheets/Arena.png" type="Texture" id=3]
 [ext_resource path="res://scenes/UI/Mainmenu_theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/UI/TransitionScreen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://font/Frostbite_32_main_nenu.tres" type="DynamicFont" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -119,10 +120,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Return" type="Button" parent="Start_container"]
+[node name="Renown_text" type="Label" parent="Start_container"]
 margin_top = 154.0
 margin_right = 256.0
 margin_bottom = 188.0
+custom_fonts/font = ExtResource( 6 )
+align = 1
+valign = 1
+max_lines_visible = 3
+
+[node name="Return" type="Button" parent="Start_container"]
+margin_top = 192.0
+margin_right = 256.0
+margin_bottom = 226.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Return"
