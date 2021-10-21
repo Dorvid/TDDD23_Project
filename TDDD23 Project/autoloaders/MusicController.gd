@@ -42,15 +42,15 @@ func Game_over():
 func player_swing():
 	$player_swing.play()
 
-#Boss3
-func boss3_fast():
-	$boss3_fast.play()
+#Boss
+func boss_fast():
+	$boss_fast.play()
 
-func boss3_slow():
-	$boss3_slow.play()
+func boss_slow():
+	$boss_slow.play()
 
-func boss3_air():
-	$boss3_air.play()
+func boss_air():
+	$boss_air.play()
 
 #Purchasing items
 func purchase():

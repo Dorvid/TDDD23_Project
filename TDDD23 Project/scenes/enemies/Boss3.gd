@@ -158,24 +158,24 @@ func disable_all_hitboxes():
 func _on_Attack_timer_timeout():
 	$AttackCollision/area.set_deferred('disabled',false)
 	cant_turn = true
-	MusicController.boss3_fast()
+	MusicController.boss_fast()
 
 func _on_Attack_timer2_timeout():
 	$AttackCollision/area2.set_deferred('disabled',false)
 	cant_turn = true
-	MusicController.boss3_slow()
+	MusicController.boss_slow()
 
 
 func _on_Attack_timer3_timeout():
 	$AttackCollision/area3.set_deferred('disabled',false)
 	cant_turn = true
-	MusicController.boss3_fast()
+	MusicController.boss_fast()
 
 
 func _on_Attack_timer4_timeout():
 	$AttackCollision/area4.set_deferred('disabled',false)
 	cant_turn = true
-	MusicController.boss3_air()
+	MusicController.boss_air()
 
 
 func _on_AnimatedSprite_animation_finished():

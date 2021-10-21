@@ -12,10 +12,12 @@ var player_alive = true
 var moving_left = true
 var alive = true
 var renown_hp_scale = 1.0
+var can_attack_upwards = false
 
 onready var ray_wall = $RayWall
 onready var ray_char = $RayChar
 onready var ray_behind = $RayBehind
+onready var ray_up = $RayUp
 onready var effect_dmg = $Effect_dmg
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +35,8 @@ func _ready():
 	#If renown 5 or higher drop less gold
 	if CharacterController.get_chosen_renown() >= 5:
 		GOLD_CAP *= 0.8
+	if CharacterController.get_chosen_renown() >= 4:
+		can_attack_upwards = true
 	$AnimatedSprite.play("idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
 		print("Failed to connect to fight_start signal in Boss1 script")
@@ -47,6 +51,10 @@ func _physics_process(_delta):
 				$AnimatedSprite.play("attack")
 				$AttackCollision/start.set_deferred('disabled', false)
 				$SwingTimer.start()
+				is_attacking = true
+			elif can_attack_upwards && ray_up.is_colliding():
+				$AnimatedSprite.play("upwards")
+				$UpwardTimer.start()
 				is_attacking = true
 			elif ray_wall.is_colliding():
 				swap_sides()
@@ -89,15 +97,26 @@ func swap_sides():
 func _on_SwingTimer_timeout():
 	$AttackCollision/start.set_deferred('disabled', true)
 	$AttackCollision/end.set_deferred('disabled', false)
+	MusicController.boss_fast()
+
+func _on_UpwardTimer_timeout():
+	$AttackCollision/up.set_deferred('disabled',false)
+	MusicController.boss_fast()
+
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "attack":
-		attack_on_cooldown = true
 		$AttackCollision/end.set_deferred('disabled', true)
-		is_attacking = false
-		$AttackCooldownTimer.start()
-		$AnimatedSprite.play("idle")
+		attack_done()
+	elif $AnimatedSprite.animation == "upwards":
+		$AttackCollision/up.set_deferred('disabled',true)
+		attack_done()
 
+func attack_done():
+	attack_on_cooldown = true
+	is_attacking = false
+	$AttackCooldownTimer.start()
+	$AnimatedSprite.play("idle")
 
 func _on_AttackCooldownTimer_timeout():
 	attack_on_cooldown = false
@@ -115,6 +134,7 @@ func boss_hit(dmg):
 	if current_hp <=0:
 		$AttackCollision.queue_free()
 		$SwingTimer.queue_free()
+		$UpwardTimer.queue_free()
 		$TurnTimer.queue_free()
 		$AnimatedSprite.play("death")
 		$hitbox.set_deferred('disabled',true)
@@ -126,7 +146,7 @@ func boss_hit(dmg):
 
 func _fight_start():
 	fight_started = true
-	
+
 func _player_dead():
 	player_alive = false
 	$AnimatedSprite.play("idle")

@@ -36,17 +36,19 @@ stream = ExtResource( 5 )
 volume_db = -15.0
 bus = "SFX"
 
-[node name="boss3_fast" type="AudioStreamPlayer" parent="."]
+[node name="boss_fast" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-bus = "SFX"
-
-[node name="boss3_slow" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
 volume_db = -10.0
 bus = "SFX"
 
-[node name="boss3_air" type="AudioStreamPlayer" parent="."]
+[node name="boss_slow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -20.0
+bus = "SFX"
+
+[node name="boss_air" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Purchase" type="AudioStreamPlayer" parent="."]

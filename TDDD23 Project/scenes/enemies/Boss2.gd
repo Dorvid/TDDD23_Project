@@ -38,6 +38,9 @@ func _ready():
 	#If renown 5 or higher drop less gold
 	if CharacterController.get_chosen_renown() >= 5:
 		GOLD_CAP *= 0.8
+	#If renown 4 Jump higher
+	if CharacterController.get_chosen_renown() >= 4:
+		JUMPFORCE += 256
 	$AnimatedSprite.play("Idle")
 	if CharacterController.connect("fight_start", self, "_fight_start") != OK:
 		print("Failed to connect to fight_start signal in Boss1 script")
@@ -151,6 +154,7 @@ func disable_all_hitboxes():
 
 func _on_Attack_timer_timeout():
 	$AttackCollision/area.set_deferred('disabled',false)
+	MusicController.boss_slow()
 
 
 func _on_AnimatedSprite_animation_finished():
