@@ -9,7 +9,7 @@ export (int) var GRAVITY
 export (int) var JUMPFORCE
 export (int) var KNOCKBACK_FORCE
 var is_attacking = false
-var last_direction = 0
+var last_direction = 1
 var alive = true
 var entrance_area = false
 
@@ -20,9 +20,11 @@ onready var effect_dmg2 = $Effect_dmg_head
 # Loads swords so they can be set in ready or in set_longsword()
 var short_frames = preload("res://scenes/player/shortsword.tres")
 var long_frames = preload("res://scenes/player/longsword.tres")
-
+#projectile
+var projectile = preload("res://scenes/player/projectile.tscn")
 func _ready():
 	base_speed = SPEED * CharacterController.get_speed_multiplier()
+	JUMPFORCE *= CharacterController.get_jump_multiplier()
 	#If the player has unlocked the long sword set it and increase hitboxes
 	if CharacterController.has_longsword == false:
 		set_shortsword()
@@ -83,6 +85,14 @@ func _physics_process(_delta):
 				#So that we get our attacking animations over our other ones so far
 				is_attacking = true
 				MusicController.player_swing()
+			elif Input.is_action_just_pressed("ui_alt_attack") && is_attacking == false:
+				print("Attempting to shoot")
+				if CharacterController.slingshot():
+					$Weapon.play("slingshot")
+					$Slingshot_timer.start()
+					is_attacking = true
+				else:
+					print("failed...")
 		
 		#If player wants to attack downwards change animation to look down
 		if Input.is_action_pressed("ui_down"):
@@ -135,7 +145,7 @@ func turn_off_weap_collision(animation):
 
 #When player attacks enemy
 func _on_AttackCollision_body_entered(_body):
-	CharacterController.emit_signal("boss_hit")
+	CharacterController.boss_hit()
 	#Get which way char is attacking
 	var temp = $Weapon.get_animation()
 	turn_off_weap_collision(temp)
@@ -180,3 +190,15 @@ func _speed_increase():
 #so player cant swing in entrance area
 func in_entrance_area():
 	entrance_area = true
+
+
+func _on_Slingshot_timer_timeout():
+	#instance a projectile
+	var new_projectile = projectile.instance()
+	new_projectile.direction(last_direction)
+	new_projectile.transform = global_transform
+	owner.add_child(new_projectile)
+	pass
+
+func get_last_direction():
+	return last_direction

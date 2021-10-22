@@ -86,7 +86,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Ground_and_walls" type="Node2D" parent="."]
+[node name="Ground_and_walls" type="Node2D" parent="." groups=[
+"walls",
+]]
 __meta__ = {
 "_edit_group_": true
 }

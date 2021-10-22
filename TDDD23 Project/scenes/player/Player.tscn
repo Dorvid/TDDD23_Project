@@ -135,7 +135,8 @@ shape = SubResource( 14 )
 
 [node name="Weapon" type="AnimatedSprite" parent="."]
 frames = ExtResource( 4 )
-animation = "idle"
+animation = "slingshot"
+frame = 3
 
 [node name="AttackCollision" type="Area2D" parent="."]
 visible = false
@@ -162,5 +163,10 @@ disabled = true
 
 [node name="Effect_dmg_head" type="Tween" parent="."]
 
+[node name="Slingshot_timer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
 [connection signal="animation_finished" from="Weapon" to="." method="_on_Weapon_animation_finished"]
 [connection signal="body_entered" from="AttackCollision" to="." method="_on_AttackCollision_body_entered"]
+[connection signal="timeout" from="Slingshot_timer" to="." method="_on_Slingshot_timer_timeout"]

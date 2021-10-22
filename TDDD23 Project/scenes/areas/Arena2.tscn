@@ -108,7 +108,9 @@ __meta__ = {
 shape = SubResource( 7 )
 disabled = true
 
-[node name="Ground_and_walls" type="Node2D" parent="."]
+[node name="Ground_and_walls" type="Node2D" parent="." groups=[
+"walls",
+]]
 position = Vector2( 1.88776, 4.71942 )
 __meta__ = {
 "_edit_group_": true

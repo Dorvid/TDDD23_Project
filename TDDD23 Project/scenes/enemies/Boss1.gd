@@ -19,10 +19,9 @@ onready var ray_char = $RayChar
 onready var ray_behind = $RayBehind
 onready var ray_up = $RayUp
 onready var effect_dmg = $Effect_dmg
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#Gravity incase player manages to move boss upwards
-	velocity.y = 32
 	#Increases hp depending on renown
 	if CharacterController.get_chosen_renown() == 10:
 		renown_hp_scale = 3.0
@@ -73,7 +72,7 @@ func _physics_process(_delta):
 				$AnimatedSprite.play("walk")
 		else:
 			velocity.x = 0
-		
+		velocity.y = 100
 		velocity = move_and_slide(velocity,Vector2.UP)
 		
 		velocity.x = lerp(velocity.x,0,0.2)

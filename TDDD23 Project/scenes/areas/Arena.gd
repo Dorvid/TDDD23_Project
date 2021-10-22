@@ -23,6 +23,8 @@ func _ready():
 		print("Failed to connect to player_dead signal in arena script")
 	if CharacterController.connect("boss_hit",self, "_on_Player_enemy_hit") != OK:
 		print("Failed to connect to boss_hit signal in arena script")
+	if CharacterController.connect("boss_hit_range",self, "_on_Player_enemy_hit_ranged") != OK:
+		print("Failed to connect to boss_hit_range signal in arena script")
 	if CharacterController.connect("flame_armor_hit",self,"_on_Flame_armor_hit") != OK:
 		print("Failed to connect to flame_armor_hit signal in arena script")
 	if CharacterController.connect("abandon_run",self,"_abandon_run") != OK:
@@ -45,6 +47,15 @@ func _on_Player_enemy_hit():
 			$Boss2.boss_hit(CharacterController.get_player_dmg())
 		2:
 			$Boss3.boss_hit(CharacterController.get_player_dmg())
+
+func _on_Player_enemy_hit_ranged():
+	match current_boss:
+		0:
+			$Boss1.boss_hit(CharacterController.get_player_rdmg())
+		1:
+			$Boss2.boss_hit(CharacterController.get_player_rdmg())
+		2:
+			$Boss3.boss_hit(CharacterController.get_player_rdmg())
 
 func _on_Flame_armor_hit():
 	match current_boss:

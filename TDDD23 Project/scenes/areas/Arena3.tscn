@@ -108,7 +108,9 @@ __meta__ = {
 shape = SubResource( 7 )
 disabled = true
 
-[node name="Ground_and_walls" type="Node2D" parent="."]
+[node name="Ground_and_walls" type="Node2D" parent="." groups=[
+"walls",
+]]
 position = Vector2( 1.88776, 4.71942 )
 __meta__ = {
 "_edit_group_": true
@@ -162,12 +164,12 @@ position = Vector2( 0.430252, 620.295 )
 shape = SubResource( 13 )
 disabled = true
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -115.323, 626.602 )
-
 [node name="Boss3" parent="." instance=ExtResource( 3 )]
 material = SubResource( 14 )
 position = Vector2( 1181.84, 654.014 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -115.323, 626.602 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
 

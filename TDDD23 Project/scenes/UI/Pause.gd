@@ -26,10 +26,8 @@ func _on_Button_pressed():
 	CharacterController.abandon_run()
 
 func update_inventory():
-	print_tree()
 	for i in $Inventory.get_children():
 		i.queue_free()
-	print_tree()
 	inventory = CharacterController.get_inventory()
 	print(inventory)
 	for item in inventory:

@@ -16,17 +16,22 @@ var base_hp = 5
 var max_hp
 var current_hp
 var base_dmg = 3
+var base_rdmg = 1
 var dmg
-var gold = 0
+var rdmg
+var gold = 10000
+var ammo = 3
 #Ascension mechanic from Slay the Spire
 var renown = 0
 var chosen_renown = 0
 var progressing_renown = false
 var has_longsword = false
+var has_slingshot = false
 var returning = false
 var current_boss = 0
 var boss_hp_multiplier = 1.0
 var speed_multiplier = 1.0
+var jump_multiplier = 1.0
 var gold_multiplier = 1.0
 var avoidance = false
 var avoid_chance = 0.0
@@ -42,15 +47,18 @@ signal boss_dead
 signal fight_start
 signal damage_taken
 signal boss_hit
+signal boss_hit_range
 signal hp_change
 signal heal
 signal gold_changed
 signal longsword
 signal damage_change
+signal rdamage_change
 signal speed_increase
 signal flame_armor_hit
 signal inventory_change
 signal abandon_run
+signal ammo_update
 
 func _ready():
 	for _i in range(0,Permanent_loot.size()):
@@ -58,6 +66,7 @@ func _ready():
 	max_hp = base_hp
 	current_hp = max_hp
 	dmg = base_dmg
+	rdmg = base_rdmg
 	temp_shop_loot = Shop_loot.duplicate()
 	temp_boss_loot = Boss_loot.duplicate()
 	temp_perma_loot = Permanent_loot.duplicate()
@@ -155,6 +164,9 @@ func set_gold_multiplier(input: float):
 func get_player_dmg():
 	return dmg
 
+func get_player_rdmg(): #ranged damage
+	return rdmg
+
 func received_longsword():
 	has_longsword = true
 	unlocked_array[0] = true
@@ -164,6 +176,33 @@ func increase_dmg(input: int):
 	dmg += input
 	emit_signal("damage_change")
 
+func received_slingshot():
+	has_slingshot = true
+	unlocked_array[3] = true
+	emit_signal("ammo_update")
+
+func increase_rdmg(input: int):
+	dmg += input
+	emit_signal("rdamage_change")
+
+func slingshot():
+	if !has_slingshot || ammo == 0:
+		print(has_slingshot)
+		print(ammo)
+		return false
+	else:
+		#shots a shot
+		print("Shooting shot")
+		increase_ammo(-1)
+		return true
+
+func increase_ammo(value: int):
+	ammo += value
+	emit_signal("ammo_update")
+
+func get_ammo():
+	return ammo
+
 #Speed related functions
 
 func increase_speed(input: float):
@@ -172,6 +211,15 @@ func increase_speed(input: float):
 
 func get_speed_multiplier():
 	return speed_multiplier
+
+#Jump related functions
+
+func increase_jump(input: float):
+	jump_multiplier *= input
+
+func get_jump_multiplier():
+	return jump_multiplier
+
 
 #Scene related functions
 func get_returning():
@@ -194,7 +242,7 @@ func boss_dead():
 func emit_fight_start():
 	emit_signal("fight_start")
 	#reset permanent loot for next round shop
-	temp_perma_loot = Permanent_loot.duplicate()
+	change_permanent_loot()
 
 func damage_taken():
 	emit_signal("damage_taken")
@@ -203,6 +251,9 @@ func damage_taken():
 
 func boss_hit():
 	emit_signal("boss_hit")
+
+func boss_hit_ranged():
+	emit_signal("boss_hit_range")
 
 #Loot functions
 func select_loot():
@@ -235,12 +286,15 @@ func select_permanent_loot():
 func change_permanent_loot(): #Changes loot that shop can have so that each item only appears once in shop
 	var temp_arr = [] #Fills with which indexs of elements in Permanent_loot to remove
 	var temp_permanent = Permanent_loot.duplicate() #Neccessary so that this function can be used multiple times
+	print(temp_permanent)
+	print(unlocked_array)
 	for i in range(0,unlocked_array.size()):
 		if unlocked_array[i]:
 			temp_arr += [i]
 	temp_arr.invert() #To loop from behind
 	for i in temp_arr:
 		temp_permanent.remove(i)
+	print(temp_permanent)
 	temp_perma_loot = temp_permanent.duplicate()
 
 func is_boss_loot_empty():
@@ -280,6 +334,7 @@ func get_renown_progression():
 func game_done():
 	returning = false
 	speed_multiplier = 1.0
+	jump_multiplier = 1.0
 	avoidance = false
 	avoid_chance = 0.0
 	flame_armor = false
@@ -324,7 +379,9 @@ func fill_save_data():
 		"gold_scale": gold_multiplier,
 		"renown": renown,
 		"damage": base_dmg,
+		"rdamage": base_rdmg,
 		"longsword": has_longsword,
+		"slingshot": has_slingshot,
 		"unlocked_items": unlocked_array
 	}
 	print(save_data)
@@ -350,7 +407,9 @@ func read_save_data(data):
 		gold_multiplier = data["gold_scale"]
 		renown = data["renown"]
 		base_dmg = data["damage"]
+		base_rdmg = data["rdamage"]
 		has_longsword = data["longsword"]
+		has_slingshot = data["slingshot"]
 		unlocked_array = data["unlocked_items"]
 		print(unlocked_array)
 		change_permanent_loot()
