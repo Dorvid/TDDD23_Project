@@ -19,7 +19,7 @@ var base_dmg = 3
 var base_rdmg = 1
 var dmg
 var rdmg
-var gold = 10000
+var gold = 0
 var ammo = 3
 #Ascension mechanic from Slay the Spire
 var renown = 0
@@ -125,7 +125,7 @@ func set_boss_hp_scale(input: float):
 
 func get_boss_hp_scale():
 	return boss_hp_multiplier
-
+#Melee range
 func increase_range(value: float):
 	range_multiplier *= value
 
@@ -176,14 +176,22 @@ func increase_dmg(input: int):
 	dmg += input
 	emit_signal("damage_change")
 
-func received_slingshot():
-	has_slingshot = true
-	unlocked_array[3] = true
-	emit_signal("ammo_update")
+func increase_base_dmg(input: int):
+	base_dmg += input
+	increase_dmg(input)
+
+func increase_base_rdmg(input: int):
+	base_rdmg += input
+	increase_rdmg(input)
 
 func increase_rdmg(input: int):
 	dmg += input
 	emit_signal("rdamage_change")
+
+func received_slingshot():
+	has_slingshot = true
+	unlocked_array[3] = true
+	emit_signal("ammo_update")
 
 func slingshot():
 	if !has_slingshot || ammo == 0:
@@ -219,7 +227,6 @@ func increase_jump(input: float):
 
 func get_jump_multiplier():
 	return jump_multiplier
-
 
 #Scene related functions
 func get_returning():

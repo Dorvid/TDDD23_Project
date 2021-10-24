@@ -14,5 +14,5 @@ func update_label():
 	$NinePatchRect/Label.text = str(CharacterController.get_player_rdmg())
 
 func update_visablity():
-	if !visible:
+	if CharacterController.unlocked_array[3] == true && !visible: 
 		set_visible(true)

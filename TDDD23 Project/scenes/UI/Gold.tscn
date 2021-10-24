@@ -9,7 +9,7 @@
 [node name="Gold" type="NinePatchRect"]
 margin_right = 122.0
 margin_bottom = 58.0
-hint_tooltip = "Your current gold, Spend it in the Shop!"
+hint_tooltip = "Your current gold, Spend it in the Shop! Is saved inbetween runs."
 mouse_filter = 0
 theme = ExtResource( 5 )
 texture = ExtResource( 1 )
