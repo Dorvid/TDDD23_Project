@@ -16,6 +16,16 @@ Music promoted by https://www.chosic.com/free-music/all/
 Attribution 4.0 International (CC BY 4.0)
 https://creativecommons.org/licenses/by/4.0/
 
+"Main Theme (Overture) | The Grand Score" by Alexander Nakarada | https://www.serpentsoundstudios.com
+Music promoted by https://www.chosic.com/free-music/all/
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+ Adventure by Alexander Nakarada | https://www.serpentsoundstudios.com
+Music promoted by https://www.chosic.com/free-music/all/
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
 "Dagger Woosh" - Mixkit | https://mixkit.co/
 Converted to 16 bit .wav file
 retreived from: https://mixkit.co/free-sound-effects/sword/ 
