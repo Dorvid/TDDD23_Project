@@ -10,3 +10,7 @@ PRICE = 100
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
+
+[node name="Control" parent="." index="2"]
+hint_tooltip = "Potion of Major Reach:
+Increase Attack range by 15%"
