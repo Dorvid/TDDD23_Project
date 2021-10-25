@@ -41,6 +41,8 @@ func _ready():
 		print("Failed to connect to longsword signal in player script")
 	if CharacterController.connect("speed_increase",self,"_speed_increase") != OK:
 		print("Failed to connect to speed_increase signal in player script")
+	
+	print(entrance_area)
 
 func _physics_process(_delta):
 	#Move Character left or right and change animation
@@ -198,7 +200,6 @@ func _on_Slingshot_timer_timeout():
 	new_projectile.direction(last_direction)
 	new_projectile.transform = global_transform
 	owner.add_child(new_projectile)
-	pass
 
 func get_last_direction():
 	return last_direction

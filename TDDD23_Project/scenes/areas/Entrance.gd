@@ -32,11 +32,6 @@ func _process(_delta):
 	if ready_to_shop:
 		if Input.is_action_just_pressed("ui_enter_shop"):
 			$Shop_Screen.set_visible(true)
-	#prevent player from moving and attacking when shop is open
-	if $Shop_Screen.is_visible() == true:
-		$Player.is_attacking = true
-	else:
-		$Player.is_attacking = false
 
 
 func _on_Entrance_body_entered(_body):
