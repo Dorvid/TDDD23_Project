@@ -186,7 +186,7 @@ func increase_base_rdmg(input: int):
 	increase_rdmg(input)
 
 func increase_rdmg(input: int):
-	dmg += input
+	rdmg += input
 	emit_signal("rdamage_change")
 
 func received_slingshot():
