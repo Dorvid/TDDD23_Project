@@ -1,9 +1,15 @@
 extends Node
 
 var crowd_active = false
+const SAVE_DIR = "user://saves"
+var filepath = SAVE_DIR + "/settings.dat"
+var bus_index = AudioServer.get_bus_index("Master")
+var music_index = AudioServer.get_bus_index("Music")
+var sfx_index = AudioServer.get_bus_index("SFX")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_bus_volumes()
 	pass # Replace with function body.
 
 func leave_arena():
@@ -98,3 +104,44 @@ func _on_walk_finished():
 
 func _on_Timer_timeout():
 	walk_start()
+
+func save_bus_volumes():
+	#Check if directory exists, if not create it
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
+	
+	#Open file
+	var file = File.new()
+	var error = file.open(filepath,File.WRITE)
+	if error != OK:
+		print("Failed to open save data, error code:")
+		print(error)
+	else:
+		file.store_var(fill_save_data())
+		file.close()
+
+func fill_save_data():
+	var dict = {
+		"master": AudioServer.get_bus_volume_db(bus_index),
+		"music": AudioServer.get_bus_volume_db(music_index),
+		"sfx": AudioServer.get_bus_volume_db(sfx_index)
+	}
+	return dict
+
+func load_bus_volumes():
+	var file = File.new()
+	if file.file_exists(filepath):
+		var error = file.open(filepath,File.READ)
+		if error != OK:
+			print("Couldnt open save data, error code:")
+			print(error)
+		else:
+			var save_data = file.get_var()
+			read_save_data(save_data)
+			file.close()
+
+func read_save_data(data):
+	AudioServer.set_bus_volume_db(bus_index,data["master"])
+	AudioServer.set_bus_volume_db(music_index,data["music"])
+	AudioServer.set_bus_volume_db(sfx_index,data["sfx"])

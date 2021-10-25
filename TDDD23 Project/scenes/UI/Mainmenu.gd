@@ -1,6 +1,8 @@
 extends Control
 
 var bus_index = AudioServer.get_bus_index("Master")
+var music_index = AudioServer.get_bus_index("Music")
+var sfx_index = AudioServer.get_bus_index("SFX")
 var choice = false
 
 
@@ -9,6 +11,8 @@ func _ready():
 	CharacterController.load_progress()
 	#Gets master audio bus value and sets slider to that value
 	$Options_container/Volume_slider.set_value(AudioServer.get_bus_volume_db(bus_index))
+	$Options_container/Music_slider.set_value(AudioServer.get_bus_volume_db(music_index))
+	$Options_container/SFX_slider.set_value(AudioServer.get_bus_volume_db(sfx_index))
 	#Gets values from CharacterController for selecting renown difficulty
 	$Start_container/CheckButton.set_pressed(CharacterController.get_renown_progression())
 	$Start_container/GridContainer/SpinBox.set_max(CharacterController.get_renown())
@@ -38,6 +42,7 @@ func _on_Return_pressed():
 	$Button_container.set_visible(true)
 	$Start_container.set_visible(false)
 	$Options_container.set_visible(false)
+	MusicController.save_bus_volumes()
 
 
 func _on_Startgame_pressed():
@@ -52,6 +57,13 @@ func _on_Startgame_pressed():
 func _on_Volume_changed(value):
 	AudioServer.set_bus_volume_db(bus_index,value)
 
+func _on_Music_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(music_index,value)
+
+
+func _on_SFX_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(sfx_index,value)
+
 
 func _on_TransitionScreen_transition_done():
 	if choice:
@@ -65,6 +77,7 @@ func _on_TransitionScreen_transition_done():
 func _on_SpinBox_value_changed(value):
 	CharacterController.set_chosen_renown(value)
 	set_renown_text(value)
+
 
 func set_renown_text(value: int):
 	match value:

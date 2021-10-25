@@ -143,13 +143,45 @@ __meta__ = {
 
 [node name="Volum_label" type="Label" parent="Options_container"]
 margin_right = 256.0
-margin_bottom = 14.0
+margin_bottom = 34.0
 text = "Volume"
 
 [node name="Volume_slider" type="HSlider" parent="Options_container"]
-margin_top = 18.0
+margin_top = 38.0
 margin_right = 256.0
-margin_bottom = 34.0
+margin_bottom = 54.0
+min_value = -80.0
+max_value = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music_Label" type="Label" parent="Options_container"]
+margin_top = 58.0
+margin_right = 256.0
+margin_bottom = 92.0
+text = "MUSIC"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music_slider" type="HSlider" parent="Options_container"]
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 112.0
+min_value = -80.0
+max_value = 0.0
+
+[node name="SFX_Label" type="Label" parent="Options_container"]
+margin_top = 116.0
+margin_right = 256.0
+margin_bottom = 150.0
+text = "SFX"
+
+[node name="SFX_slider" type="HSlider" parent="Options_container"]
+margin_top = 154.0
+margin_right = 256.0
+margin_bottom = 170.0
 min_value = -80.0
 max_value = 0.0
 __meta__ = {
@@ -157,9 +189,9 @@ __meta__ = {
 }
 
 [node name="Return" type="Button" parent="Options_container"]
-margin_top = 38.0
+margin_top = 174.0
 margin_right = 256.0
-margin_bottom = 58.0
+margin_bottom = 208.0
 text = "Return"
 
 [node name="Label" type="Label" parent="."]
@@ -192,5 +224,7 @@ layer = 11
 [connection signal="value_changed" from="Start_container/GridContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Start_container/Return" to="." method="_on_Return_pressed"]
 [connection signal="value_changed" from="Options_container/Volume_slider" to="." method="_on_Volume_changed"]
+[connection signal="value_changed" from="Options_container/Music_slider" to="." method="_on_Music_slider_value_changed"]
+[connection signal="value_changed" from="Options_container/SFX_slider" to="." method="_on_SFX_slider_value_changed"]
 [connection signal="pressed" from="Options_container/Return" to="." method="_on_Return_pressed"]
 [connection signal="transition_done" from="TransitionScreen" to="." method="_on_TransitionScreen_transition_done"]
