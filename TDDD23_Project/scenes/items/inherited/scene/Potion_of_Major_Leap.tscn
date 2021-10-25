@@ -12,5 +12,5 @@ PRICE = 55
 texture = ExtResource( 1 )
 
 [node name="Control" parent="." index="2"]
-hint_tooltip = "Item Name:
+hint_tooltip = "Potion of Major Leap:
 Increases jump Height by 15%"

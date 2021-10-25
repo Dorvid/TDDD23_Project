@@ -18,7 +18,6 @@ func _ready():
 	$Start_container/GridContainer/SpinBox.set_max(CharacterController.get_renown())
 	$Start_container/GridContainer/SpinBox.set_value(CharacterController.get_renown())
 
-
 func _on_Quit_pressed():
 	get_tree().quit()
 
