@@ -79,6 +79,7 @@ func player_hit():
 		if rng.randf_range(0.0,1.0) < avoid_chance:
 			return
 	current_hp -= 1
+	MusicController.player_grunt()
 	#print(current_hp)
 	if current_hp <= 0:
 		game_over()
@@ -391,7 +392,7 @@ func fill_save_data():
 		"slingshot": has_slingshot,
 		"unlocked_items": unlocked_array
 	}
-	print(save_data)
+	#print(save_data)
 	return save_data
 
 func load_progress():
@@ -418,5 +419,5 @@ func read_save_data(data):
 		has_longsword = data["longsword"]
 		has_slingshot = data["slingshot"]
 		unlocked_array = data["unlocked_items"]
-		print(unlocked_array)
+		#print(unlocked_array)
 		change_permanent_loot()

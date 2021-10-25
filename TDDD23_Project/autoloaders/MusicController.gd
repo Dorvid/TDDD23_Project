@@ -85,6 +85,8 @@ func play_grunt2():
 func play_grunt3():
 	$grunt3.play()
 
+func player_grunt():
+	$player_grunt.play()
 
 #Purchasing items
 func purchase():

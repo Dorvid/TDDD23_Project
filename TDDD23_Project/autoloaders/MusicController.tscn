@@ -84,6 +84,10 @@ stream = ExtResource( 11 )
 pitch_scale = 1.1
 bus = "SFX"
 
+[node name="player_grunt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+pitch_scale = 1.25
+
 [node name="Purchase" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 bus = "SFX"
